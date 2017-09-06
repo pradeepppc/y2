@@ -1,0 +1,10 @@
+import java.util.*;
+public class Main {
+public static void main(String args[]){
+	Map m1 = new HashMap();
+	m1.put("hello","5");
+	m1.put("hi","6");
+	m1.put("here", "1");
+	System.out.println(m1);
+}
+}

@@ -1,0 +1,2185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>The REST API for User Directory Application</title>
+<!-- 2017-04-26 Wed 22:27 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="VLEAD" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../../style/css/worg-style.css" />
+<link rel="stylesheet" type="text/css" href="../../style/css/override.css" />
+<link rel="icon" type="image/png" href="../../style/img/favicon/popl.png" />
+<script type="text/javascript" src="../../style/js/org-info.js">
+/**
+ *
+ * @source: ../../style/js/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in ../../style/js/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in ../../style/js/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "1");
+org_html_manager.set("LINK_HOME", "../../index.html");
+org_html_manager.set("LINK_UP", "../index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../../index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">The REST API for User Directory Application</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Introduction</a></li>
+<li><a href="#sec-2">2. REST</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Serve index.html</a></li>
+<li><a href="#sec-2-2">2.2. Login</a>
+<ul>
+<li><a href="#sec-2-2-1">2.2.1. API Design</a></li>
+<li><a href="#sec-2-2-2">2.2.2. <code>Login</code> API</a></li>
+<li><a href="#sec-2-2-3">2.2.3. Google Callback response <code>API</code></a></li>
+<li><a href="#sec-2-2-4">2.2.4. Google OAuth Credentials</a></li>
+<li><a href="#sec-2-2-5">2.2.5. Google token getter</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-3">2.3. <code>Logout</code> API</a>
+<ul>
+<li><a href="#sec-2-3-1">2.3.1. API Design</a></li>
+<li><a href="#sec-2-3-2">2.3.2. Implementation</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-4">2.4. Add User</a>
+<ul>
+<li><a href="#sec-2-4-1">2.4.1. API Design</a></li>
+<li><a href="#sec-2-4-2">2.4.2. Implementation</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-5">2.5. Del User</a>
+<ul>
+<li><a href="#sec-2-5-1">2.5.1. API design</a></li>
+<li><a href="#sec-2-5-2">2.5.2. Implementation</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-6">2.6. Show Users</a>
+<ul>
+<li><a href="#sec-2-6-1">2.6.1. API Design</a></li>
+<li><a href="#sec-2-6-2">2.6.2. Implementation</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-7">2.7. Show Sessions</a>
+<ul>
+<li><a href="#sec-2-7-1">2.7.1. API Design</a></li>
+<li><a href="#sec-2-7-2">2.7.2. Implementation</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-8">2.8. Show Roles</a>
+<ul>
+<li><a href="#sec-2-8-1">2.8.1. API Design</a></li>
+<li><a href="#sec-2-8-2">2.8.2. Implementation</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-9">2.9. Show User Details</a>
+<ul>
+<li><a href="#sec-2-9-1">2.9.1. API Design</a></li>
+<li><a href="#sec-2-9-2">2.9.2. Implementation</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-10">2.10. Set email of a User</a>
+<ul>
+<li><a href="#sec-2-10-1">2.10.1. API Design</a></li>
+<li><a href="#sec-2-10-2">2.10.2. Implementation</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-11">2.11. Set name of a User</a>
+<ul>
+<li><a href="#sec-2-11-1">2.11.1. API Design</a></li>
+<li><a href="#sec-2-11-2">2.11.2. Implementation</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-12">2.12. Show Roles of a user</a>
+<ul>
+<li><a href="#sec-2-12-1">2.12.1. API Design</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-13">2.13. Add Role to a user</a>
+<ul>
+<li><a href="#sec-2-13-1">2.13.1. API Design</a></li>
+<li><a href="#sec-2-13-2">2.13.2. Implementation</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-14">2.14. Del Role of user</a>
+<ul>
+<li><a href="#sec-2-14-1">2.14.1. API Design</a></li>
+<li><a href="#sec-2-14-2">2.14.2. Implementation</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-15">2.15. Jsonify_list</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This document illustrates building of the REST API.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> REST</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Serve index.html</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="serve_index_html"><span style="font-weight: bold; text-decoration: underline;">@api.route</span>(<span style="font-style: italic;">"/"</span>, methods=[<span style="font-style: italic;">'GET'</span>])
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">index</span>():
+    <span style="font-weight: bold;">return</span> render_template(<span style="font-style: italic;">"index.html"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Login</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+API to login to the application. 
+</p>
+</div>
+
+<div id="outline-container-sec-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1"><span class="section-number-4">2.2.1</span> API Design</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<dl class="org-dl">
+<dt> URL </dt><dd>/login
+</dd>
+<dt> Method </dt><dd>GET
+</dd>
+
+<dt> Data Params </dt><dd><pre class="example">
+{
+"role": "&lt;value&gt;"
+}
+</pre>
+</dd>
+
+<dt> Success Response </dt><dd><ul class="org-ul">
+<li>Code: 200
+</li>
+
+<li id="Content">list of roles
+<pre class="example">
+[
+   {
+   "name": "admin",
+   "id": "1"
+   },
+   {
+   "name": "user",
+   "id": "2"
+   }
+]
+</pre>
+</li>
+</ul>
+</dd>
+
+<dt> Error Response </dt><dd><ul class="org-ul">
+<li>Code: 401 UNAUTHORIZED
+</li>
+
+<li>Content: { error : "Not Authorized" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 400 Bad Request
+</li>
+
+<li>Content: { error : "Malformed arguments" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 500
+</li>
+
+<li>Content: { error : Exception String}
+</li>
+</ul>
+</dd>
+</dl>
+
+
+<dl class="org-dl">
+<dt> Example </dt><dd><pre class="example">
+http://localhost:5000/login
+</pre>
+</dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-2-2" class="outline-4">
+<h4 id="sec-2-2-2"><span class="section-number-4">2.2.2</span> <code>Login</code> API</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+When user clicks on <code>login</code> button from f/e it will invoke <code>/login</code> api and
+thereby it will forward request to <code>google</code>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="login_route"><span style="font-weight: bold; text-decoration: underline;">@api.route</span>(<span style="font-style: italic;">'/login'</span>, methods=[<span style="font-style: italic;">"GET"</span>])
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">login</span>():
+         <span style="font-weight: bold;">return</span> google_oauth.authorize(callback=url_for(<span style="font-style: italic;">'APIs.authorized'</span>,
+                                                        _external=<span style="font-weight: bold; text-decoration: underline;">True</span>))
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-2-3" class="outline-4">
+<h4 id="sec-2-2-3"><span class="section-number-4">2.2.3</span> Google Callback response <code>API</code></h4>
+<div class="outline-text-4" id="text-2-2-3">
+<ul class="org-ul">
+<li>Once the Google verfies the user credentials it will send callback
+response to <code>/authorized</code> api which should be registered at google's
+dashboard as one of Authorized redirect URIs
+</li>
+
+<li>Once google authenticates the user, <code>userdirectory</code> application will
+authorize the user to use the application.
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="callback_google_api"><span style="font-weight: bold; text-decoration: underline;">@api.route</span>(<span style="font-style: italic;">'/authorized'</span>)
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">authorized</span>():
+    <span style="font-weight: bold;">try</span>:
+        <span style="font-weight: bold; font-style: italic;">resp</span> = google_oauth.authorized_response()
+
+        <span style="font-weight: bold;">if</span> resp <span style="font-weight: bold;">is</span> <span style="font-weight: bold; text-decoration: underline;">None</span>:
+            <span style="font-weight: bold;">return</span> jsonify({<span style="font-style: italic;">"Status"</span> : <span style="font-style: italic;">"User denied access"</span>})
+
+        <span style="font-weight: bold; font-style: italic;">session</span>[<span style="font-style: italic;">'google_token'</span>] = (resp[<span style="font-style: italic;">'access_token'</span>], <span style="font-style: italic;">''</span>)
+        <span style="font-weight: bold; font-style: italic;">user_info</span> = google_oauth.get(<span style="font-style: italic;">'userinfo'</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span> = <span style="font-weight: bold;">str</span>(user_info.data[<span style="font-style: italic;">'email'</span>])
+        <span style="font-weight: bold; font-style: italic;">session</span>[<span style="font-style: italic;">'email'</span>] = email
+
+        <span style="font-weight: bold;">try</span>:
+            <span style="font-weight: bold; font-style: italic;">role_str</span> = SystemInterface.authorize_user(email,
+                                                      session[<span style="font-style: italic;">'google_token'</span>])
+            <span style="font-weight: bold; font-style: italic;">session</span>[<span style="font-style: italic;">"role"</span>] = role_str
+            <span style="font-weight: bold;">print</span>(<span style="font-style: italic;">"redirecting to / ..."</span>)
+            <span style="font-weight: bold;">return</span> redirect(<span style="font-style: italic;">"/"</span>)
+
+        <span style="font-weight: bold;">except</span> NotAuthorizedError <span style="font-weight: bold;">as</span> e:
+            session.clear()
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Not Authorized error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span> <span style="font-weight: bold;">as</span> e:
+            session.clear()
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Malformed Arguments"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> StateError <span style="font-weight: bold;">as</span> e:
+            session.clear()
+            <span style="font-weight: bold; font-style: italic;">err_str</span> = <span style="font-weight: bold;">str</span>(e)
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: err_str}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span> <span style="font-weight: bold;">as</span> e:
+            session.clear()
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Internal Server Error"</span>}
+
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+    <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span> <span style="font-weight: bold;">as</span> e:
+        <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                   <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Internal Server Error"</span>}
+
+        <span style="font-weight: bold;">return</span> jsonify(msg)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-4" class="outline-4">
+<h4 id="sec-2-2-4"><span class="section-number-4">2.2.4</span> Google OAuth Credentials</h4>
+<div class="outline-text-4" id="text-2-2-4">
+<p>
+Google OAuth service required URLs (Credentials) should be specified
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="google_oauth_configuration"><span style="font-weight: bold; font-style: italic;">session_list</span> = {}
+<span style="font-weight: bold; font-style: italic;">oauth</span> = OAuth()
+
+<span style="font-weight: bold; font-style: italic;">google_oauth</span> = oauth.remote_app(
+    <span style="font-style: italic;">'google'</span>,
+    consumer_key=oauth_config.CONSUMER_KEY,
+    consumer_secret=oauth_config.CONSUMER_SECRET,
+    request_token_params={
+        <span style="font-style: italic;">'scope'</span>: <span style="font-style: italic;">'email'</span>, <span style="font-style: italic;">'prompt'</span> : <span style="font-style: italic;">'select_account'</span>
+    },
+    base_url=<span style="font-style: italic;">'https://www.googleapis.com/oauth2/v1/'</span>,
+    request_token_url=<span style="font-weight: bold; text-decoration: underline;">None</span>,
+    access_token_method=<span style="font-style: italic;">'POST'</span>,
+    access_token_url=<span style="font-style: italic;">'https://accounts.google.com/o/oauth2/token'</span>,
+    authorize_url=<span style="font-style: italic;">'https://accounts.google.com/o/oauth2/auth'</span>,
+)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-5" class="outline-4">
+<h4 id="sec-2-2-5"><span class="section-number-4">2.2.5</span> Google token getter</h4>
+<div class="outline-text-4" id="text-2-2-5">
+<ul class="org-ul">
+<li>Once the google verfies the credentials token will be shared.
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-python" id="google_oauth_token"><span style="font-weight: bold; text-decoration: underline;">@google_oauth.tokengetter</span>
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_google_oauth_token</span>():
+    <span style="font-weight: bold;">return</span> session.get(<span style="font-style: italic;">'google_token'</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> <code>Logout</code> API</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+When user clicks on <code>logout</code> button from f/e it will invoke <code>/logout</code> api
+and thereby it will destroy all session variables.
+</p>
+</div>
+
+<div id="outline-container-sec-2-3-1" class="outline-4">
+<h4 id="sec-2-3-1"><span class="section-number-4">2.3.1</span> API Design</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<dl class="org-dl">
+<dt> URL </dt><dd>/logout
+</dd>
+<dt> Method </dt><dd>GET
+</dd>
+
+<dt> URL Params </dt><dd>None
+</dd>
+
+<dt> Success Response </dt><dd><ul class="org-ul">
+<li>Code: 200
+</li>
+
+<li id="Content"><pre class="example">
+{"status" : "Successfully logged out from system"}
+</pre>
+</li>
+</ul>
+</dd>
+</dl>
+
+
+<dl class="org-dl">
+<dt> Error Response </dt><dd><ul class="org-ul">
+<li>Code: 401 UNAUTHORIZED
+</li>
+
+<li>Content: { error : "Not Authorized" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 400 Bad Request
+</li>
+
+<li>Content: { error : "Malformed arguments" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 500
+</li>
+
+<li>Content: { error : Exception String}
+</li>
+</ul>
+</dd>
+
+<dt> Example </dt><dd><pre class="example">
+http://localhost:5000/logout
+</pre>
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3-2" class="outline-4">
+<h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> Implementation</h4>
+<div class="outline-text-4" id="text-2-3-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="logout_route"><span style="font-weight: bold; text-decoration: underline;">@api.route</span>(<span style="font-style: italic;">'/logout'</span>)
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">logout</span>():
+    <span style="font-weight: bold;">if</span> <span style="font-style: italic;">'google_token'</span> <span style="font-weight: bold;">in</span> session:
+        <span style="font-weight: bold; font-style: italic;">email</span> = session[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold; font-style: italic;">role</span> = session[<span style="font-style: italic;">'role'</span>]
+        <span style="font-weight: bold; font-style: italic;">key</span> = session[<span style="font-style: italic;">'google_token'</span>]
+        <span style="font-weight: bold; font-style: italic;">session_dict</span> = {<span style="font-style: italic;">'email'</span>: email,
+                         <span style="font-style: italic;">'role'</span>: role,
+                         <span style="font-style: italic;">'key'</span>: key }        
+        <span style="font-weight: bold;">try</span>:
+            session.clear()
+            <span style="font-weight: bold; font-style: italic;">session_obj</span> = SystemInterface.logout(session_dict)
+            <span style="font-weight: bold;">return</span> redirect(<span style="font-style: italic;">"/"</span>)
+
+        <span style="font-weight: bold;">except</span> NotAuthorizedError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Not Authorized error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Malformed Arguments"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> StateError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">err_str</span> = <span style="font-weight: bold;">str</span>(e)
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: err_str}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Internal Server Error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+    <span style="font-weight: bold;">else</span>:
+        session.clear()
+        <span style="font-weight: bold;">return</span> redirect(<span style="font-style: italic;">"/"</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Add User</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+API to add a user
+</p>
+</div>
+
+<div id="outline-container-sec-2-4-1" class="outline-4">
+<h4 id="sec-2-4-1"><span class="section-number-4">2.4.1</span> API Design</h4>
+<div class="outline-text-4" id="text-2-4-1">
+<dl class="org-dl">
+<dt> URL </dt><dd>/add_user
+</dd>
+
+<dt> Method </dt><dd>POST
+</dd>
+
+<dt> Data Params </dt><dd>     {
+ 'email': '&lt;value&gt;',
+ 'name': '&lt;value&gt;'
+}
+</dd>
+
+<dt> Success Response </dt><dd><ul class="org-ul">
+<li>Code: 200
+</li>
+
+<li>Content:
+<pre class="example">
+{
+  "email": {
+  "email": "xyz@gmail.com",
+  "id": "2"
+   },
+"id": "2",
+"name": {
+"id": "2",
+"name": "xyz"
+   },
+"roles": [
+      {
+     "id": "2",
+     "name": "user"
+      }
+    ]
+}
+</pre>
+</li>
+</ul>
+</dd>
+
+<dt> Error Response </dt><dd><ul class="org-ul">
+<li>Code: 401 UNAUTHORIZED
+</li>
+
+<li>Content: { error : "Not Authorized error: not Authorized to perform this action" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 400 Bad Request
+</li>
+
+<li>Content: { error : "Malformed arguments" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 500
+</li>
+
+<li>Content: { error : Exception String}
+</li>
+</ul>
+</dd>
+
+<dt> Example </dt><dd><pre class="example">
+http://localhost:5000/add_user
+</pre>
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-2-4-2" class="outline-4">
+<h4 id="sec-2-4-2"><span class="section-number-4">2.4.2</span> Implementation</h4>
+<div class="outline-text-4" id="text-2-4-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="add_user"><span style="font-weight: bold; text-decoration: underline;">@api.route</span>(<span style="font-style: italic;">'/add_user'</span>, methods=[<span style="font-style: italic;">'POST'</span>])
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">add_user</span>():
+    <span style="font-weight: bold;">if</span> request.method == <span style="font-style: italic;">'POST'</span>:
+        
+        <span style="font-weight: bold; font-style: italic;">data_json</span> = json.dumps(request.get_json())
+        <span style="font-weight: bold; font-style: italic;">data_dict</span> = yaml.safe_load(data_json)
+        <span style="font-weight: bold; font-style: italic;">user_dict</span> = {<span style="font-style: italic;">'email'</span>: data_dict[<span style="font-style: italic;">'email'</span>],
+                        <span style="font-style: italic;">'name'</span>: data_dict[<span style="font-style: italic;">'name'</span>] }
+        
+        <span style="font-weight: bold; font-style: italic;">email</span> = session[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold; font-style: italic;">role</span> = session[<span style="font-style: italic;">'role'</span>]
+        <span style="font-weight: bold; font-style: italic;">key</span> = session[<span style="font-style: italic;">'google_token'</span>]
+        <span style="font-weight: bold; font-style: italic;">session_dict</span> = {<span style="font-style: italic;">'email'</span>: email,
+                            <span style="font-style: italic;">'role'</span>: role,
+                            <span style="font-style: italic;">'key'</span>: key }        
+        <span style="font-weight: bold;">try</span>:            
+            <span style="font-weight: bold; font-style: italic;">user_obj</span> = SystemInterface.add_user(session_dict, user_dict)
+            <span style="font-weight: bold;">return</span> jsonify(user_obj.to_client())
+
+        <span style="font-weight: bold;">except</span> NotAuthorizedError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Not Authorized error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Malformed Arguments"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> StateError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">err_str</span> = <span style="font-weight: bold;">str</span>(e)
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: err_str}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Internal Server Error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Del User</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+API to delete a user
+</p>
+</div>
+
+<div id="outline-container-sec-2-5-1" class="outline-4">
+<h4 id="sec-2-5-1"><span class="section-number-4">2.5.1</span> API design</h4>
+<div class="outline-text-4" id="text-2-5-1">
+<dl class="org-dl">
+<dt> URL </dt><dd>/del_user/&lt;email_str&gt;
+</dd>
+
+<dt> Method </dt><dd>DELETE
+</dd>
+
+<dt> Success Response </dt><dd><ul class="org-ul">
+<li>Code: 200
+</li>
+
+<li>Content: 
+<pre class="example">
+{"status" : "success"}
+</pre>
+</li>
+</ul>
+</dd>
+
+<dt> Error Response </dt><dd><ul class="org-ul">
+<li>Code: 401 UNAUTHORIZED
+</li>
+
+<li>Content: { error : "Not Authorized" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 400 Bad Request
+</li>
+
+<li>Content: { error : "Malformed arguments" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 500
+</li>
+
+<li>Content: { error : Exception String}
+</li>
+</ul>
+</dd>
+<dt> Example </dt><dd><pre class="example">
+http://localhost:5000/del_user/tt@gmail.com
+</pre>
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-2-5-2" class="outline-4">
+<h4 id="sec-2-5-2"><span class="section-number-4">2.5.2</span> Implementation</h4>
+<div class="outline-text-4" id="text-2-5-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="del_user"><span style="font-weight: bold; text-decoration: underline;">@api.route</span>(<span style="font-style: italic;">'/del_user/&lt;email_str&gt;'</span>, methods=[<span style="font-style: italic;">'DELETE'</span>])
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">del_user</span>(email_str):
+    <span style="font-weight: bold;">if</span> request.method == <span style="font-style: italic;">'DELETE'</span>:
+        <span style="font-weight: bold; font-style: italic;">email</span> = session[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold; font-style: italic;">role</span> = session[<span style="font-style: italic;">'role'</span>]
+        <span style="font-weight: bold; font-style: italic;">key</span> = session[<span style="font-style: italic;">'google_token'</span>]
+        <span style="font-weight: bold; font-style: italic;">session_dict</span> = {<span style="font-style: italic;">'email'</span>: email,
+                            <span style="font-style: italic;">'role'</span>: role,
+                            <span style="font-style: italic;">'key'</span>: key }        
+        <span style="font-weight: bold;">try</span>:
+           
+            <span style="font-weight: bold; font-style: italic;">user_obj</span> = SystemInterface.del_user(session_dict, <span style="font-weight: bold;">str</span>(email_str))
+            <span style="font-weight: bold;">return</span> jsonify({<span style="font-style: italic;">"status"</span> : <span style="font-style: italic;">"success"</span>})
+
+        <span style="font-weight: bold;">except</span> NotAuthorizedError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Not Authorized error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Malformed Arguments"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> StateError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">err_str</span> = <span style="font-weight: bold;">str</span>(e)
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: err_str}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> NotFoundError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">err_str</span> = <span style="font-weight: bold;">str</span>(e)
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>,
+                       <span style="font-style: italic;">"msg"</span>: err_str}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Internal Server Error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Show Users</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+API to Show Users
+</p>
+</div>
+
+<div id="outline-container-sec-2-6-1" class="outline-4">
+<h4 id="sec-2-6-1"><span class="section-number-4">2.6.1</span> API Design</h4>
+<div class="outline-text-4" id="text-2-6-1">
+<dl class="org-dl">
+<dt> URL </dt><dd>/show_users
+</dd>
+<dt> Method </dt><dd>GET
+</dd>
+
+<dt> URL Params </dt><dd>None
+</dd>
+
+<dt> Success Response </dt><dd><ul class="org-ul">
+<li>Code: 200
+</li>
+
+<li id="Content"><pre class="example">
+[
+  {
+    "id": "1",
+    "email": {
+      "email": "xyz@vlabs.ac.in",
+      "id": "1"
+    },
+    "roles": [],
+    "name": {
+      "name": "admin",
+      "id": "1"
+    }
+  },
+  {
+    "id": "2",
+    "email": {
+      "email": "abc@gmail.com",
+      "id": "2"
+    },
+    "roles": [],
+    "name": {
+      "name": "abc",
+      "id": "2"
+    }
+  }
+]
+</pre>
+</li>
+</ul>
+</dd>
+
+<dt> Error Response </dt><dd><ul class="org-ul">
+<li>Code: 401 UNAUTHORIZED
+</li>
+
+<li>Content: { error : "Not Authorized" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 400 Bad Request
+</li>
+
+<li>Content: { error : "Malformed arguments" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 500
+</li>
+
+<li>Content: { error : Exception String}
+</li>
+</ul>
+</dd>
+</dl>
+
+
+<dl class="org-dl">
+<dt> Example </dt><dd><pre class="example">
+http://localhost:5000/show_users
+</pre>
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-2-6-2" class="outline-4">
+<h4 id="sec-2-6-2"><span class="section-number-4">2.6.2</span> Implementation</h4>
+<div class="outline-text-4" id="text-2-6-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="show_users"><span style="font-weight: bold; text-decoration: underline;">@api.route</span>(<span style="font-style: italic;">'/show_users'</span>, methods=[<span style="font-style: italic;">'GET'</span>])
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">show_users</span>():
+    <span style="font-weight: bold;">if</span> request.method == <span style="font-style: italic;">'GET'</span>:
+        <span style="font-weight: bold; font-style: italic;">email</span> = session[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold; font-style: italic;">role</span> = session[<span style="font-style: italic;">'role'</span>]
+        <span style="font-weight: bold; font-style: italic;">key</span> = session[<span style="font-style: italic;">'google_token'</span>]
+        <span style="font-weight: bold; font-style: italic;">session_dict</span> = {<span style="font-style: italic;">'email'</span>: email,
+                            <span style="font-style: italic;">'role'</span>: role,
+                            <span style="font-style: italic;">'key'</span>: key }        
+        <span style="font-weight: bold;">try</span>:            
+            <span style="font-weight: bold; font-style: italic;">users</span> = SystemInterface.show_users(session_dict)
+            <span style="font-weight: bold;">return</span> jsonify_list(users)
+
+        <span style="font-weight: bold;">except</span> NotAuthorizedError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Not Authorized error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Malformed Arguments"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> StateError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">err_str</span> = <span style="font-weight: bold;">str</span>(e)
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: err_str}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Internal Server Error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-7" class="outline-3">
+<h3 id="sec-2-7"><span class="section-number-3">2.7</span> Show Sessions</h3>
+<div class="outline-text-3" id="text-2-7">
+<p>
+API to Show Sessions
+</p>
+</div>
+<div id="outline-container-sec-2-7-1" class="outline-4">
+<h4 id="sec-2-7-1"><span class="section-number-4">2.7.1</span> API Design</h4>
+<div class="outline-text-4" id="text-2-7-1">
+<dl class="org-dl">
+<dt> URL </dt><dd>/show_sessions
+</dd>
+<dt> Method </dt><dd>GET
+</dd>
+
+<dt> URL Params </dt><dd>None
+</dd>
+
+<dt> Success Response </dt><dd><ul class="org-ul">
+<li>Code: 200
+</li>
+
+<li id="Content">list of sessions
+<pre class="example">
+[
+  {
+    "role": {
+      "name": "admin",
+      "id": "None"
+    },
+    "user": {
+      "id": "1",
+      "name": {
+	"name": "admin",
+	"id": "1"
+      },
+      "roles": [],
+      "email": {
+	"email": "xyz@vlabs.ac.in",
+	"id": "1"
+      }
+    },
+    "key": "(u'ya29.GlvlAwItRd_ahdDONLq5EymPoOTaMf5jNh1k65PUPu8Zx6TLo5H5vOipa_RCAXhEeQ7qlHsM4MS96DwamtLXbqgbUuPVCmQ4v_AbfOi6wP1i7mXQ9wg9qu4aEwxQ', '')"
+  }
+]
+</pre>
+</li>
+</ul>
+</dd>
+
+<dt> Error Response </dt><dd><ul class="org-ul">
+<li>Code: 401 UNAUTHORIZED
+</li>
+
+<li>Content: { error : "Not Authorized" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 400 Bad Request
+</li>
+
+<li>Content: { error : "Malformed arguments" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 500
+</li>
+
+<li>Content: { error : Exception String}
+</li>
+</ul>
+</dd>
+</dl>
+
+
+<dl class="org-dl">
+<dt> Example </dt><dd><pre class="example">
+http://localhost:5000/show_sessions
+</pre>
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-2-7-2" class="outline-4">
+<h4 id="sec-2-7-2"><span class="section-number-4">2.7.2</span> Implementation</h4>
+<div class="outline-text-4" id="text-2-7-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="show_sessions"><span style="font-weight: bold; text-decoration: underline;">@api.route</span>(<span style="font-style: italic;">'/show_sessions'</span>, methods=[<span style="font-style: italic;">'GET'</span>])
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">show_sessions</span>():
+    <span style="font-weight: bold;">if</span> request.method == <span style="font-style: italic;">'GET'</span>:
+        <span style="font-weight: bold; font-style: italic;">email</span> = session[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold; font-style: italic;">role</span> = session[<span style="font-style: italic;">'role'</span>]
+        <span style="font-weight: bold; font-style: italic;">key</span> = session[<span style="font-style: italic;">'google_token'</span>]
+        <span style="font-weight: bold; font-style: italic;">session_dict</span> = {<span style="font-style: italic;">'email'</span>: email,
+                            <span style="font-style: italic;">'role'</span>: role,
+                            <span style="font-style: italic;">'key'</span>: key }        
+        <span style="font-weight: bold;">try</span>:            
+            <span style="font-weight: bold; font-style: italic;">sessions</span> = SystemInterface.show_sessions(session_dict)
+            <span style="font-weight: bold;">return</span> jsonify_list(sessions)
+
+        <span style="font-weight: bold;">except</span> NotAuthorizedError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Not Authorized error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Malformed Arguments"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> StateError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">err_str</span> = <span style="font-weight: bold;">str</span>(e)
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: err_str}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Internal Server Error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-8" class="outline-3">
+<h3 id="sec-2-8"><span class="section-number-3">2.8</span> Show Roles</h3>
+<div class="outline-text-3" id="text-2-8">
+</div><div id="outline-container-sec-2-8-1" class="outline-4">
+<h4 id="sec-2-8-1"><span class="section-number-4">2.8.1</span> API Design</h4>
+<div class="outline-text-4" id="text-2-8-1">
+<dl class="org-dl">
+<dt> URL </dt><dd>/show_roles
+</dd>
+<dt> Method </dt><dd>GET
+</dd>
+
+<dt> URL Params </dt><dd>None
+</dd>
+
+<dt> Success Response </dt><dd><ul class="org-ul">
+<li>Code: 200
+</li>
+
+<li id="Content">list of roles
+<pre class="example">
+[
+  {
+ "name": "admin",
+ "id": "1"
+  },
+ {
+ "name": "user",
+ "id": "2"
+ }
+]
+</pre>
+</li>
+</ul>
+</dd>
+
+<dt> Error Response </dt><dd><ul class="org-ul">
+<li>Code: 401 UNAUTHORIZED
+</li>
+
+<li>Content: { error : "Not Authorized" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 400 Bad Request
+</li>
+
+<li>Content: { error : "Malformed arguments" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 500
+</li>
+
+<li>Content: { error : Exception String}
+</li>
+</ul>
+</dd>
+</dl>
+
+
+<dl class="org-dl">
+<dt> Example </dt><dd><pre class="example">
+http://localhost:5000/show_roles
+</pre>
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-2-8-2" class="outline-4">
+<h4 id="sec-2-8-2"><span class="section-number-4">2.8.2</span> Implementation</h4>
+<div class="outline-text-4" id="text-2-8-2">
+<p>
+API to Show all roles in the system. 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="show_roles"><span style="font-weight: bold; text-decoration: underline;">@api.route</span>(<span style="font-style: italic;">'/show_roles'</span>, methods=[<span style="font-style: italic;">'GET'</span>])
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">show_roles</span>():
+    <span style="font-weight: bold;">if</span> request.method == <span style="font-style: italic;">'GET'</span>:
+        <span style="font-weight: bold; font-style: italic;">email</span> = session[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold; font-style: italic;">role</span> = session[<span style="font-style: italic;">'role'</span>]
+        <span style="font-weight: bold; font-style: italic;">key</span> = session[<span style="font-style: italic;">'google_token'</span>]
+        <span style="font-weight: bold; font-style: italic;">session_dict</span> = {<span style="font-style: italic;">'email'</span>: email,
+                            <span style="font-style: italic;">'role'</span>: role,
+                            <span style="font-style: italic;">'key'</span>: key }        
+        <span style="font-weight: bold;">try</span>:            
+            <span style="font-weight: bold; font-style: italic;">roles</span> = SystemInterface.show_roles(session_dict)
+            <span style="font-weight: bold;">return</span> jsonify_list(roles)
+
+        <span style="font-weight: bold;">except</span> NotAuthorizedError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Not Authorized error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Malformed Arguments"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> StateError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">err_str</span> = <span style="font-weight: bold;">str</span>(e)
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: err_str}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Internal Server Error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-9" class="outline-3">
+<h3 id="sec-2-9"><span class="section-number-3">2.9</span> Show User Details</h3>
+<div class="outline-text-3" id="text-2-9">
+<p>
+API to show user details
+</p>
+</div>
+<div id="outline-container-sec-2-9-1" class="outline-4">
+<h4 id="sec-2-9-1"><span class="section-number-4">2.9.1</span> API Design</h4>
+<div class="outline-text-4" id="text-2-9-1">
+<dl class="org-dl">
+<dt> URL </dt><dd>/show_user_details?email=&lt;email_str&gt;
+</dd>
+<dt> Method </dt><dd>GET
+</dd>
+
+<dt> URL Params </dt><dd>       
+</dd>
+
+<dt> Success Response </dt><dd><ul class="org-ul">
+<li>Code: 200
+</li>
+
+<li id="Content">user with roles
+<pre class="example">
+{
+  "email": {
+    "email": "xyz@vlabs.ac.in", 
+    "id": "1"
+  }, 
+  "id": "1", 
+  "name": {
+    "id": "1", 
+    "name": "xyz"
+  }, 
+  "roles": [
+    {
+      "id": "1", 
+      "name": "admin"
+    }
+  ]
+}
+</pre>
+</li>
+</ul>
+</dd>
+
+<dt> Error Response </dt><dd><ul class="org-ul">
+<li>Code: 401 UNAUTHORIZED
+</li>
+
+<li>Content: { error : "Not Authorized" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 400 Bad Request
+</li>
+
+<li>Content: { error : "Malformed arguments" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 500
+</li>
+
+<li>Content: { error : Exception String}
+</li>
+</ul>
+</dd>
+</dl>
+
+
+<dl class="org-dl">
+<dt> Example </dt><dd><pre class="example">
+http://localhost:5000/show_user_details?email=&lt;email_str&gt;
+</pre>
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-2-9-2" class="outline-4">
+<h4 id="sec-2-9-2"><span class="section-number-4">2.9.2</span> Implementation</h4>
+<div class="outline-text-4" id="text-2-9-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="show_user_details"><span style="font-weight: bold; text-decoration: underline;">@api.route</span>(<span style="font-style: italic;">'/show_user_details'</span>, methods=[<span style="font-style: italic;">'GET'</span>])
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">show_user_details</span>():
+    <span style="font-weight: bold;">if</span> request.method == <span style="font-style: italic;">'GET'</span>:
+        <span style="font-weight: bold; font-style: italic;">email_str</span> = request.args.get(<span style="font-style: italic;">'email'</span>)
+
+        <span style="font-weight: bold; font-style: italic;">email</span> = session[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold; font-style: italic;">role</span> = session[<span style="font-style: italic;">'role'</span>]
+        <span style="font-weight: bold; font-style: italic;">key</span> = session[<span style="font-style: italic;">'google_token'</span>]
+        <span style="font-weight: bold; font-style: italic;">session_dict</span> = {<span style="font-style: italic;">'email'</span>: email,
+                            <span style="font-style: italic;">'role'</span>: role,
+                            <span style="font-style: italic;">'key'</span>: key }        
+        <span style="font-weight: bold;">try</span>:            
+            <span style="font-weight: bold; font-style: italic;">user</span> = SystemInterface.show_user_details(session_dict, <span style="font-weight: bold;">str</span>(email_str))
+            <span style="font-weight: bold;">return</span> jsonify(user.to_client())
+
+        <span style="font-weight: bold;">except</span> NotAuthorizedError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Not Authorized error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Malformed Arguments"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> StateError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">err_str</span> = <span style="font-weight: bold;">str</span>(e)
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: err_str}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Internal Server Error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-10" class="outline-3">
+<h3 id="sec-2-10"><span class="section-number-3">2.10</span> Set email of a User</h3>
+<div class="outline-text-3" id="text-2-10">
+<p>
+API to change the email of the user.
+</p>
+</div>
+<div id="outline-container-sec-2-10-1" class="outline-4">
+<h4 id="sec-2-10-1"><span class="section-number-4">2.10.1</span> API Design</h4>
+<div class="outline-text-4" id="text-2-10-1">
+<dl class="org-dl">
+<dt> URL </dt><dd>/set_email
+</dd>
+<dt> Method </dt><dd>GET
+</dd>
+
+<dt> URL Params </dt><dd>None
+<pre class="example">
+{
+"email" : "abc@gmail.com",
+"set_email_str" : "xyz@gmail.com"    
+}
+</pre>
+</dd>
+<dt> Success Response </dt><dd><ul class="org-ul">
+<li>Code: 200
+</li>
+
+<li id="Content"><pre class="example">
+{
+  "email": {
+    "email": "xyz@gmail.com", 
+    "id": "3"
+  }, 
+  "id": "2", 
+  "name": {
+    "id": "2", 
+    "name": "xyz"
+  }, 
+  "roles": [
+    {
+      "id": "2", 
+      "name": "user"
+    }
+  ]
+}
+</pre>
+</li>
+</ul>
+</dd>
+
+<dt> Error Response </dt><dd><ul class="org-ul">
+<li>Code: 401 UNAUTHORIZED
+</li>
+
+<li>Content: { error : "Not Authorized" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 400 Bad Request
+</li>
+
+<li>Content: { error : "Malformed arguments" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 500
+</li>
+
+<li>Content: { error : Exception String}
+</li>
+</ul>
+</dd>
+</dl>
+
+
+<dl class="org-dl">
+<dt> Example </dt><dd><pre class="example">
+http://localhost:5000/set_email
+</pre>
+</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-sec-2-10-2" class="outline-4">
+<h4 id="sec-2-10-2"><span class="section-number-4">2.10.2</span> Implementation</h4>
+<div class="outline-text-4" id="text-2-10-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="set_email_of_user"><span style="font-weight: bold; text-decoration: underline;">@api.route</span>(<span style="font-style: italic;">'/set_email'</span>, methods=[<span style="font-style: italic;">'PUT'</span>])
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">set_email</span>():
+    <span style="font-weight: bold;">if</span> request.method == <span style="font-style: italic;">'PUT'</span>:
+        <span style="font-weight: bold; font-style: italic;">data_json</span> = json.dumps(request.get_json())
+        <span style="font-weight: bold; font-style: italic;">data_dict</span> = yaml.safe_load(data_json)
+        <span style="font-weight: bold; font-style: italic;">email_str</span> = data_dict[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold; font-style: italic;">set_email_str</span> = data_dict[<span style="font-style: italic;">'set_email_str'</span>]
+        
+        <span style="font-weight: bold; font-style: italic;">email</span> = session[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold; font-style: italic;">role</span> = session[<span style="font-style: italic;">'role'</span>]
+        <span style="font-weight: bold; font-style: italic;">key</span> = session[<span style="font-style: italic;">'google_token'</span>]
+        <span style="font-weight: bold; font-style: italic;">session_dict</span> = {<span style="font-style: italic;">'email'</span>: email,
+                            <span style="font-style: italic;">'role'</span>: role,
+                            <span style="font-style: italic;">'key'</span>: key }        
+        <span style="font-weight: bold;">try</span>:            
+            <span style="font-weight: bold; font-style: italic;">user_obj</span> = SystemInterface.set_email_of_user(session_dict,
+                                                             email_str,
+                                                             set_email_str)
+                                                        
+            <span style="font-weight: bold;">return</span> jsonify(user_obj.to_client())
+
+        <span style="font-weight: bold;">except</span> NotAuthorizedError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Not Authorized error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Malformed Arguments"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> StateError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">err_str</span> = <span style="font-weight: bold;">str</span>(e)
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: err_str}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Internal Server Error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-11" class="outline-3">
+<h3 id="sec-2-11"><span class="section-number-3">2.11</span> Set name of a User</h3>
+<div class="outline-text-3" id="text-2-11">
+<p>
+API to change the name of the user.
+</p>
+</div>
+<div id="outline-container-sec-2-11-1" class="outline-4">
+<h4 id="sec-2-11-1"><span class="section-number-4">2.11.1</span> API Design</h4>
+<div class="outline-text-4" id="text-2-11-1">
+<dl class="org-dl">
+<dt> URL </dt><dd>/set_name
+</dd>
+<dt> Method </dt><dd>GET
+</dd>
+
+<dt> URL Params </dt><dd><pre class="example">
+{
+"email" : "xyz@gmail.com",
+"name_str" : "XYZ"      
+}
+</pre>
+</dd>
+<dt> Success Response </dt><dd><ul class="org-ul">
+<li>Code: 200
+</li>
+
+<li id="Content"><pre class="example">
+{
+  "email": {
+    "email": "xyz@gmail.com", 
+    "id": "3"
+  }, 
+  "id": "2", 
+  "name": {
+    "id": "3", 
+    "name": "XYZ"
+  }, 
+  "roles": [
+    {
+      "id": "2", 
+      "name": "user"
+    }
+  ]
+}
+</pre>
+</li>
+</ul>
+</dd>
+
+<dt> Error Response </dt><dd><ul class="org-ul">
+<li>Code: 401 UNAUTHORIZED
+</li>
+
+<li>Content: { error : "Not Authorized" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 400 Bad Request
+</li>
+
+<li>Content: { error : "Malformed arguments" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 500
+</li>
+
+<li>Content: { error : Exception String}
+</li>
+</ul>
+</dd>
+</dl>
+
+
+<dl class="org-dl">
+<dt> Example </dt><dd><pre class="example">
+http://localhost:5000/set_name
+</pre>
+</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-sec-2-11-2" class="outline-4">
+<h4 id="sec-2-11-2"><span class="section-number-4">2.11.2</span> Implementation</h4>
+<div class="outline-text-4" id="text-2-11-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="set_name_of_user"><span style="font-weight: bold; text-decoration: underline;">@api.route</span>(<span style="font-style: italic;">'/set_name'</span>, methods=[<span style="font-style: italic;">'PUT'</span>])
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">set_name</span>():
+    <span style="font-weight: bold;">if</span> request.method == <span style="font-style: italic;">'PUT'</span>:
+        <span style="font-weight: bold; font-style: italic;">data_json</span> = json.dumps(request.get_json())
+        <span style="font-weight: bold; font-style: italic;">data_dict</span> = yaml.safe_load(data_json)
+        <span style="font-weight: bold; font-style: italic;">email_str</span> = data_dict[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold; font-style: italic;">name_str</span> = data_dict[<span style="font-style: italic;">'name_str'</span>]
+        
+        <span style="font-weight: bold; font-style: italic;">email</span> = session[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold; font-style: italic;">role</span> = session[<span style="font-style: italic;">'role'</span>]
+        <span style="font-weight: bold; font-style: italic;">key</span> = session[<span style="font-style: italic;">'google_token'</span>]
+        <span style="font-weight: bold; font-style: italic;">session_dict</span> = {<span style="font-style: italic;">'email'</span>: email,
+                            <span style="font-style: italic;">'role'</span>: role,
+                            <span style="font-style: italic;">'key'</span>: key }        
+        <span style="font-weight: bold;">try</span>:            
+            <span style="font-weight: bold; font-style: italic;">user_obj</span> = SystemInterface.set_name_of_user(session_dict,
+                                                             email_str,
+                                                             name_str)
+                                                        
+            <span style="font-weight: bold;">return</span> jsonify(user_obj.to_client())
+
+        <span style="font-weight: bold;">except</span> NotAuthorizedError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Not Authorized error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Malformed Arguments"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> StateError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">err_str</span> = <span style="font-weight: bold;">str</span>(e)
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: err_str}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Internal Server Error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-12" class="outline-3">
+<h3 id="sec-2-12"><span class="section-number-3">2.12</span> Show Roles of a user</h3>
+<div class="outline-text-3" id="text-2-12">
+<p>
+API to show all roles of a user
+</p>
+</div>
+<div id="outline-container-sec-2-12-1" class="outline-4">
+<h4 id="sec-2-12-1"><span class="section-number-4">2.12.1</span> API Design</h4>
+<div class="outline-text-4" id="text-2-12-1">
+<dl class="org-dl">
+<dt> URL </dt><dd>/show_roles_of_user?email=&lt;email_str&gt;
+</dd>
+<dt> Method </dt><dd>GET
+</dd>
+
+<dt> URL Params </dt><dd></dd>
+</dl>
+
+
+<dl class="org-dl">
+<dt> Success Response </dt><dd><ul class="org-ul">
+<li>Code: 200
+</li>
+
+<li id="Content"><pre class="example">
+[{"name": "admin", "id": "1"}]
+</pre>
+</li>
+</ul>
+</dd>
+
+<dt> Error Response </dt><dd><ul class="org-ul">
+<li>Code: 401 UNAUTHORIZED
+</li>
+
+<li>Content: { error : "Not Authorized" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 400 Bad Request
+</li>
+
+<li>Content: { error : "Malformed arguments" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 500
+</li>
+
+<li>Content: { error : Exception String}
+</li>
+</ul>
+</dd>
+</dl>
+
+
+<dl class="org-dl">
+<dt> Example </dt><dd><pre class="example">
+http://localhost:5000/show_roles_of_user?email=xyz@vlabs.ac.in
+</pre>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-13" class="outline-3">
+<h3 id="sec-2-13"><span class="section-number-3">2.13</span> Add Role to a user</h3>
+<div class="outline-text-3" id="text-2-13">
+<p>
+API to add a role to a user.
+</p>
+</div>
+<div id="outline-container-sec-2-13-1" class="outline-4">
+<h4 id="sec-2-13-1"><span class="section-number-4">2.13.1</span> API Design</h4>
+<div class="outline-text-4" id="text-2-13-1">
+<dl class="org-dl">
+<dt> URL </dt><dd>/add_role_to_user
+</dd>
+<dt> Method </dt><dd>GET
+</dd>
+
+<dt> URL Params </dt><dd><pre class="example">
+  {
+  "email" : "xyz@gmail.com",
+  "role" : "admin"      
+  }
+</pre>
+</dd>
+
+<dt> Success Response </dt><dd><ul class="org-ul">
+<li>Code: 200
+</li>
+
+<li id="Content"><pre class="example">
+{
+  "email": {
+    "email": "xyz@gmail.com", 
+    "id": "3"
+  }, 
+  "id": "2", 
+  "name": {
+    "id": "3", 
+    "name": "XYZ"
+  }, 
+  "roles": [
+    {
+      "id": "1", 
+      "name": "admin"
+    }, 
+    {
+      "id": "2", 
+      "name": "user"
+    }
+  ]
+}
+</pre>
+</li>
+</ul>
+</dd>
+
+<dt> Error Response </dt><dd><ul class="org-ul">
+<li>Code: 401 UNAUTHORIZED
+</li>
+
+<li>Content: { error : "Not Authorized" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 400 Bad Request
+</li>
+
+<li>Content: { error : "Malformed arguments" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 500
+</li>
+
+<li>Content: { error : Exception String}
+</li>
+</ul>
+</dd>
+</dl>
+
+
+<dl class="org-dl">
+<dt> Example </dt><dd><pre class="example">
+http://localhost:5000/add_role_to_user
+</pre>
+</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-sec-2-13-2" class="outline-4">
+<h4 id="sec-2-13-2"><span class="section-number-4">2.13.2</span> Implementation</h4>
+<div class="outline-text-4" id="text-2-13-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="add_role_to_user"><span style="font-weight: bold; text-decoration: underline;">@api.route</span>(<span style="font-style: italic;">'/add_role_to_user'</span>, methods=[<span style="font-style: italic;">'POST'</span>])
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">add_role_to_user</span>():
+    <span style="font-weight: bold;">if</span> request.method == <span style="font-style: italic;">'POST'</span>:
+        
+        <span style="font-weight: bold; font-style: italic;">data_json</span> = json.dumps(request.get_json())
+        <span style="font-weight: bold; font-style: italic;">data_dict</span> = yaml.safe_load(data_json)
+        <span style="font-weight: bold; font-style: italic;">email_str</span> = data_dict[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold; font-style: italic;">role_str</span> = data_dict[<span style="font-style: italic;">'role'</span>]
+        
+        <span style="font-weight: bold; font-style: italic;">email</span> = session[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold; font-style: italic;">role</span> = session[<span style="font-style: italic;">'role'</span>]
+        <span style="font-weight: bold; font-style: italic;">key</span> = session[<span style="font-style: italic;">'google_token'</span>]
+        <span style="font-weight: bold; font-style: italic;">session_dict</span> = {<span style="font-style: italic;">'email'</span>: email,
+                            <span style="font-style: italic;">'role'</span>: role,
+                            <span style="font-style: italic;">'key'</span>: key }        
+        <span style="font-weight: bold;">try</span>:            
+            <span style="font-weight: bold; font-style: italic;">user_obj</span> = SystemInterface.add_role_to_user(session_dict, 
+                                                            email_str,
+                                                            role_str)
+            <span style="font-weight: bold;">return</span> jsonify(user_obj.to_client())
+
+        <span style="font-weight: bold;">except</span> NotAuthorizedError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Not Authorized error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Malformed Arguments"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> StateError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">err_str</span> = <span style="font-weight: bold;">str</span>(e)
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: err_str}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Internal Server Error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-14" class="outline-3">
+<h3 id="sec-2-14"><span class="section-number-3">2.14</span> Del Role of user</h3>
+<div class="outline-text-3" id="text-2-14">
+<p>
+API to delete a role of a user.
+</p>
+</div>
+<div id="outline-container-sec-2-14-1" class="outline-4">
+<h4 id="sec-2-14-1"><span class="section-number-4">2.14.1</span> API Design</h4>
+<div class="outline-text-4" id="text-2-14-1">
+<dl class="org-dl">
+<dt> URL </dt><dd>/del_role_of_user
+</dd>
+<dt> Method </dt><dd>PUT
+</dd>
+
+<dt> URL Params </dt><dd>None
+<pre class="example">
+{
+"email" : "xyz@gmail.com",
+"role" : "admin"
+}
+</pre>
+</dd>
+<dt> Success Response </dt><dd><ul class="org-ul">
+<li>Code: 200
+</li>
+
+<li id="Content"><pre class="example">
+{
+  "email": {
+    "email": "xyz@gmail.com", 
+    "id": "3"
+    }, 
+    "id": "2", 
+    "name": {
+    "id": "3", 
+    "name": "XYZ"
+    }, 
+    "roles": [
+    {
+    "id": "2", 
+    "name": "user"
+    }
+    ]
+}
+</pre>
+</li>
+</ul>
+</dd>
+
+<dt> Error Response </dt><dd><ul class="org-ul">
+<li>Code: 401 UNAUTHORIZED
+</li>
+
+<li>Content: { error : "Not Authorized" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 400 Bad Request
+</li>
+
+<li>Content: { error : "Malformed arguments" }
+</li>
+</ul>
+<p>
+OR
+</p>
+
+<ul class="org-ul">
+<li>Code: 500
+</li>
+
+<li>Content: { error : Exception String}
+</li>
+</ul>
+</dd>
+</dl>
+
+
+<dl class="org-dl">
+<dt> Example </dt><dd><pre class="example">
+http://localhost:5000/del_role_of_user
+</pre>
+</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-sec-2-14-2" class="outline-4">
+<h4 id="sec-2-14-2"><span class="section-number-4">2.14.2</span> Implementation</h4>
+<div class="outline-text-4" id="text-2-14-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="del_role_of_user"><span style="font-weight: bold; text-decoration: underline;">@api.route</span>(<span style="font-style: italic;">'/del_role_of_user'</span>, methods=[<span style="font-style: italic;">'PUT'</span>])
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">del_role_of_user</span>():
+    <span style="font-weight: bold;">if</span> request.method == <span style="font-style: italic;">'PUT'</span>:
+        <span style="font-weight: bold; font-style: italic;">data_json</span> = json.dumps(request.get_json())
+        <span style="font-weight: bold; font-style: italic;">data_dict</span> = yaml.safe_load(data_json)
+        <span style="font-weight: bold; font-style: italic;">email_str</span> = data_dict[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold; font-style: italic;">role_str</span> = data_dict[<span style="font-style: italic;">'role'</span>]
+        
+        <span style="font-weight: bold; font-style: italic;">email</span> = session[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold; font-style: italic;">role</span> = session[<span style="font-style: italic;">'role'</span>]
+        <span style="font-weight: bold; font-style: italic;">key</span> = session[<span style="font-style: italic;">'google_token'</span>]
+        <span style="font-weight: bold; font-style: italic;">session_dict</span> = {<span style="font-style: italic;">'email'</span>: email,
+                            <span style="font-style: italic;">'role'</span>: role,
+                            <span style="font-style: italic;">'key'</span>: key }        
+        <span style="font-weight: bold;">try</span>:            
+            <span style="font-weight: bold; font-style: italic;">user_obj</span> = SystemInterface.del_role_of_user(session_dict, 
+                                                            email_str,
+                                                            role_str)
+            <span style="font-weight: bold;">return</span> jsonify(user_obj.to_client())
+
+        <span style="font-weight: bold;">except</span> NotAuthorizedError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Not Authorized error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Malformed Arguments"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> StateError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">err_str</span> = <span style="font-weight: bold;">str</span>(e)
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: err_str}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span> <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">msg</span> = {<span style="font-style: italic;">"status"</span>: <span style="font-style: italic;">"failure"</span>, 
+                       <span style="font-style: italic;">"msg"</span>: <span style="font-style: italic;">"Internal Server Error"</span>}
+            <span style="font-weight: bold;">return</span> jsonify(msg)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-15" class="outline-3">
+<h3 id="sec-2-15"><span class="section-number-3">2.15</span> Jsonify_list</h3>
+<div class="outline-text-3" id="text-2-15">
+<p>
+Returns a list of dicts as json with correct mime types.  flask does not
+provide a jsonify for lists; hence this method
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="jsonify_list"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">jsonify_list</span>(data):
+    <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">type</span>(data) <span style="font-weight: bold;">is</span> <span style="font-weight: bold;">not</span> <span style="font-weight: bold;">list</span>:
+        <span style="font-weight: bold;">raise</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span>(<span style="font-style: italic;">'jsonify_list function accepts only a list'</span>)
+    <span style="font-weight: bold; font-style: italic;">s_data</span> = []
+    <span style="font-weight: bold;">for</span> d <span style="font-weight: bold;">in</span> data:
+        s_data.append(d.to_client())
+    <span style="font-weight: bold;">return</span> make_response(json.dumps(s_data), 200,
+                         {<span style="font-style: italic;">'content-type'</span>: <span style="font-style: italic;">'application/json'</span>})
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2016-07-26 Tue]</span></span></p>
+<p class="author">Author: VLEAD</p>
+<p class="date">Created: 2017-04-26 Wed 22:27</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

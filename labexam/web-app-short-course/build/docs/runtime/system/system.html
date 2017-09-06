@@ -1,0 +1,1588 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>User Directory Application: System</title>
+<!-- 2017-04-26 Wed 22:27 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="VLEAD" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../../style/css/worg-style.css" />
+<link rel="stylesheet" type="text/css" href="../../style/css/override.css" />
+<link rel="icon" type="image/png" href="../../style/img/favicon/popl.png" />
+<script type="text/javascript" src="../../style/js/org-info.js">
+/**
+ *
+ * @source: ../../style/js/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in ../../style/js/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in ../../style/js/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "1");
+org_html_manager.set("LINK_HOME", "../../index.html");
+org_html_manager.set("LINK_UP", "../index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../../index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">User Directory Application: System</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Introduction</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Structure of each operation class</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. The <code>System</code> class</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Constructor</a></li>
+<li><a href="#sec-2-2">2.2. Session for authorization</a>
+<ul>
+<li><a href="#sec-2-2-1">2.2.1. Test Constructor</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-3">2.3. Arity and Type check methods</a>
+<ul>
+<li><a href="#sec-2-3-1">2.3.1. Test Arity and Type Checks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-3">3. <code>do</code> method</a></li>
+<li><a href="#sec-4">4. Operations</a>
+<ul>
+<li><a href="#sec-4-1">4.1. <code>LoginFirstStep</code></a></li>
+<li><a href="#sec-4-2">4.2. <code>LoginSecondStep</code></a>
+<ul>
+<li><a href="#sec-4-2-1">4.2.1. This is not implemented</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-3">4.3. <code>Logout</code></a></li>
+<li><a href="#sec-4-4">4.4. <code>AddUser</code></a></li>
+<li><a href="#sec-4-5">4.5. <code>ShowUsers</code></a></li>
+<li><a href="#sec-4-6">4.6. <code>ShowUserDetails</code></a></li>
+<li><a href="#sec-4-7">4.7. <code>SetName</code></a></li>
+<li><a href="#sec-4-8">4.8. <code>SetEmail</code></a></li>
+<li><a href="#sec-4-9">4.9. <code>GetUserByEmail</code></a></li>
+<li><a href="#sec-4-10">4.10. <code>DelUser</code></a></li>
+<li><a href="#sec-4-11">4.11. <code>GetRoleSet</code></a></li>
+<li><a href="#sec-4-12">4.12. <code>GetRolesOfUser</code></a></li>
+<li><a href="#sec-4-13">4.13. <code>AddRole</code></a></li>
+<li><a href="#sec-4-14">4.14. <code>DeleteRole</code></a></li>
+<li><a href="#sec-4-15">4.15. <code>ShowSession</code></a>
+<ul>
+<li><a href="#sec-4-15-1">4.15.1. Tests</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-16">4.16. Operations Table</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+A system has clear boundaries of input, output and state.
+In the context of our application, the system interacts with
+the external world (through command line function calls)
+and also manages the entity objects in such a way that the
+system invariants are maintained. 
+</p>
+
+
+<p>
+The system holds two state variables:
+</p>
+
+<dl class="org-dl">
+<dt> <code>user_set</code> </dt><dd>The set of users in the system
+</dd>
+<dt> <code>session_set</code> </dt><dd>The set of sessions in the system
+</dd>
+</dl>
+
+<p>
+The system's inputs are in terms of <i>operations</i>.  Each
+operation consists of an operation name and a sequence of
+arguments.  
+</p>
+
+<p>
+In this implementation, an operation is identified by a
+class.  The dictionary <code>ops_table</code> maps operation names to
+their corresponding classes.
+</p>
+
+<p>
+Each operation is divided into five checks.  A <i>check</i> is a
+predicate that either returns true or throws an exception.
+</p>
+
+<p>
+The following checks are performed:
+</p>
+
+<dl class="org-dl">
+<dt> Arity check </dt><dd>checks if the operation has the right
+number  of arguments.
+</dd>
+
+<dt> Type check </dt><dd>checks if the arguments have the correct
+type. 
+</dd>
+
+<dt> Auth check </dt><dd>checks if the session performing the
+operation is authorized to do so.
+</dd>
+
+<dt> State check </dt><dd>checks if the operation meets all the
+constraints imposed by the state of the system
+(referential integrity constraints, etc.)
+</dd>
+</dl>
+</div>
+
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Structure of each operation class</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+The class corresponding to each operation has five fields:
+</p>
+
+<dl class="org-dl">
+<dt> arg_types </dt><dd>a list of type predicates.  The length of
+this list is the arity of the operation.  The arity
+check is simply a comparison of the length of this
+list with the length of the list of arguments.  Each
+predicate in the <code>arg_types</code> list is applied to the
+corresponding argument to check the type of that
+argument.
+</dd>
+
+<dt> auth_check </dt><dd>a function that checks if the  <code>args</code> (which
+may include a session) together satisfy the
+authorization conditions imposed by the operation. 
+</dd>
+
+<dt> state_check </dt><dd>a function that checks <code>args</code> and checks
+if the particular state invariant holds.
+</dd>
+
+<dt> action </dt><dd>a function on args that (presumably) changes
+the state of the system and also returns an answer.
+An exception thrown by this function indicates a
+serious failure in the application (e.g., out of
+memory error). 
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> The <code>System</code> class</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+There is only one <code>System</code> in the application.
+</p>
+</div>
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Constructor</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+This is the generic <code>System</code> implementation.  The entities that make up the
+sytem can be pure objects or objects that can be persisted.
+</p>
+
+<p>
+The specific tasks on the composed objects is agnostic to the <code>system</code>.
+This is achieved by defining an API that the system uses and is implemented
+by composed entity set.
+</p>
+
+<p>
+The system is initialized based on what the system should be composed of.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_system"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">System</span> ():
+    
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">__init__</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">raise</span> Error(<span style="font-style: italic;">'Can not instantiate'</span>)
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">initialize_system</span>(cls):
+        <span style="font-weight: bold; font-style: italic;">System.delegate</span> = cls()
+        <span style="font-weight: bold; font-style: italic;">System.session_set</span> = []
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Session for authorization</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+The authorization checks that the <code>system</code> performs require a set of
+operations to determine validity of a session or to find the type of user
+within a session.  
+</p>
+
+<p>
+Though a <code>user</code> can be associated with multiple <code>roles</code>, in a session a
+<code>user</code> is associated with a single <code>role</code>.
+</p>
+
+<p>
+These operations are implemented as part of the <code>system</code>.  At a later date,
+if a need for a different session management arises, the new session manager
+will provide this same <i>API</i>.
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="session_for_authorization">    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">is_session_valid</span>(session):
+        <span style="font-weight: bold;">return</span> (session.get(<span style="font-style: italic;">"key"</span>) == KEY <span style="font-weight: bold;">and</span>
+                    System.session_exists(session))
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">session_exists</span>(session):
+        <span style="font-weight: bold;">return</span> session <span style="font-weight: bold;">in</span> System.session_set
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">session_exists_for_same_user_and_role</span>(new_session):
+        <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+        <span style="font-weight: bold; font-style: italic;">bool_map</span> = <span style="font-weight: bold;">map</span>(<span style="font-weight: bold;">lambda</span> session: \
+                           new_session.get(<span style="font-style: italic;">"user"</span>) == session.get(<span style="font-style: italic;">"user"</span>) \
+                           <span style="font-weight: bold;">and</span> new_session.get(<span style="font-style: italic;">"role"</span>) == session.get(<span style="font-style: italic;">"role"</span>),\
+                           System.session_set)
+
+        <span style="font-weight: bold;">if</span> bool_map:
+            <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold;">reduce</span>(<span style="font-weight: bold;">lambda</span> a, b: a <span style="font-weight: bold;">or</span> b, bool_map)
+
+        <span style="font-weight: bold;">return</span> ret_val
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">is_session_admin</span>(session):
+        <span style="font-weight: bold;">return</span> session.get(<span style="font-style: italic;">"role"</span>).get(<span style="font-style: italic;">"val"</span>) == Config.admin_role
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">is_session_user</span>(session):
+        <span style="font-weight: bold;">return</span> session.get(<span style="font-style: italic;">"role"</span>).get(<span style="font-style: italic;">"val"</span>) == Config.user_role
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1"><span class="section-number-4">2.2.1</span> Test Constructor</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+For every test case, the runtime environment is created at the start and is
+torn after the test is run.  Such an environment here is made of persistent
+entities.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_constructor"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestSystemConstructor</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+        System.initialize_system(PersistenceDelegate)
+        Config.populate_db()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">System.delegate</span> = <span style="font-weight: bold; text-decoration: underline;">None</span>
+        <span style="font-weight: bold; font-style: italic;">System.session_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_delegate</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_delegate"</span>
+        <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">isinstance</span>(System.delegate, PersistenceDelegate), 
+                             <span style="font-weight: bold; text-decoration: underline;">True</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_system_constructor</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_system_constructor"</span>
+        <span style="font-weight: bold;">self</span>.assertEqual(System.delegate.get_admin_user().get(<span style="font-style: italic;">"name"</span>).get(<span style="font-style: italic;">"val"</span>),
+                         Config.admin_name)
+        <span style="font-weight: bold;">self</span>.assertEqual(System.delegate.get_admin_user().get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"val"</span>),
+                         Config.admin_email)
+        <span style="font-weight: bold;">self</span>.assertEqual(System.delegate.get_admin_user().get(<span style="font-style: italic;">'roles'</span>)[0].get(<span style="font-style: italic;">'val'</span>),
+                         Config.admin_role)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_is_session_admin</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_is_session_admin"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span> = System.delegate.get_admin_user()
+        <span style="font-weight: bold; font-style: italic;">admin_role</span> = System.delegate.get_admin_role()
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user, role=admin_role, key=<span style="font-style: italic;">"abcde"</span>)
+        System.session_set.append(session)
+        <span style="font-weight: bold;">self</span>.assertEqual(System.is_session_admin(session), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_is_session_user</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_is_session_user"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span> = System.delegate.get_admin_user()
+        <span style="font-weight: bold; font-style: italic;">user_role</span> = Role(val=Config.user_role)
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user, role=user_role, key=<span style="font-style: italic;">"abcde"</span>)
+        System.session_set.append(session)
+        <span style="font-weight: bold;">self</span>.assertEqual(System.is_session_user(session), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_session_exists</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_session_exists"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span> = System.delegate.get_admin_user()
+        <span style="font-weight: bold; font-style: italic;">admin_role</span> = System.delegate.get_admin_role()
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user, role=admin_role, key=<span style="font-style: italic;">"abcde"</span>)
+        System.session_set.append(session)
+        <span style="font-weight: bold;">self</span>.assertEqual(System.session_exists(session), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_session_exists_for_same_user_and_role</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_session_exists_for_same_user_and_role"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span> = System.delegate.get_admin_user()
+        <span style="font-weight: bold; font-style: italic;">admin_role</span> = System.delegate.get_admin_role()
+        <span style="font-weight: bold; font-style: italic;">session1</span> = Session(user=admin_user, role=admin_role, key=<span style="font-style: italic;">"abcde"</span>)
+        <span style="font-weight: bold; font-style: italic;">session2</span> = Session(user=admin_user, role=admin_role, key=<span style="font-style: italic;">"12345"</span>)
+        System.session_set.append(session1)
+        <span style="font-weight: bold;">self</span>.assertEqual(System.session_exists_for_same_user_and_role(session1), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Arity and Type check methods</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Arity Check ensures that correct number of arguments are passed to a
+functions.  Type Check ensures that the type of the arguments passed to a
+function are same as expected.
+</p>
+
+<p>
+Any operation, before being executed is subjected to <code>Arity</code> and <code>Type</code>
+checks.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="arity_type_checks">    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">arity_check</span>(args, n):
+       <span style="font-weight: bold;">if</span>  (<span style="font-weight: bold;">len</span>(args) != n) :
+          <span style="font-weight: bold;">raise</span> ArityError(<span style="font-style: italic;">"arity mismatch: size of args  does not "</span> + 
+                           <span style="font-style: italic;">"match operation arity "</span> )
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">type_check</span>(args, arg_types):
+        <span style="font-weight: bold;">for</span> key, value <span style="font-weight: bold;">in</span> args.iteritems():
+            <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> arg_types[key](value):
+                <span style="font-weight: bold;">raise</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span>(<span style="font-style: italic;">"type mismatch: argument %s is not of "</span>
+                                <span style="font-style: italic;">"type %s"</span> % (value, key))
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3-1" class="outline-4">
+<h4 id="sec-2-3-1"><span class="section-number-4">2.3.1</span> Test Arity and Type Checks</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_arity_and_types">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_arity</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_arity"</span>
+        <span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.assertRaises(ArityError):
+            System.arity_check([1,2], 3)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_type_checks</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_type_checks"</span>
+        <span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"question"</span>: Question(name=<span style="font-style: italic;">"why"</span>, question_type=<span style="font-style: italic;">"radio"</span>),
+                <span style="font-style: italic;">"answer"</span>: Question(name=<span style="font-style: italic;">"where"</span>, question_type=<span style="font-style: italic;">"radio"</span>)
+                }
+
+        <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"question"</span>: is_question,
+                     <span style="font-style: italic;">"answer"</span>: is_answer
+                     }
+
+        <span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.assertRaises(<span style="font-weight: bold; text-decoration: underline;">TypeError</span>):
+            System.type_check(args, arg_types)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> <code>do</code> method</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+The <code>do</code> method is the main work-horse of <code>System</code> which is construed as the
+<code>Controller</code>.  Every operation follows a template and realized as a class
+that defines:
+</p>
+<ol class="org-ol">
+<li>Number of Arguments
+</li>
+<li>Type of Arguments
+</li>
+<li>Who is allowed to perform the operation
+</li>
+<li>Referential integrity checks and finally
+</li>
+<li>the operation that changes state of the system. 
+</li>
+</ol>
+
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="do_function">    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>   
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">do</span>(op, **args):
+        <span style="font-weight: bold; font-style: italic;">cls</span> = ops_table[op]
+        <span style="font-weight: bold; font-style: italic;">arg_types</span>  = cls.arg_types
+        <span style="font-weight: bold; font-style: italic;">auth_check</span> = cls.auth_check
+        <span style="font-weight: bold; font-style: italic;">state_check</span> = cls.state_check
+        <span style="font-weight: bold; font-style: italic;">arity_and_type_checks_needed</span> = cls.arity_and_type_checks_needed
+        <span style="font-weight: bold;">try</span>:
+            <span style="font-weight: bold;">if</span> arity_and_type_checks_needed:
+               System.arity_check(args.keys(), <span style="font-weight: bold;">len</span>(arg_types.keys()))
+               System.type_check(args, arg_types)
+            auth_check(args)
+            state_check(args)
+            <span style="font-weight: bold;">return</span> cls.action(args)
+        <span style="font-weight: bold;">except</span> (ArityError, <span style="font-weight: bold; text-decoration: underline;">TypeError</span>, NotAuthorizedError, StateError) <span style="font-weight: bold;">as</span> err:
+            <span style="font-weight: bold;">raise</span> err
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Operations</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Operations provide the mechanism to either change or retrieve the state of
+the system.  While the system state is changed, it is imperative to maintain
+the invariant of the system.  Before the actual change in system is made,
+each operation goes through a series of checks:
+</p>
+<ol class="org-ol">
+<li>Arity Check - ensures the right number of arguments are provided to
+the operation.
+</li>
+<li>Type Check - ensures the arguments are of right type
+</li>
+<li>Auth Check - ensures only the authorized can perform the operation
+</li>
+<li>State Check - ensures System invariant is maintained
+</li>
+</ol>
+
+<p>
+Once these checks are satisfied, either the system state is modified or retrieved.
+</p>
+</div>
+
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> <code>LoginFirstStep</code></h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+In the current system, a user is associated with either one or two roles.
+If the user is associated with one role, the login session is associated
+with that role.  If the user has two roles,  role <code>user</code> is associated with
+the login session.  After the successful logn, the user has the ability to
+switch between the roles. 
+</p>
+
+<p>
+Refer <a href="../../data-model/index.html#login-first-step-auth">auth-check</a> and referential <a href="../../data-model/index.html#login-first-step-ref">integrity</a> rules.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_login_first_step"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">LoginFirstStep</span>():
+    <span style="font-weight: bold;">from</span> runtime.objects.entities <span style="font-weight: bold;">import</span> is_user
+    <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"user"</span>: is_user}
+    <span style="font-weight: bold; font-style: italic;">arity_and_type_checks_needed</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">auth_check</span>(args):
+        <span style="font-weight: bold;">pass</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">state_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> System.delegate.user_exists(user):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"user %s does not exist in System"</span>
+                                % user.to_client())
+        
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">action</span>(args):
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        <span style="font-weight: bold; font-style: italic;">user_from_system</span> = System.delegate.get_user(email=user.get(<span style="font-style: italic;">"email"</span>))
+        <span style="font-weight: bold; font-style: italic;">roles</span> = user_from_system.get(<span style="font-style: italic;">"roles"</span>)
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">len</span>(roles) == 1:
+            <span style="font-weight: bold;">return</span> roles[0]
+        <span style="font-weight: bold;">else</span>:
+            <span style="font-weight: bold;">return</span> System.delegate.get_role(val=Config.user_role)
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> <code>LoginSecondStep</code></h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Create a session.  This is done after a user us authorized.  Currently there
+is no mechanism to expire a session.  And any login attempt with a
+successful authorization will create a session.
+</p>
+</div>
+
+<div id="outline-container-sec-4-2-1" class="outline-4">
+<h4 id="sec-4-2-1"><span class="section-number-4">4.2.1</span> This is not implemented</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<p>
+The second step ensures every session in the session set is uniquely
+identified by a user and a role.  This means, a user can have multiple
+sessions but each session of a user is uniquely identified by a role.  In
+other words a user cannot have multiple sessions with a same role.
+</p>
+
+<p>
+A session is made up of a user, a role and a key.  A new login attempt
+might have a different key, but the fact that a session exists for a user
+and a role is sufficient to raise a state error.  Refer <a href="../../data-model/index.html#login-second-step-auth">auth-check</a> and
+referential <a href="../../data-model/index.html#login-second-step-ref">integrity</a> rules.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_login_second_step"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">LoginSecondStep</span>():
+    <span style="font-weight: bold;">from</span> runtime.objects.entities <span style="font-weight: bold;">import</span> is_session
+    <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"session"</span>: is_session}
+    <span style="font-weight: bold; font-style: italic;">arity_and_type_checks_needed</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">auth_check</span>(args):
+        <span style="font-weight: bold;">pass</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">state_check</span>(args):
+        <span style="font-weight: bold;">pass</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">session = args["session"]</span>
+
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">if System.session_exists_for_same_user_and_role(session):</span>
+        <span style="font-weight: bold; font-style: italic;">#     </span><span style="font-weight: bold; font-style: italic;">raise StateError("session %s already exists in System"</span>
+        <span style="font-weight: bold; font-style: italic;">#                          </span><span style="font-weight: bold; font-style: italic;">% session.to_client())</span>
+        
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">action</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">"session"</span>]
+        System.session_set.append(session)
+        <span style="font-weight: bold;">return</span> session
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> <code>Logout</code></h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+Logout ensures the session is deleted from the session set.  Refer
+<a href="../../data-model/index.html#logout-auth">auth-check</a> and referential <a href="../../data-model/index.html#logout-ref">integrity</a> rules.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_logout"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">Logout</span>():
+    <span style="font-weight: bold;">from</span> runtime.objects.entities <span style="font-weight: bold;">import</span> is_session
+    <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"session"</span>: is_session}
+    <span style="font-weight: bold; font-style: italic;">arity_and_type_checks_needed</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">auth_check</span>(args):
+        <span style="font-weight: bold;">pass</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">state_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">"session"</span>]
+
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> System.session_exists(session):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"session %s does not exist in System"</span>
+                                 % session.to_client())
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">action</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">"session"</span>]
+        System.session_set.remove(session)
+        <span style="font-weight: bold;">return</span> session
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> <code>AddUser</code></h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+A user is added to the system.  Refer <a href="../../data-model/index.html#add-user-auth">auth-check</a> and referential <a href="../../data-model/index.html#add-user-ref">integrity</a>
+rules.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_add_user"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">AddUser</span>():
+    <span style="font-weight: bold;">from</span> runtime.objects.entities <span style="font-weight: bold;">import</span> is_user, is_session
+    <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"user"</span>: is_user, <span style="font-style: italic;">"session"</span>: is_session}
+    <span style="font-weight: bold; font-style: italic;">arity_and_type_checks_needed</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">auth_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">'session'</span>]
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> (System.is_session_admin(session)):
+            <span style="font-weight: bold;">raise</span> NotAuthorizedError(<span style="font-style: italic;">"User with role %s"</span> 
+                                <span style="font-style: italic;">" not Authorized to perform this action"</span>
+                                % session.to_client())
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">state_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">"session"</span>]
+
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> System.session_exists(session):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"session %s does not exist in System"</span>
+                                % session.to_client())
+        <span style="font-weight: bold;">elif</span> System.delegate.user_exists(user):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"user %s already exists in System"</span>
+                                % user.to_client())
+        <span style="font-weight: bold;">elif</span> System.delegate.is_admin(user):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"A user with role admin cannot be added"</span>)
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">action</span>(args):
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        <span style="font-weight: bold; font-style: italic;">user</span> = System.delegate.add_user(user)
+        <span style="font-weight: bold;">return</span> user
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> <code>ShowUsers</code></h3>
+<div class="outline-text-3" id="text-4-5">
+<p>
+User's name and email is returned for every user in the set returned.  The
+users fetched by the delegate contain information about the roles for each
+user.  But the contract for <code>showusers</code> is to provide <code>name</code> and <code>email</code> of
+a user.  Therefore, before the user list is returned, the roles of each user
+are masked.  
+</p>
+
+<p>
+Refer <a href="../../data-model/index.html#show-users-auth">auth-check</a> and referential <a href="../../data-model/index.html#show-users-ref">integrity</a> rules.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_show_users"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">ShowUsers</span>():
+    <span style="font-weight: bold;">from</span> runtime.objects.entities <span style="font-weight: bold;">import</span> is_session
+    <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"session"</span>: is_session}
+    <span style="font-weight: bold; font-style: italic;">arity_and_type_checks_needed</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">auth_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">'session'</span>]
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> ((System.is_session_admin(session)) <span style="font-weight: bold;">or</span> 
+                (System.is_session_user(session))):
+            <span style="font-weight: bold;">raise</span> NotAuthorizedError(<span style="font-style: italic;">"Role not Authorized to perform this action"</span>)
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">state_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">"session"</span>]
+
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> System.session_exists(session):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"session %s does not exist in System"</span>
+                                % session.to_client())
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">action</span>(args):
+        <span style="font-weight: bold; font-style: italic;">users</span> = System.delegate.get_user_set()
+        <span style="font-weight: bold; font-style: italic;">users_to_return</span> = []
+        <span style="font-weight: bold;">for</span> user <span style="font-weight: bold;">in</span> users:
+            <span style="font-weight: bold; font-style: italic;">new_user</span> = System.delegate.mask_roles_of_user(user)
+            users_to_return.append(new_user)
+
+        <span style="font-weight: bold;">return</span> users_to_return
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-6" class="outline-3">
+<h3 id="sec-4-6"><span class="section-number-3">4.6</span> <code>ShowUserDetails</code></h3>
+<div class="outline-text-3" id="text-4-6">
+<p>
+User's name, email and roles are returned for the user identified by email.
+Refer <a href="../../data-model/index.html#show-user-details-auth">auth-check</a> and referential <a href="../../data-model/index.html#show-user-details-ref">integrity</a> rules.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_show_user_details"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">ShowUserDetails</span>():
+    <span style="font-weight: bold;">from</span> runtime.objects.entities <span style="font-weight: bold;">import</span> is_session, is_email
+    <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"session"</span>: is_session, <span style="font-style: italic;">"email"</span>: is_email}
+    <span style="font-weight: bold; font-style: italic;">arity_and_type_checks_needed</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">auth_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">'session'</span>]
+        <span style="font-weight: bold; font-style: italic;">email</span> = args[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> ((System.is_session_admin(session)) <span style="font-weight: bold;">or</span> 
+                (System.is_session_user(session) <span style="font-weight: bold;">and</span>
+                     session.get(<span style="font-style: italic;">"user"</span>).get(<span style="font-style: italic;">"email"</span>) == email)):
+            <span style="font-weight: bold;">raise</span> NotAuthorizedError(<span style="font-style: italic;">"Role not Authorized to perform this action"</span>)
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">state_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">"session"</span>]
+        <span style="font-weight: bold; font-style: italic;">email</span> = args[<span style="font-style: italic;">'email'</span>]
+
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> (System.session_exists(session) <span style="font-weight: bold;">and</span>
+                    System.delegate.email_exists(email)):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"session: %s or email: %s does not exist in System"</span>
+                                % (session.to_client(), email.to_client()))
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">action</span>(args):
+        <span style="font-weight: bold; font-style: italic;">email</span> = args[<span style="font-style: italic;">'email'</span>]
+        <span style="font-weight: bold;">return</span> System.delegate.get_user_by_email(email)
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-7" class="outline-3">
+<h3 id="sec-4-7"><span class="section-number-3">4.7</span> <code>SetName</code></h3>
+<div class="outline-text-3" id="text-4-7">
+<p>
+Set the name of an existing user to a new value.  Refer <a href="../../data-model/index.html#set-name-auth">auth-check</a> and
+referential <a href="../../data-model/index.html#set-name-ref">integrity</a> rules.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_set_name"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">SetName</span>():
+    <span style="font-weight: bold;">from</span> runtime.objects.entities <span style="font-weight: bold;">import</span> is_user, is_name, is_session
+    <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"user"</span>: is_user, 
+                 <span style="font-style: italic;">"name"</span>: is_name, 
+                 <span style="font-style: italic;">"session"</span>: is_session
+                }
+
+    <span style="font-weight: bold; font-style: italic;">arity_and_type_checks_needed</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">auth_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">'session'</span>]
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> (System.is_session_admin(session) <span style="font-weight: bold;">or</span>
+                    user == session.get(<span style="font-style: italic;">"user"</span>)):
+            <span style="font-weight: bold;">raise</span> NotAuthorizedError(<span style="font-style: italic;">"User with role %s"</span> 
+                                <span style="font-style: italic;">" not Authorized to perform this action"</span>
+                                % session.to_client())
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">state_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">"session"</span>]
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> System.session_exists(session):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"session %s does not exist in System"</span>
+                                % session.to_client())
+
+        <span style="font-weight: bold;">elif</span> <span style="font-weight: bold;">not</span> System.delegate.user_exists(user):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"user %s does not exist in System"</span>
+                                % user.to_client())
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">action</span>(args):
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        <span style="font-weight: bold; font-style: italic;">name</span> = args[<span style="font-style: italic;">"name"</span>]
+        <span style="font-weight: bold; font-style: italic;">user</span> = System.delegate.set_name(user, name)
+        <span style="font-weight: bold;">return</span> user
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-8" class="outline-3">
+<h3 id="sec-4-8"><span class="section-number-3">4.8</span> <code>SetEmail</code></h3>
+<div class="outline-text-3" id="text-4-8">
+<p>
+Set the name of an existing user to a new value.  Refer <a href="../../data-model/index.html#set-email-auth">auth-check</a> and
+referential <a href="../../data-model/index.html#set-email-ref">inftegrity</a> rules.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_set_email"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">SetEmail</span>():
+    <span style="font-weight: bold;">from</span> runtime.objects.entities <span style="font-weight: bold;">import</span> is_user, is_email, is_session
+    <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"user"</span>: is_user, 
+                 <span style="font-style: italic;">"email"</span>: is_email, 
+                 <span style="font-style: italic;">"session"</span>: is_session
+                }
+
+    <span style="font-weight: bold; font-style: italic;">arity_and_type_checks_needed</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">auth_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">'session'</span>]
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> (System.is_session_admin(session) <span style="font-weight: bold;">or</span>
+                    user == session.get(<span style="font-style: italic;">"user"</span>)):
+            <span style="font-weight: bold;">raise</span> NotAuthorizedError(<span style="font-style: italic;">"User with role %s"</span> 
+                                <span style="font-style: italic;">" not Authorized to perform this action"</span>
+                                % session.to_client())
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">state_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">"session"</span>]
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        <span style="font-weight: bold; font-style: italic;">email</span> = args[<span style="font-style: italic;">"email"</span>]
+
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> System.session_exists(session):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"session %s does not exist in System"</span>
+                                % session.to_client())
+
+        <span style="font-weight: bold;">elif</span> <span style="font-weight: bold;">not</span> System.delegate.user_exists(user):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"user %s does not exist in System"</span>
+                                % user.to_client())
+
+        <span style="font-weight: bold;">elif</span> System.delegate.get_user_by_email(email) <span style="font-weight: bold;">is</span> <span style="font-weight: bold;">not</span> <span style="font-weight: bold; text-decoration: underline;">None</span>:
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"Another user exists with the email %s in System"</span>
+                                % email.to_client())
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">action</span>(args):
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        <span style="font-weight: bold; font-style: italic;">email</span> = args[<span style="font-style: italic;">"email"</span>]
+        <span style="font-weight: bold; font-style: italic;">user</span> = System.delegate.set_email(user, email)
+        <span style="font-weight: bold;">return</span> user
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-9" class="outline-3">
+<h3 id="sec-4-9"><span class="section-number-3">4.9</span> <code>GetUserByEmail</code></h3>
+<div class="outline-text-3" id="text-4-9">
+<p>
+If the user exists, the user is returned.  If the user does not exist, None
+object is returned.  It is up to the upper layer to interpret the returned
+value.  There are no state or auth checks here.
+</p>
+
+<p>
+The roles are masked before the user is returned
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_get_user_by_email"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">GetUserByEmail</span>():
+    <span style="font-weight: bold;">from</span> runtime.objects.entities <span style="font-weight: bold;">import</span> is_email, is_session
+    <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"email"</span>: is_email}
+    <span style="font-weight: bold; font-style: italic;">arity_and_type_checks_needed</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">auth_check</span>(args):
+        <span style="font-weight: bold;">pass</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">state_check</span>(args):
+        <span style="font-weight: bold;">pass</span>
+        
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">action</span>(args):
+        <span style="font-weight: bold; font-style: italic;">email</span> = args[<span style="font-style: italic;">"email"</span>]
+        <span style="font-weight: bold; font-style: italic;">user</span> = System.delegate.get_user_by_email(email)
+        <span style="font-weight: bold;">if</span> user <span style="font-weight: bold;">is</span> <span style="font-weight: bold;">not</span> <span style="font-weight: bold; text-decoration: underline;">None</span>:
+            <span style="font-weight: bold; font-style: italic;">user</span> = System.delegate.mask_roles_of_user(user)
+        <span style="font-weight: bold;">return</span> user
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-10" class="outline-3">
+<h3 id="sec-4-10"><span class="section-number-3">4.10</span> <code>DelUser</code></h3>
+<div class="outline-text-3" id="text-4-10">
+<p>
+Delete an existing user from the system.  Refer <a href="../../data-model/index.html#del-user-auth">auth-check</a> and
+referential <a href="../../data-model/index.html#del-user-ref">inftegrity</a> rules.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_del_user"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">DelUser</span>():
+    <span style="font-weight: bold;">from</span> runtime.objects.entities <span style="font-weight: bold;">import</span> is_user, is_session
+    <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"user"</span>: is_user, <span style="font-style: italic;">"session"</span>: is_session}
+    <span style="font-weight: bold; font-style: italic;">arity_and_type_checks_needed</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">auth_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">'session'</span>]
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> (System.is_session_admin(session)):
+            <span style="font-weight: bold;">raise</span> NotAuthorizedError(<span style="font-style: italic;">"Role not Authorized to perform this action"</span>)
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">state_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">"session"</span>]
+
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> System.session_exists(session):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"session %s does not exist in System"</span>
+                                % session.to_client())
+        
+        <span style="font-weight: bold;">elif</span> user == session.get(<span style="font-style: italic;">"user"</span>):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"logged user %s cannot delete himself"</span>
+                                 % user.to_client())
+
+        <span style="font-weight: bold;">elif</span> <span style="font-weight: bold;">not</span> System.delegate.user_exists(user):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"user %s does not exist in System"</span>
+                                % user.to_client())
+
+        <span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">elif System.delegate.is_admin(user):</span>
+        <span style="font-weight: bold; font-style: italic;">#     </span><span style="font-weight: bold; font-style: italic;">raise StateError("A user with role admin cannot be deleted")</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">action</span>(args):
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        <span style="font-weight: bold; font-style: italic;">user_from_system</span> = System.delegate.get_user(email=user.get(<span style="font-style: italic;">"email"</span>))
+        <span style="font-weight: bold; font-style: italic;">user</span> = System.delegate.del_user(user_from_system)
+        <span style="font-weight: bold;">return</span> user
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-11" class="outline-3">
+<h3 id="sec-4-11"><span class="section-number-3">4.11</span> <code>GetRoleSet</code></h3>
+<div class="outline-text-3" id="text-4-11">
+<p>
+Get the role set in the system.  Refer <a href="../../data-model/index.html#get-role-set-auth">auth-check</a> and referential <a href="../../data-model/index.html#get-role-set-ref">integrity</a>
+rules.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_get_role_set"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">GetRoleSet</span>():
+    <span style="font-weight: bold;">from</span> runtime.objects.entities <span style="font-weight: bold;">import</span> is_session
+    <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"session"</span>: is_session}
+
+    <span style="font-weight: bold; font-style: italic;">arity_and_type_checks_needed</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">auth_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">'session'</span>]
+        
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> (System.is_session_admin(session) <span style="font-weight: bold;">or</span>
+                System.is_session_user(session)):
+            <span style="font-weight: bold;">raise</span> NotAuthorizedError(<span style="font-style: italic;">"User with role %s"</span> 
+                                <span style="font-style: italic;">" not Authorized to perform this action"</span>
+                                % session.to_client())
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">state_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">"session"</span>]
+
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> System.session_exists(session):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"session %s does not exist in System"</span>
+                                % session.to_client())
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">action</span>(args):
+        <span style="font-weight: bold;">return</span> System.delegate.get_role_set()
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-12" class="outline-3">
+<h3 id="sec-4-12"><span class="section-number-3">4.12</span> <code>GetRolesOfUser</code></h3>
+<div class="outline-text-3" id="text-4-12">
+<p>
+Get the roles of a user.  Refer <a href="../../data-model/index.html#get-roles-auth">auth-check</a> and referential <a href="../../data-model/index.html#get-roles-ref">integrity</a> rules.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_get_roles_of_user"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">GetRolesOfUser</span>():
+    <span style="font-weight: bold;">from</span> runtime.objects.entities <span style="font-weight: bold;">import</span> is_user, is_session
+    <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"user"</span>: is_user, 
+                 <span style="font-style: italic;">"session"</span>: is_session
+                }
+
+    <span style="font-weight: bold; font-style: italic;">arity_and_type_checks_needed</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">auth_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">'session'</span>]
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> (System.is_session_admin(session) <span style="font-weight: bold;">or</span>
+                    user == session.get(<span style="font-style: italic;">"user"</span>)):
+            <span style="font-weight: bold;">raise</span> NotAuthorizedError(<span style="font-style: italic;">"User with role %s"</span> 
+                                <span style="font-style: italic;">" not Authorized to perform this action"</span>
+                                % session.to_client())
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">state_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">"session"</span>]
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> System.session_exists(session):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"session %s does not exist in System"</span>
+                                % session.to_client())
+
+        <span style="font-weight: bold;">elif</span> <span style="font-weight: bold;">not</span> System.delegate.user_exists(user):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"user %s does not exist in System"</span>
+                                % user.to_client())
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">action</span>(args):
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        <span style="font-weight: bold; font-style: italic;">roles</span> = System.delegate.get_roles_of_user(user)
+        <span style="font-weight: bold;">return</span> roles
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-13" class="outline-3">
+<h3 id="sec-4-13"><span class="section-number-3">4.13</span> <code>AddRole</code></h3>
+<div class="outline-text-3" id="text-4-13">
+<p>
+Add a role to a user.  Refer <a href="../../data-model/index.html#add-role-auth">auth-check</a> and referential <a href="../../data-model/index.html#add-role-ref">integrity</a> rules.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_add_role_to_user"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">AddRoleToUser</span>():
+    <span style="font-weight: bold;">from</span> runtime.objects.entities <span style="font-weight: bold;">import</span> is_user, is_session, is_role
+    <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"user"</span>: is_user, 
+                 <span style="font-style: italic;">"session"</span>: is_session,
+                 <span style="font-style: italic;">'role'</span>: is_role
+                }
+
+    <span style="font-weight: bold; font-style: italic;">arity_and_type_checks_needed</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">auth_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">'session'</span>]
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        <span style="font-weight: bold; font-style: italic;">role</span> = args[<span style="font-style: italic;">"role"</span>]
+        
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> (System.is_session_admin(session)):
+            <span style="font-weight: bold;">raise</span> NotAuthorizedError(<span style="font-style: italic;">"User with role %s"</span> 
+                                <span style="font-style: italic;">" not Authorized to perform this action"</span>
+                                % session.to_client())
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">state_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">"session"</span>]
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        <span style="font-weight: bold; font-style: italic;">role</span> = args[<span style="font-style: italic;">"role"</span>]
+
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> System.session_exists(session):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"session %s doeps not exist in System"</span>
+                                % session.to_client())
+
+        <span style="font-weight: bold;">elif</span> <span style="font-weight: bold;">not</span> System.delegate.user_exists(user):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"user %s does not exist in System"</span>
+                                % user.to_client())
+
+        <span style="font-weight: bold;">elif</span> <span style="font-weight: bold;">not</span> System.delegate.role_exists_in_system(role):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"role %s does not exist in System"</span>
+                                % role.to_client())
+
+        <span style="font-weight: bold;">elif</span> System.delegate.role_exists_for_user(role, user):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"role %s already exists for user %s"</span>
+                                % (role.to_client(), user.to_client()))
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">action</span>(args):
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        <span style="font-weight: bold; font-style: italic;">role</span> = args[<span style="font-style: italic;">"role"</span>]
+
+        <span style="font-weight: bold; font-style: italic;">user</span> = System.delegate.add_role_to_user(role, user)
+        <span style="font-weight: bold;">return</span> user
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-14" class="outline-3">
+<h3 id="sec-4-14"><span class="section-number-3">4.14</span> <code>DeleteRole</code></h3>
+<div class="outline-text-3" id="text-4-14">
+<p>
+Delete a role of a user.  Refer <a href="../../data-model/index.html#del-role-auth">auth-check</a> and referential <a href="../../data-model/index.html#del-role-ref">integrity</a> rules.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_del_role_of_user"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">DelRoleOfUser</span>():
+    <span style="font-weight: bold;">from</span> runtime.objects.entities <span style="font-weight: bold;">import</span> is_user, is_session, is_role
+    <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"user"</span>: is_user, 
+                 <span style="font-style: italic;">"session"</span>: is_session,
+                 <span style="font-style: italic;">'role'</span>: is_role
+                }
+
+    <span style="font-weight: bold; font-style: italic;">arity_and_type_checks_needed</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">auth_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">'session'</span>]
+        
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> (System.is_session_admin(session)):
+            <span style="font-weight: bold;">raise</span> NotAuthorizedError(<span style="font-style: italic;">"User with role %s"</span> 
+                                <span style="font-style: italic;">" not Authorized to perform this action"</span>
+                                % session.to_client())
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">state_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">"session"</span>]
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        <span style="font-weight: bold; font-style: italic;">role</span> = args[<span style="font-style: italic;">"role"</span>]
+
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> System.session_exists(session):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"session %s does not exist in System"</span>
+                                % session.to_client())
+
+        <span style="font-weight: bold;">elif</span> user == session.get(<span style="font-style: italic;">"user"</span>):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"logged user %s cannot delete self role"</span>
+                                 % user.to_client())
+
+        <span style="font-weight: bold;">elif</span> <span style="font-weight: bold;">not</span> System.delegate.user_exists(user):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"user %s does not exist in System"</span>
+                                % user.to_client())
+
+        <span style="font-weight: bold;">elif</span> <span style="font-weight: bold;">not</span> System.delegate.role_exists_in_system(role):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"role %s does not exist in System"</span>
+                                % role.to_client())
+
+        <span style="font-weight: bold;">elif</span> <span style="font-weight: bold;">not</span> System.delegate.role_exists_for_user(role, user):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"role %s does not exist for user %s"</span>
+                                % (role.to_client(), user.to_client()))
+
+        <span style="font-weight: bold;">elif</span> <span style="font-weight: bold;">not</span> (System.delegate.get_roles_length_of_user(user) &gt; 1):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"number of roles of the user %s is not greater "</span>
+                                 <span style="font-style: italic;">"than one"</span> % role.to_client())
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">action</span>(args):
+        <span style="font-weight: bold; font-style: italic;">user</span> = args[<span style="font-style: italic;">"user"</span>]
+        <span style="font-weight: bold; font-style: italic;">role</span> = args[<span style="font-style: italic;">"role"</span>]
+
+        <span style="font-weight: bold; font-style: italic;">user</span> = System.delegate.del_role_of_user(role, user)
+        <span style="font-weight: bold;">return</span> user
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-15" class="outline-3">
+<h3 id="sec-4-15"><span class="section-number-3">4.15</span> <code>ShowSession</code></h3>
+<div class="outline-text-3" id="text-4-15">
+<p>
+Show all the current sessions.  Refer <a href="../../data-model/index.html#show-sessions-auth">auth-check</a> and referential <a href="../../data-model/index.html#show-sessions-ref">integrity</a>
+rules.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_show_sessions"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">ShowSessions</span>():
+    <span style="font-weight: bold;">from</span> runtime.objects.entities <span style="font-weight: bold;">import</span> is_session
+    <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"session"</span>: is_session}
+
+    <span style="font-weight: bold; font-style: italic;">arity_and_type_checks_needed</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">auth_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">'session'</span>]
+        
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> (System.is_session_admin(session)):
+            <span style="font-weight: bold;">raise</span> NotAuthorizedError(<span style="font-style: italic;">"User with role %s"</span> 
+                                <span style="font-style: italic;">" not Authorized to perform this action"</span>
+                                % session.to_client())
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">state_check</span>(args):
+        <span style="font-weight: bold; font-style: italic;">session</span> = args[<span style="font-style: italic;">"session"</span>]
+
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> System.session_exists(session):
+            <span style="font-weight: bold;">raise</span> StateError(<span style="font-style: italic;">"session %s does not exist in System"</span>
+                                % session.to_client())
+
+    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">action</span>(args):
+        <span style="font-weight: bold;">return</span> System.session_set
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-4-15-1" class="outline-4">
+<h4 id="sec-4-15-1"><span class="section-number-4">4.15.1</span> Tests</h4>
+<div class="outline-text-4" id="text-4-15-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_show_sessions"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestShowSessions</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+        System.initialize_system(PersistenceDelegate)
+        Config.populate_db()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">System.delegate</span> = <span style="font-weight: bold; text-decoration: underline;">None</span>
+        <span style="font-weight: bold; font-style: italic;">System.session_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_show_sessions_passes</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_show_sessions_passes"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.get_admin_user()
+        <span style="font-weight: bold; font-style: italic;">admin_role</span> = System.delegate.get_role(val=Config.admin_role)
+        <span style="font-weight: bold; font-style: italic;">user_role</span> = System.delegate.get_role(val=Config.user_role)
+
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=Name(val=<span style="font-style: italic;">"me mine myself"</span>),
+                                  email=Email(val=<span style="font-style: italic;">"abc@gnu.org"</span>),
+                                  roles=[user_role, admin_role])
+
+        System.delegate.add_user(user)           
+        <span style="font-weight: bold; font-style: italic;">admin_session</span> = Session(user=admin_user, role=admin_role, key=<span style="font-style: italic;">"12345"</span>)
+        <span style="font-weight: bold; font-style: italic;">user_session</span> = Session(user=user, role=user_role, key=<span style="font-style: italic;">"abcde"</span>)
+
+        System.session_set.append(admin_session)        
+        System.session_set.append(user_session)
+
+        <span style="font-weight: bold; font-style: italic;">session</span> = System.do(<span style="font-style: italic;">"show_sessions"</span>, 
+                            session=admin_session)
+
+        <span style="font-weight: bold;">self</span>.assertEquals(<span style="font-weight: bold;">len</span>(session), 2)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_show_sessions_raises_auth_error</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_show_sessions_raises_auth_error"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.get_admin_user()
+        <span style="font-weight: bold; font-style: italic;">admin_role</span> = System.delegate.get_role(val=Config.admin_role)
+        <span style="font-weight: bold; font-style: italic;">user_role</span> = System.delegate.get_role(val=Config.user_role)
+
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=Name(val=<span style="font-style: italic;">"me mine myself"</span>),
+                                  email=Email(val=<span style="font-style: italic;">"abc@gnu.org"</span>),
+                                  roles=[user_role, admin_role])
+
+        System.delegate.add_user(user)           
+        <span style="font-weight: bold; font-style: italic;">admin_session</span> = Session(user=admin_user, role=admin_role, key=<span style="font-style: italic;">"12345"</span>)
+        <span style="font-weight: bold; font-style: italic;">user_session</span> = Session(user=user, role=user_role, key=<span style="font-style: italic;">"abcde"</span>)
+
+        System.session_set.append(admin_session)        
+        System.session_set.append(user_session)
+
+        <span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.assertRaises(NotAuthorizedError):
+            System.do(<span style="font-style: italic;">"show_sessions"</span>, 
+                          session=user_session)
+
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_show_sessions_raises_state_error</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_show_sessions_raises_state_error"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.get_admin_user()
+        <span style="font-weight: bold; font-style: italic;">admin_role</span> = System.delegate.get_role(val=Config.admin_role)
+        <span style="font-weight: bold; font-style: italic;">user_role</span> = System.delegate.get_role(val=Config.user_role)
+
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=Name(val=<span style="font-style: italic;">"me mine myself"</span>),
+                                  email=Email(val=<span style="font-style: italic;">"abc@gnu.org"</span>),
+                                  roles=[user_role, admin_role])
+
+        System.delegate.add_user(user)           
+        <span style="font-weight: bold; font-style: italic;">admin_session</span> = Session(user=admin_user, role=admin_role, key=<span style="font-style: italic;">"12345"</span>)
+        <span style="font-weight: bold; font-style: italic;">user_session</span> = Session(user=user, role=user_role, key=<span style="font-style: italic;">"abcde"</span>)
+
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">sessions not appended to session set</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">System.session_set.append(admin_session)        </span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">System.session_set.append(user_session)</span>
+
+        <span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.assertRaises(StateError):
+            System.do(<span style="font-style: italic;">"show_sessions"</span>, 
+                          session=admin_session)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-16" class="outline-3">
+<h3 id="sec-4-16"><span class="section-number-3">4.16</span> Operations Table</h3>
+<div class="outline-text-3" id="text-4-16">
+<p>
+Each operation has a corresponding implementation defined as a class. 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="ops_table"><span style="font-weight: bold; font-style: italic;">ops_table</span> = {<span style="font-style: italic;">'login_first_step'</span>: LoginFirstStep,
+             <span style="font-style: italic;">'login_second_step'</span>: LoginSecondStep,
+             <span style="font-style: italic;">'logout'</span>: Logout,
+             <span style="font-style: italic;">'add_user'</span>: AddUser,
+             <span style="font-style: italic;">'show_users'</span>: ShowUsers,
+             <span style="font-style: italic;">'show_user_details'</span>: ShowUserDetails,
+             <span style="font-style: italic;">'show_user_details'</span>: ShowUserDetails,
+             <span style="font-style: italic;">'set_name'</span>: SetName,
+             <span style="font-style: italic;">'set_email'</span>: SetEmail,
+             <span style="font-style: italic;">'get_user_by_email'</span>: GetUserByEmail,
+             <span style="font-style: italic;">'del_user'</span>: DelUser,
+             <span style="font-style: italic;">'get_role_set'</span>: GetRoleSet,
+             <span style="font-style: italic;">'get_roles_of_user'</span>: GetRolesOfUser,
+             <span style="font-style: italic;">'add_role_to_user'</span>: AddRoleToUser,
+             <span style="font-style: italic;">'del_role_of_user'</span>: DelRoleOfUser,
+             <span style="font-style: italic;">'show_sessions'</span>: ShowSessions
+            }
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2016-06-07 Tue]</span></span></p>
+<p class="author">Author: VLEAD</p>
+<p class="date">Created: 2017-04-26 Wed 22:27</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

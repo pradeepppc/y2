@@ -1,0 +1,1242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Persistence Delegate for the System</title>
+<!-- 2017-04-26 Wed 22:27 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="VLEAD" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../../style/css/worg-style.css" />
+<link rel="stylesheet" type="text/css" href="../../style/css/override.css" />
+<link rel="icon" type="image/png" href="../../style/img/favicon/popl.png" />
+<script type="text/javascript" src="../../style/js/org-info.js">
+/**
+ *
+ * @source: ../../style/js/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in ../../style/js/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in ../../style/js/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "1");
+org_html_manager.set("LINK_HOME", "../../index.html");
+org_html_manager.set("LINK_UP", "../index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../../index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Persistence Delegate for the System</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Persistence Delegate</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Initialize Persistence Delegate</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. class_persistence_delegate</a></li>
+<li><a href="#sec-1-1-2">1.1.2. get_role_set</a></li>
+<li><a href="#sec-1-1-3">1.1.3. get_user_set</a></li>
+<li><a href="#sec-1-1-4">1.1.4. Tests</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. Other functions</a>
+<ul>
+<li><a href="#sec-1-2-1">1.2.1. Check if <code>user</code> already exists</a></li>
+<li><a href="#sec-1-2-2">1.2.2. Check if <code>name</code> already exists</a></li>
+<li><a href="#sec-1-2-3">1.2.3. Check if <code>email</code> already exists</a></li>
+<li><a href="#sec-1-2-4">1.2.4. Check if <code>role</code> already exists</a></li>
+<li><a href="#sec-1-2-5">1.2.5. Check if <code>role</code> already exists for a user</a></li>
+<li><a href="#sec-1-2-6">1.2.6. Check if user with role <code>admin</code> exists in the system</a></li>
+<li><a href="#sec-1-2-7">1.2.7. Add a user to the system</a></li>
+<li><a href="#sec-1-2-8">1.2.8. Delete a user from the system</a></li>
+<li><a href="#sec-1-2-9">1.2.9. Return the users in the system</a></li>
+<li><a href="#sec-1-2-10">1.2.10. Check if user has admin role</a></li>
+<li><a href="#sec-1-2-11">1.2.11. Get an object</a></li>
+<li><a href="#sec-1-2-12">1.2.12. Get Name</a></li>
+<li><a href="#sec-1-2-13">1.2.13. Get Email</a></li>
+<li><a href="#sec-1-2-14">1.2.14. Get Role</a></li>
+<li><a href="#sec-1-2-15">1.2.15. Get <code>Roles</code> of a <code>User</code></a></li>
+<li><a href="#sec-1-2-16">1.2.16. Get <code>length of roles</code> of a <code>User</code></a></li>
+<li><a href="#sec-1-2-17">1.2.17. Get the <code>admin</code> role</a></li>
+<li><a href="#sec-1-2-18">1.2.18. Get User</a></li>
+<li><a href="#sec-1-2-19">1.2.19. Get user with admin role</a></li>
+<li><a href="#sec-1-2-20">1.2.20. Get user by Email</a></li>
+<li><a href="#sec-1-2-21">1.2.21. Mask roles of a User</a></li>
+<li><a href="#sec-1-2-22">1.2.22. Set Email of a User</a></li>
+<li><a href="#sec-1-2-23">1.2.23. Set Name of a User</a></li>
+<li><a href="#sec-1-2-24">1.2.24. Add a role to the user in the system</a></li>
+<li><a href="#sec-1-2-25">1.2.25. Delete a role of the user in the system</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Persistence Delegate</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Persistence Delegate encapsulates a set of functions where each function
+performs a specific task.  With the use of the delegates, the core
+implementation of the <code>system</code> is oblivious to what sort of objects it is
+operating on.  The objects are either persistent or just objects.  The right
+delegate is the one that in effect performs the operations. 
+</p>
+
+<p>
+Even if a new environment where objects are persisted in a different way is
+introduced, <code>system</code> does not alter but by plugging the right delegate
+specific to the environment, <code>system</code> for that particular environment is
+derived while not modifying the implementation. 
+</p>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Initialize Persistence Delegate</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Persistence Delegate provides all the methods that operate on persistence
+objects.
+</p>
+</div>
+
+<div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> class_persistence_delegate</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+Saves the list of entities that are present in the environment in the
+initialization and implements the operations that operate on these initial
+list of entities.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_persistence_delegate"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">PersistenceDelegate</span>():
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">__init__</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">self</span>.entities = {<span style="font-style: italic;">'session'</span>: Session,
+                         <span style="font-style: italic;">'name'</span>: Name,
+                         <span style="font-style: italic;">'email'</span>: Email,
+                         <span style="font-style: italic;">'role'</span>: Role,
+                         <span style="font-style: italic;">'user'</span>: User
+                        }
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> get_role_set</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_role_set">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_role_set</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">return</span> Role.get_all()
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> get_user_set</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_user_set">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_user_set</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">return</span> User.get_all()
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Tests</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_class_persistence_delegate"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistenceDelegate</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+        Config.populate_db()
+        <span style="font-weight: bold;">self</span>.delegate = PersistenceDelegate()
+        
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+        <span style="font-weight: bold;">self</span>.delegate = <span style="font-weight: bold; text-decoration: underline;">None</span>
+   
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_initialize_persistence_delegate</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_initialize_persistence_delegate"</span>
+         <span style="font-weight: bold; font-style: italic;">role_set</span> = <span style="font-weight: bold;">self</span>.delegate.get_role_set()
+         <span style="font-weight: bold; font-style: italic;">user_set</span> = <span style="font-weight: bold;">self</span>.delegate.get_user_set()
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">len</span>(role_set), 2)
+         <span style="font-weight: bold;">self</span>.assertEqual(role_set[0].get_by_id(1).get(<span style="font-style: italic;">"val"</span>), 
+                              Config.admin_role)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">len</span>(user_set), 1)
+         <span style="font-weight: bold;">self</span>.assertEqual(user_set[0].get(<span style="font-style: italic;">"roles"</span>)[0].get(<span style="font-style: italic;">"val"</span>),
+                              Config.admin_role)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Other functions</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Other functions that help <code>System</code> perform the operations. 
+</p>
+</div>
+
+<div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Check if <code>user</code> already exists</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+This function checks if a user is already in the database of the <code>System</code>.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="user_exists">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">user_exists</span>(<span style="font-weight: bold;">self</span>, user):
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">self</span>.email_exists(user.get(<span style="font-style: italic;">"email"</span>)):
+            <span style="font-weight: bold;">return</span> user == <span style="font-weight: bold;">self</span>.get_user(email=user.get(<span style="font-style: italic;">"email"</span>))
+        <span style="font-weight: bold;">else</span>:
+            <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">False</span>
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-1-1" name="sec-1-2-1-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-1-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_user_exists">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_user_exists</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_user_exists"</span>
+         <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.get_user_set()[0]
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.user_exists(user), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Check if <code>name</code> already exists</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+This function checks if a name is already in the database of the <code>System</code>.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="name_exists">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">name_exists</span>(<span style="font-weight: bold;">self</span>, name):
+        <span style="font-weight: bold;">return</span> name == <span style="font-weight: bold;">self</span>.get_name(val=name.get(<span style="font-style: italic;">"val"</span>))
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-2-1" name="sec-1-2-2-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-2-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_name_exists">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_name_exists</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_name_exists"</span>
+         <span style="font-weight: bold; font-style: italic;">name</span> = Name(val=Config.admin_name)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.name_exists(name), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+         <span style="font-weight: bold; font-style: italic;">name</span> = Name(val=<span style="font-style: italic;">"Temp user"</span>)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.name_exists(name), <span style="font-weight: bold; text-decoration: underline;">False</span>)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> Check if <code>email</code> already exists</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+This function checks if email is already in the database of the <code>System</code>.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="email_exists">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">email_exists</span>(<span style="font-weight: bold;">self</span>, email):
+        <span style="font-weight: bold;">return</span> email == <span style="font-weight: bold;">self</span>.get_email(val=email.get(<span style="font-style: italic;">"val"</span>))
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-3-1" name="sec-1-2-3-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-3-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_email_exists">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_email_exists</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_email_exists"</span>
+         <span style="font-weight: bold; font-style: italic;">email</span> = Email(val=Config.admin_email)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.email_exists(email), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+         <span style="font-weight: bold; font-style: italic;">email</span> = Email(val=<span style="font-style: italic;">"abc@gnu.org"</span>)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.email_exists(email), <span style="font-weight: bold; text-decoration: underline;">False</span>)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-1-2-4" class="outline-4">
+<h4 id="sec-1-2-4"><span class="section-number-4">1.2.4</span> Check if <code>role</code> already exists</h4>
+<div class="outline-text-4" id="text-1-2-4">
+<p>
+This function checks if role is already in the database of the <code>System</code>.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="role_exists_in_system">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">role_exists_in_system</span>(<span style="font-weight: bold;">self</span>, role):
+        <span style="font-weight: bold;">return</span> role == <span style="font-weight: bold;">self</span>.get_role(val=role.get(<span style="font-style: italic;">"val"</span>))
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-4-1" name="sec-1-2-4-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-4-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_role_exists_in_system">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_role_exists_in_system</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_role_exists"</span>
+         <span style="font-weight: bold; font-style: italic;">role</span> = Role(val=Config.admin_role)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.role_exists_in_system(role), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+         <span style="font-weight: bold; font-style: italic;">role</span> = Role(val=<span style="font-style: italic;">"temp"</span>)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.role_exists_in_system(role), <span style="font-weight: bold; text-decoration: underline;">False</span>)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-1-2-5" class="outline-4">
+<h4 id="sec-1-2-5"><span class="section-number-4">1.2.5</span> Check if <code>role</code> already exists for a user</h4>
+<div class="outline-text-4" id="text-1-2-5">
+<p>
+This function checks if role is already is present for a given user.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="role_exists_for_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">role_exists_for_user</span>(<span style="font-weight: bold;">self</span>, role, user):
+        <span style="font-weight: bold;">return</span> role <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.get_roles_of_user(user)
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-5-1" name="sec-1-2-5-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-5-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_role_exists_for_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_role_exists_for_user</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_role_exists_for_user"</span>
+         <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.get_user_set()[0]
+         <span style="font-weight: bold; font-style: italic;">role</span> = Role(val=Config.admin_role)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.role_exists_for_user(role, user), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+         <span style="font-weight: bold; font-style: italic;">role</span> = Role(val=<span style="font-style: italic;">"temp"</span>)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.role_exists_for_user(role, user), <span style="font-weight: bold; text-decoration: underline;">False</span>)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+<div id="outline-container-sec-1-2-6" class="outline-4">
+<h4 id="sec-1-2-6"><span class="section-number-4">1.2.6</span> Check if user with role <code>admin</code> exists in the system</h4>
+<div class="outline-text-4" id="text-1-2-6">
+<p>
+This function checks if a user with admin role exists in the system
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="user_with_admin_role_exists">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">user_with_admin_role_exists</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">for</span> user <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.get_user_set():
+            <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">self</span>.is_admin(user):
+                <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">False</span>
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-6-1" name="sec-1-2-6-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-6-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_user_with_admin_role_exists">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_user_with_admin_role_exists</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_user_with_admin_role_exists"</span>
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.user_with_admin_role_exists(), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+         <span style="font-weight: bold;">self</span>.delegate.del_user(<span style="font-weight: bold;">self</span>.delegate.get_user(email=Email(val=Config.admin_email)))
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.user_with_admin_role_exists(), <span style="font-weight: bold; text-decoration: underline;">False</span>)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-1-2-7" class="outline-4">
+<h4 id="sec-1-2-7"><span class="section-number-4">1.2.7</span> Add a user to the system</h4>
+<div class="outline-text-4" id="text-1-2-7">
+<p>
+This function adds a user to the database of the system.  When a name is
+already present in the system, user's name is set to it before user is
+saved to system. 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="add_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">add_user</span>(<span style="font-weight: bold;">self</span>, user):
+        <span style="font-weight: bold; font-style: italic;">name</span> = user.get(<span style="font-style: italic;">"name"</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span> = user.get(<span style="font-style: italic;">"email"</span>)
+
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">roles = []</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">for role in user.get("roles"):</span>
+        <span style="font-weight: bold; font-style: italic;">#     </span><span style="font-weight: bold; font-style: italic;">db_role = self.get_role(val=role.get("name"))</span>
+        <span style="font-weight: bold; font-style: italic;">#     </span><span style="font-weight: bold; font-style: italic;">roles.append(db_role)</span>
+
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">user.set(roles=roles, do_not_save=True)</span>
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> <span style="font-weight: bold;">self</span>.name_exists(name):
+            name.save()
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">else:</span>
+        <span style="font-weight: bold; font-style: italic;">#     </span><span style="font-weight: bold; font-style: italic;">name = self.get_name(val=name.get("name"))</span>
+        <span style="font-weight: bold; font-style: italic;">#     </span><span style="font-weight: bold; font-style: italic;">user.set(name=name, do_not_save=True)</span>
+            
+        email.save()
+        user.save()
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.get_user(email=email)
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-7-1" name="sec-1-2-7-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-7-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_add_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_add_user</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_add_user"</span>
+         <span style="font-weight: bold; font-style: italic;">name</span>=Name(val=<span style="font-style: italic;">"some user"</span>)
+         <span style="font-weight: bold; font-style: italic;">email</span>=Email(val=<span style="font-style: italic;">"tt@kk.com"</span>)
+         <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email=email, 
+                         roles=[<span style="font-weight: bold;">self</span>.delegate.get_role(val=Config.user_role)])
+
+         <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.add_user(user)
+         <span style="font-weight: bold; font-style: italic;">another_user</span> = User(name=name,
+                                 email=Email(val=<span style="font-style: italic;">"xyz@gnu.org"</span>),
+                                 roles=[<span style="font-weight: bold;">self</span>.delegate.get_role(val=Config.user_role)])
+
+         <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.add_user(another_user)
+
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.user_exists(user), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.user_exists(another_user), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-8" class="outline-4">
+<h4 id="sec-1-2-8"><span class="section-number-4">1.2.8</span> Delete a user from the system</h4>
+<div class="outline-text-4" id="text-1-2-8">
+<p>
+This function deletes a user from the database maintained by the system.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="del_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">del_user</span>(<span style="font-weight: bold;">self</span>, user):
+        <span style="font-weight: bold; font-style: italic;">name</span> = user.get(<span style="font-style: italic;">"name"</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span> = user.get(<span style="font-style: italic;">"email"</span>)
+        user.delete()
+        email.delete()
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">self</span>.get_user(name=name) <span style="font-weight: bold;">is</span> <span style="font-weight: bold; text-decoration: underline;">None</span>:
+            name.delete()
+        
+        <span style="font-weight: bold;">return</span> user
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-8-1" name="sec-1-2-8-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-8-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_del_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_del_user</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_del_user"</span>
+
+         <span style="font-weight: bold; font-style: italic;">name</span>=Name(val=<span style="font-style: italic;">"some user"</span>)
+         <span style="font-weight: bold; font-style: italic;">email</span>=Email(val=<span style="font-style: italic;">"tt@kk.com"</span>)
+         <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email=email, 
+                         roles=<span style="font-weight: bold;">self</span>.delegate.get_role_set())
+
+         <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.add_user(user)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.user_exists(user), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+         <span style="font-weight: bold;">self</span>.delegate.del_user(user)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.user_exists(user), <span style="font-weight: bold; text-decoration: underline;">False</span>)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-1-2-9" class="outline-4">
+<h4 id="sec-1-2-9"><span class="section-number-4">1.2.9</span> Return the users in the system</h4>
+<div class="outline-text-4" id="text-1-2-9">
+<p>
+This function returns the list of users in the database maintained by the system.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_users">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_users</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.get_user_set()
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-9-1" name="sec-1-2-9-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-9-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_get_users">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_get_users</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_get_users"</span>
+
+         <span style="font-weight: bold; font-style: italic;">name</span>=Name(val=<span style="font-style: italic;">"some user"</span>)
+         name.save()
+         <span style="font-weight: bold; font-style: italic;">email</span>=Email(val=<span style="font-style: italic;">"tt@kk.com"</span>)
+         email.save()
+         <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email=email, 
+                         role=<span style="font-weight: bold;">self</span>.delegate.get_role_set()[1])
+
+         <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.add_user(user)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">len</span>(<span style="font-weight: bold;">self</span>.delegate.get_users()), 2)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-10" class="outline-4">
+<h4 id="sec-1-2-10"><span class="section-number-4">1.2.10</span> Check if user has admin role</h4>
+<div class="outline-text-4" id="text-1-2-10">
+<p>
+This function returns true if role of a user is admin.  A user has a list
+of roles, and this list is mapped to booleans and later reduced to either a
+<code>true</code> or a <code>false</code>.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="is_admin">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">is_admin</span>(<span style="font-weight: bold;">self</span>, user):
+        <span style="font-weight: bold; font-style: italic;">roles</span> = user.get(<span style="font-style: italic;">"roles"</span>)
+        <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+        <span style="font-weight: bold;">if</span> roles:
+            <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold;">reduce</span>(<span style="font-weight: bold;">lambda</span> a, b: a <span style="font-weight: bold;">or</span> b, \
+                                <span style="font-weight: bold;">map</span>(<span style="font-weight: bold;">lambda</span> role: \
+                                    role.get(<span style="font-style: italic;">"val"</span>) == Config.admin_name, 
+                                    roles))
+        <span style="font-weight: bold;">return</span> ret_val
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-10-1" name="sec-1-2-10-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-10-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_is_admin">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_is_admin</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_is_admin"</span>
+
+         <span style="font-weight: bold; font-style: italic;">name</span>=Name(val=<span style="font-style: italic;">"some user"</span>)
+         name.save()
+         <span style="font-weight: bold; font-style: italic;">email</span>=Email(val=<span style="font-style: italic;">"tt@kk.com"</span>)
+         email.save()
+         <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email=email, 
+                         roles=[<span style="font-weight: bold;">self</span>.delegate.get_role(val=Config.user_role)])
+
+         <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.add_user(user)
+
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.is_admin(user), <span style="font-weight: bold; text-decoration: underline;">False</span>)
+
+         <span style="font-weight: bold; font-style: italic;">name</span>=Name(val=<span style="font-style: italic;">"some another user"</span>)
+         name.save()
+         <span style="font-weight: bold; font-style: italic;">email</span>=Email(val=<span style="font-style: italic;">"someanother@gnu.org"</span>)
+         email.save()
+         <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email=email,
+                        roles=[<span style="font-weight: bold;">self</span>.delegate.get_role(val=Config.admin_role)])
+
+         <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.add_user(user)
+
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.is_admin(user), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-11" class="outline-4">
+<h4 id="sec-1-2-11"><span class="section-number-4">1.2.11</span> Get an object</h4>
+<div class="outline-text-4" id="text-1-2-11">
+<p>
+A generic function to find an object of type <code>cls</code> matching a given a criteria
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_object">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_object</span>(<span style="font-weight: bold;">self</span>, cls, **kwargs):
+        <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">None</span>
+        <span style="font-weight: bold;">try</span>:
+            <span style="font-weight: bold; font-style: italic;">ret_val</span> = cls.apply_filters(**kwargs)[0]
+        <span style="font-weight: bold;">except</span> NotFoundError <span style="font-weight: bold;">as</span> e:
+            <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">None</span>
+        
+        <span style="font-weight: bold;">return</span> ret_val
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-2-12" class="outline-4">
+<h4 id="sec-1-2-12"><span class="section-number-4">1.2.12</span> Get Name</h4>
+<div class="outline-text-4" id="text-1-2-12">
+<p>
+This function returns a Name object from the database based on the name
+string provided.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_name">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_name</span>(<span style="font-weight: bold;">self</span>, **kwargs):
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.get_object(Name, **kwargs)
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-12-1" name="sec-1-2-12-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-12-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_get_name">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_get_name</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_get_name"</span>
+         <span style="font-weight: bold; font-style: italic;">name_obj</span> = <span style="font-weight: bold;">self</span>.delegate.get_name(val=Config.admin_name)
+         <span style="font-weight: bold;">self</span>.assertEqual(name_obj.get(<span style="font-style: italic;">"val"</span>), Config.admin_name)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-13" class="outline-4">
+<h4 id="sec-1-2-13"><span class="section-number-4">1.2.13</span> Get Email</h4>
+<div class="outline-text-4" id="text-1-2-13">
+<p>
+This function returns an Email object from the database based on the email
+string provided.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_email">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_email</span>(<span style="font-weight: bold;">self</span>, **kwargs):
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.get_object(Email, **kwargs)
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-13-1" name="sec-1-2-13-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-13-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_get_email">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_get_email</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_get_email"</span>
+         <span style="font-weight: bold; font-style: italic;">email_obj</span> = <span style="font-weight: bold;">self</span>.delegate.get_email(val=Config.admin_email)
+         <span style="font-weight: bold;">self</span>.assertEqual(email_obj.get(<span style="font-style: italic;">"val"</span>), Config.admin_email)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-14" class="outline-4">
+<h4 id="sec-1-2-14"><span class="section-number-4">1.2.14</span> Get Role</h4>
+<div class="outline-text-4" id="text-1-2-14">
+<p>
+This function returns either admin or user role from the roles in database
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_role">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_role</span>(<span style="font-weight: bold;">self</span>, **kwargs):
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.get_object(Role, **kwargs)
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-14-1" name="sec-1-2-14-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-14-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_get_role">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_get_role</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_get_role"</span>
+         <span style="font-weight: bold; font-style: italic;">role_obj</span> = <span style="font-weight: bold;">self</span>.delegate.get_role(val=Config.admin_role)
+         <span style="font-weight: bold;">self</span>.assertEqual(role_obj.get(<span style="font-style: italic;">"val"</span>), Config.admin_role)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-15" class="outline-4">
+<h4 id="sec-1-2-15"><span class="section-number-4">1.2.15</span> Get <code>Roles</code> of a <code>User</code></h4>
+<div class="outline-text-4" id="text-1-2-15">
+<p>
+This function returns all the roles associates with a user
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_roles_of_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_roles_of_user</span>(<span style="font-weight: bold;">self</span>, user):
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.get_user(email=user.get(<span style="font-style: italic;">"email"</span>))
+        <span style="font-weight: bold;">return</span> user.get(<span style="font-style: italic;">"roles"</span>)
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-15-1" name="sec-1-2-15-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-15-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_get_roles_of_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_get_roles_of_user</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_get_roles_of_user"</span>
+         <span style="font-weight: bold; font-style: italic;">roles</span> = <span style="font-weight: bold;">self</span>.delegate.get_roles_of_user(<span style="font-weight: bold;">self</span>.delegate.get_admin_user())
+         <span style="font-weight: bold;">self</span>.assertEqual(roles[0].get(<span style="font-style: italic;">"val"</span>), Config.admin_role)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-1-2-16" class="outline-4">
+<h4 id="sec-1-2-16"><span class="section-number-4">1.2.16</span> Get <code>length of roles</code> of a <code>User</code></h4>
+<div class="outline-text-4" id="text-1-2-16">
+<p>
+This function returns length of roles associated with a user
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_roles_length_of_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_roles_length_of_user</span>(<span style="font-weight: bold;">self</span>, user):
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.get_user(email=user.get(<span style="font-style: italic;">"email"</span>))
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">len</span>(user.get(<span style="font-style: italic;">"roles"</span>))
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-16-1" name="sec-1-2-16-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-16-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_get_roles_length_of_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_get_roles_length_of_user</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_get_roles_length_of_user"</span>
+         <span style="font-weight: bold; font-style: italic;">length</span> = <span style="font-weight: bold;">self</span>.delegate.get_roles_length_of_user(<span style="font-weight: bold;">self</span>.delegate.get_admin_user())
+         <span style="font-weight: bold;">self</span>.assertEqual(length, 1)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-1-2-17" class="outline-4">
+<h4 id="sec-1-2-17"><span class="section-number-4">1.2.17</span> Get the <code>admin</code> role</h4>
+<div class="outline-text-4" id="text-1-2-17">
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_admin_role">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_admin_role</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.get_role(val=Config.admin_role)
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-17-1" name="sec-1-2-17-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-17-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_get_admin_role">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_get_admin_role</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_get_admin_role"</span>
+         <span style="font-weight: bold; font-style: italic;">role</span> = <span style="font-weight: bold;">self</span>.delegate.get_admin_role()
+         <span style="font-weight: bold;">self</span>.assertEqual(role.get(<span style="font-style: italic;">"val"</span>), Config.admin_role)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-18" class="outline-4">
+<h4 id="sec-1-2-18"><span class="section-number-4">1.2.18</span> Get User</h4>
+<div class="outline-text-4" id="text-1-2-18">
+<p>
+This function returns a user if present in the database.  If the user is
+not present, <code>None</code> type is returned.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_user</span>(<span style="font-weight: bold;">self</span>, **kwargs):
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.get_object(User, **kwargs)
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-18-1" name="sec-1-2-18-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-18-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_get_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_get_user</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_get_user"</span>
+         <span style="font-weight: bold; font-style: italic;">email</span> = Email(val=Config.admin_email)
+         <span style="font-weight: bold; font-style: italic;">user_obj</span> = <span style="font-weight: bold;">self</span>.delegate.get_user(email=email)
+         <span style="font-weight: bold;">self</span>.assertEqual(user_obj.get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"val"</span>), 
+                              Config.admin_email)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-19" class="outline-4">
+<h4 id="sec-1-2-19"><span class="section-number-4">1.2.19</span> Get user with admin role</h4>
+<div class="outline-text-4" id="text-1-2-19">
+<p>
+This function returns the user the admin role from the database
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_admin_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_admin_user</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">email</span> = Email(val=Config.admin_email)
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.get_user(email=email)
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-19-1" name="sec-1-2-19-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-19-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_get_admin_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_get_admin_user</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_get_admin_user"</span>
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.delegate.get_admin_user(),
+                              <span style="font-weight: bold;">self</span>.delegate.get_user_set()[0])
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-20" class="outline-4">
+<h4 id="sec-1-2-20"><span class="section-number-4">1.2.20</span> Get user by Email</h4>
+<div class="outline-text-4" id="text-1-2-20">
+<p>
+This function returns the user by email from the database
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_user_by_email">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_user_by_email</span>(<span style="font-weight: bold;">self</span>, email):
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.get_user(email=email)
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-20-1" name="sec-1-2-20-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-20-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_get_user_by_email">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_get_user_by_email</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_get_user_by_email"</span>
+        <span style="font-weight: bold; font-style: italic;">email</span> = Email(val=Config.admin_email)
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.get_user_by_email(email)
+        <span style="font-weight: bold;">self</span>.assertEqual(user.get(<span style="font-style: italic;">"email"</span>), email)
+
+        <span style="font-weight: bold; font-style: italic;">email</span> = Email(val=<span style="font-style: italic;">"tt@kk.com"</span>)
+        email.save()
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.get_user_by_email(email)
+        <span style="font-weight: bold;">self</span>.assertEqual(user, <span style="font-weight: bold; text-decoration: underline;">None</span>)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-1-2-21" class="outline-4">
+<h4 id="sec-1-2-21"><span class="section-number-4">1.2.21</span> Mask roles of a User</h4>
+<div class="outline-text-4" id="text-1-2-21">
+<p>
+This function masks the roles of a user
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="mask_roles_of_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">mask_roles_of_user</span>(<span style="font-weight: bold;">self</span>, user):
+        <span style="font-weight: bold; font-style: italic;">new_user</span> = User(name=user.get(<span style="font-style: italic;">"name"</span>), email=user.get(<span style="font-style: italic;">"email"</span>), roles=[])
+        new_user.set_hidden_id(new_user, user.<span style="font-weight: bold;">id</span>)
+        <span style="font-weight: bold;">return</span> new_user
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-21-1" name="sec-1-2-21-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-21-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_mask_roles_of_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_mask_roles_of_user</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_mask_roles_of_user"</span>
+        <span style="font-weight: bold; font-style: italic;">email</span> = Email(val=Config.admin_email)
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.get_user_by_email(email)
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.mask_roles_of_user(user)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(user.get(<span style="font-style: italic;">"roles"</span>), [])
+        <span style="font-weight: bold;">self</span>.assertEqual(user.to_client()[<span style="font-style: italic;">'id'</span>], <span style="font-weight: bold;">str</span>(1))
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-1-2-22" class="outline-4">
+<h4 id="sec-1-2-22"><span class="section-number-4">1.2.22</span> Set Email of a User</h4>
+<div class="outline-text-4" id="text-1-2-22">
+<p>
+This function sets Email of a user in the user set. No exception is thrown
+here, the upper layer which is calling this function should ensure <code>user</code>
+exists whose email is changed. 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="set_email">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">set_email</span>(<span style="font-weight: bold;">self</span>, user, email):
+        <span style="font-weight: bold; font-style: italic;">usr</span> = <span style="font-weight: bold;">self</span>.get_user_by_email(user.get(<span style="font-style: italic;">"email"</span>))
+
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">self</span>.get_email(val=email.get(<span style="font-style: italic;">"val"</span>)) <span style="font-weight: bold;">is</span> <span style="font-weight: bold; text-decoration: underline;">None</span>:
+            email.save()
+            <span style="font-weight: bold; font-style: italic;">email</span> = <span style="font-weight: bold;">self</span>.get_email(val=email.get(<span style="font-style: italic;">"val"</span>))
+            
+        usr.<span style="font-weight: bold;">set</span>(email=email)
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.get_user_by_email(usr.get(<span style="font-style: italic;">"email"</span>))
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-22-1" name="sec-1-2-22-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-22-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_set_email">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_set_email</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_set_email"</span>
+        <span style="font-weight: bold; font-style: italic;">email</span> = Email(val=Config.admin_email)
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.get_user_by_email(email)
+        <span style="font-weight: bold; font-style: italic;">email</span> = Email(val=<span style="font-style: italic;">"abc@gnu.org"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.set_email(user, email)
+        <span style="font-weight: bold;">self</span>.assertEqual(user.get(<span style="font-style: italic;">"email"</span>), email)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-23" class="outline-4">
+<h4 id="sec-1-2-23"><span class="section-number-4">1.2.23</span> Set Name of a User</h4>
+<div class="outline-text-4" id="text-1-2-23">
+<p>
+This function sets Name of a user in the user set. No exception is thrown
+here, the upper layer which is calling this function should ensure <code>user</code>
+exists whose name is changed. 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="set_name">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">set_name</span>(<span style="font-weight: bold;">self</span>, user, name):
+        <span style="font-weight: bold; font-style: italic;">usr</span> = <span style="font-weight: bold;">self</span>.get_user_by_email(user.get(<span style="font-style: italic;">"email"</span>))
+
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">self</span>.get_name(val=name.get(<span style="font-style: italic;">"val"</span>)) <span style="font-weight: bold;">is</span> <span style="font-weight: bold; text-decoration: underline;">None</span>:
+            name.save()
+            <span style="font-weight: bold; font-style: italic;">name</span> = <span style="font-weight: bold;">self</span>.get_name(val=name.get(<span style="font-style: italic;">"val"</span>))
+
+        usr.<span style="font-weight: bold;">set</span>(name=name)
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.get_user(name=usr.get(<span style="font-style: italic;">"name"</span>))
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-23-1" name="sec-1-2-23-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-23-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_set_name">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_set_name</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_set_name"</span>
+        <span style="font-weight: bold; font-style: italic;">email</span> = Email(val=Config.admin_email)
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.get_user_by_email(email)
+        <span style="font-weight: bold; font-style: italic;">name</span> = Name(val=<span style="font-style: italic;">"Jimi Hendrix"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.set_name(user, name)
+        <span style="font-weight: bold;">self</span>.assertEqual(user.get(<span style="font-style: italic;">"name"</span>), name)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-1-2-24" class="outline-4">
+<h4 id="sec-1-2-24"><span class="section-number-4">1.2.24</span> Add a role to the user in the system</h4>
+<div class="outline-text-4" id="text-1-2-24">
+<div class="org-src-container">
+
+<pre class="src src-python" id="add_role_to_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">add_role_to_user</span>(<span style="font-weight: bold;">self</span>, role, user):
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.get_user(email=user.get(<span style="font-style: italic;">"email"</span>))
+        <span style="font-weight: bold; font-style: italic;">roles</span> = user.get(<span style="font-style: italic;">"roles"</span>)
+        <span style="font-weight: bold; font-style: italic;">role</span> = <span style="font-weight: bold;">self</span>.get_role(val=role.get(<span style="font-style: italic;">"val"</span>))
+        roles.append(role)
+        user.<span style="font-weight: bold;">set</span>(roles=roles)
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.get_user(email=user.get(<span style="font-style: italic;">"email"</span>))
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-24-1" name="sec-1-2-24-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-24-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_add_role_to_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_add_role_to_user</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_add_role_to_user"</span>
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.get_user(email=Email(val=Config.admin_email))
+        <span style="font-weight: bold;">self</span>.assertTrue(<span style="font-weight: bold;">len</span>(user.get(<span style="font-style: italic;">"roles"</span>)) == 1)
+        <span style="font-weight: bold; font-style: italic;">user_role</span> = Role(val=Config.user_role)
+        <span style="font-weight: bold; font-style: italic;">user_with_new_role</span> = <span style="font-weight: bold;">self</span>.delegate.add_role_to_user(user_role, user)
+        <span style="font-weight: bold;">self</span>.assertTrue(<span style="font-weight: bold;">len</span>(user_with_new_role.get(<span style="font-style: italic;">"roles"</span>)) == 2)
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.get_user(email=Email(val=Config.admin_email))
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+
+<div id="outline-container-sec-1-2-25" class="outline-4">
+<h4 id="sec-1-2-25"><span class="section-number-4">1.2.25</span> Delete a role of the user in the system</h4>
+<div class="outline-text-4" id="text-1-2-25">
+<div class="org-src-container">
+
+<pre class="src src-python" id="del_role_of_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">del_role_of_user</span>(<span style="font-weight: bold;">self</span>, role, user):
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.get_user(email=user.get(<span style="font-style: italic;">"email"</span>))
+        <span style="font-weight: bold; font-style: italic;">roles</span> = user.get(<span style="font-style: italic;">"roles"</span>)
+        roles.remove(role)
+        user.<span style="font-weight: bold;">set</span>(roles=roles)
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.get_user(email=user.get(<span style="font-style: italic;">"email"</span>))
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-25-1" name="sec-1-2-25-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-25-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_del_role_of_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_del_role_of_user</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_del_role_of_user"</span>
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.delegate.get_user(email=Email(val=Config.admin_email))
+        <span style="font-weight: bold;">self</span>.assertTrue(<span style="font-weight: bold;">len</span>(user.get(<span style="font-style: italic;">"roles"</span>)) == 1)
+
+        <span style="font-weight: bold; font-style: italic;">user_role</span> = Role(val=Config.user_role)
+        <span style="font-weight: bold; font-style: italic;">user_with_new_role</span> = <span style="font-weight: bold;">self</span>.delegate.add_role_to_user(user_role, user)
+        <span style="font-weight: bold;">self</span>.assertTrue(<span style="font-weight: bold;">len</span>(user_with_new_role.get(<span style="font-style: italic;">"roles"</span>)) == 2)
+
+        <span style="font-weight: bold; font-style: italic;">user_with_one_less_role</span> = <span style="font-weight: bold;">self</span>.delegate.del_role_of_user(user_role, user_with_new_role)
+        <span style="font-weight: bold;">self</span>.assertTrue(<span style="font-weight: bold;">len</span>(user_with_one_less_role.get(<span style="font-style: italic;">"roles"</span>)) == 1)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2016-08-04 Thu]</span></span></p>
+<p class="author">Author: VLEAD</p>
+<p class="date">Created: 2017-04-26 Wed 22:27</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

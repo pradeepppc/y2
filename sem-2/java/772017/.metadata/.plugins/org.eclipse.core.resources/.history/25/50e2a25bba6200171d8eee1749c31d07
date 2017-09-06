@@ -1,0 +1,21 @@
+import java.util.*;
+public class Main {
+public static void main(String args[]){
+		ArrayList ar = new ArrayList();
+		ar.add("a");
+		ar.add("b");
+		ar.add("c");
+		Iterator i = ar.iterator();
+		while(i.hasNext()){
+			Object o = i.next();
+			System.out.println(o + " ");
+		}
+		
+		ListIterator it =  ar.listIterator();
+		while(it.hasNext()){
+			Object l = it.next();
+			
+			//System.out.println(o + " ");
+		}
+}
+}

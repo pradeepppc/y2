@@ -1,0 +1,707 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Object Delegate for the System</title>
+<!-- 2017-04-26 Wed 22:27 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="VLEAD" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../../style/css/worg-style.css" />
+<link rel="stylesheet" type="text/css" href="../../style/css/override.css" />
+<link rel="icon" type="image/png" href="../../style/img/favicon/popl.png" />
+<script type="text/javascript" src="../../style/js/org-info.js">
+/**
+ *
+ * @source: ../../style/js/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in ../../style/js/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in ../../style/js/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "1");
+org_html_manager.set("LINK_HOME", "../../index.html");
+org_html_manager.set("LINK_UP", "../index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../../index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Object Delegate for the System</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Object Delegate</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Initialize Object Delegate</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. class_object_delegate</a></li>
+<li><a href="#sec-1-1-2">1.1.2. initialize_role_set</a></li>
+<li><a href="#sec-1-1-3">1.1.3. initialize_user_set</a></li>
+<li><a href="#sec-1-1-4">1.1.4. Tests</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. Other functions</a>
+<ul>
+<li><a href="#sec-1-2-1">1.2.1. Check if <code>user</code> already exists</a></li>
+<li><a href="#sec-1-2-2">1.2.2. Add a user to the system</a></li>
+<li><a href="#sec-1-2-3">1.2.3. Delete a user to the system</a></li>
+<li><a href="#sec-1-2-4">1.2.4. Return the users in the system</a></li>
+<li><a href="#sec-1-2-5">1.2.5. Check if user has admin role</a></li>
+<li><a href="#sec-1-2-6">1.2.6. Get a Role</a></li>
+<li><a href="#sec-1-2-7">1.2.7. Get user with admin role</a></li>
+<li><a href="#sec-1-2-8">1.2.8. Get user by Email</a></li>
+<li><a href="#sec-1-2-9">1.2.9. Set Email of a User</a></li>
+<li><a href="#sec-1-2-10">1.2.10. Set Name of a User</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Object Delegate</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Object Delegate encapsulates a set of functions where each function performs a
+specific task.  With the use of these delegates, the core implementation of
+the <code>system</code> will not alter but by plugging delegates that are specific to
+each environment, for example, be it either objects or persistence, the
+<code>system</code> for that particular environment is derived while not modifying the
+<code>system</code> class.
+</p>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Initialize Object Delegate</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Provides all the delegates that operate on objects.
+</p>
+</div>
+
+<div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> class_object_delegate</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_object_delegate"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">ObjectDelegate</span>():
+    <span style="font-weight: bold; font-style: italic;">role_set</span> = []
+    <span style="font-weight: bold; font-style: italic;">user_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">__init__</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">self</span>.role_set = <span style="font-weight: bold;">self</span>.initialize_role_set()
+        <span style="font-weight: bold;">self</span>.user_set = <span style="font-weight: bold;">self</span>.initialize_user_set()
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> initialize_role_set</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="initialize_role_set">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">initialize_role_set</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">Role.admin</span> = Role(val=Config.admin_role)
+        <span style="font-weight: bold; font-style: italic;">Role.user</span> = Role(val=Config.user_role)
+        <span style="font-weight: bold; font-style: italic;">role_set</span> = [Role.admin, Role.user]
+        <span style="font-weight: bold;">return</span> role_set
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> initialize_user_set</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<div class="org-src-container">
+
+<pre class="src src-python" id="initialize_user_set">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">initialize_user_set</span>(<span style="font-weight: bold;">self</span>):
+
+        <span style="font-weight: bold; font-style: italic;">admin_user</span> = User(name=Name(val=Config.admin_name),
+                          email=Email(val=Config.admin_email),
+                          role=Role.admin)
+
+        <span style="font-weight: bold;">return</span> [admin_user]
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Tests</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_initialize_object_delegate"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestObjectDelegate</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold; font-style: italic;">object_delegate</span> = <span style="font-weight: bold; text-decoration: underline;">None</span>
+    
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">self</span>.obj_delegate = ObjectDelegate()
+    
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">self</span>.obj_delegate = <span style="font-weight: bold; text-decoration: underline;">None</span>
+   
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_initialize_object_delegate</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_initialize_object_delegate"</span>
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">len</span>(<span style="font-weight: bold;">self</span>.obj_delegate.role_set), 2)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.obj_delegate.role_set[0].get(<span style="font-style: italic;">"val"</span>), <span style="font-style: italic;">"admin"</span>)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">len</span>(<span style="font-weight: bold;">self</span>.obj_delegate.user_set), 1)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.obj_delegate.user_set[0].get(<span style="font-style: italic;">"role"</span>).get(<span style="font-style: italic;">"val"</span>),
+                          <span style="font-style: italic;">"admin"</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Other functions</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Other functions that help <code>System</code> perform the operations. 
+</p>
+</div>
+
+<div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Check if <code>user</code> already exists</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+This function checks if a user is already in the user-set of the <code>System</code>.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="user_exists">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">user_exists</span>(<span style="font-weight: bold;">self</span>, user):
+        <span style="font-weight: bold;">return</span> user <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.user_set
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-1-1" name="sec-1-2-1-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-1-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_user_exists">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_user_exists</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_user_exists"</span>
+         <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.obj_delegate.user_set[0]
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.obj_delegate.user_exists(user), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Add a user to the system</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+This function adds a user to the user-set maintained by the system.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="add_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">add_user</span>(<span style="font-weight: bold;">self</span>, user):
+        <span style="font-weight: bold;">self</span>.user_set.append(user)
+        <span style="font-weight: bold;">return</span> user
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-2-1" name="sec-1-2-2-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-2-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_add_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_add_user</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_add_user"</span>
+         <span style="font-weight: bold; font-style: italic;">user</span> = User(name=Name(val=<span style="font-style: italic;">"some user"</span>),
+                          email=Email(val=<span style="font-style: italic;">"tt@kk.com"</span>),
+                          role=Role.user)
+
+         <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.obj_delegate.add_user(user)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.obj_delegate.user_exists(user), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> Delete a user to the system</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+This function deletes a user from the user-set maintained by the system.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="del_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">del_user</span>(<span style="font-weight: bold;">self</span>, user):
+        <span style="font-weight: bold;">self</span>.user_set.remove(user)
+        <span style="font-weight: bold;">return</span> user
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-3-1" name="sec-1-2-3-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-3-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_del_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_del_user</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_del_user"</span>
+         <span style="font-weight: bold; font-style: italic;">user</span> = User(name=Name(val=<span style="font-style: italic;">"some user"</span>),
+                          email=Email(val=<span style="font-style: italic;">"tt@kk.com"</span>),
+                          role=Role.user)
+
+         <span style="font-weight: bold;">self</span>.obj_delegate.user_set.append(user)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.obj_delegate.user_exists(user), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+         <span style="font-weight: bold;">self</span>.obj_delegate.del_user(user)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.obj_delegate.user_exists(user), <span style="font-weight: bold; text-decoration: underline;">False</span>)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-4" class="outline-4">
+<h4 id="sec-1-2-4"><span class="section-number-4">1.2.4</span> Return the users in the system</h4>
+<div class="outline-text-4" id="text-1-2-4">
+<p>
+This function returns the list of users maintained by the system.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_users">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_users</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.user_set
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-4-1" name="sec-1-2-4-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-4-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_get_users">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_get_users</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_get_users"</span>
+         <span style="font-weight: bold; font-style: italic;">user</span> = User(name=Name(val=<span style="font-style: italic;">"some user"</span>),
+                          email=Email(val=<span style="font-style: italic;">"tt@kk.com"</span>),
+                          role=Role.user)
+
+         <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.obj_delegate.add_user(user)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">len</span>(<span style="font-weight: bold;">self</span>.obj_delegate.get_users()), 2)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-5" class="outline-4">
+<h4 id="sec-1-2-5"><span class="section-number-4">1.2.5</span> Check if user has admin role</h4>
+<div class="outline-text-4" id="text-1-2-5">
+<p>
+This function returns true if role of a user is admin
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="is_admin">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">is_admin</span>(<span style="font-weight: bold;">self</span>, user):
+        <span style="font-weight: bold;">return</span> user.get(<span style="font-style: italic;">"role"</span>).get(<span style="font-style: italic;">"val"</span>) == <span style="font-style: italic;">"admin"</span>
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-5-1" name="sec-1-2-5-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-5-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_is_admin">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_is_admin</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_is_admin"</span>
+         <span style="font-weight: bold; font-style: italic;">user</span> = User(name=Name(val=<span style="font-style: italic;">"some user"</span>),
+                          email=Email(val=<span style="font-style: italic;">"tt@kk.com"</span>),
+                          role=Role.user)
+
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.obj_delegate.is_admin(user), <span style="font-weight: bold; text-decoration: underline;">False</span>)
+
+         <span style="font-weight: bold; font-style: italic;">user</span> = User(name=Name(val=<span style="font-style: italic;">"some user"</span>),
+                          email=Email(val=<span style="font-style: italic;">"tt@kk.com"</span>),
+                          role=Role.admin)
+
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.obj_delegate.is_admin(user), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-6" class="outline-4">
+<h4 id="sec-1-2-6"><span class="section-number-4">1.2.6</span> Get a Role</h4>
+<div class="outline-text-4" id="text-1-2-6">
+<p>
+This function returns either admin or user role from the role set
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_role">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_role</span>(<span style="font-weight: bold;">self</span>, **kwargs):
+        
+        <span style="font-weight: bold;">if</span> kwargs[<span style="font-style: italic;">'name'</span>] == <span style="font-style: italic;">"admin"</span>:
+            <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.role_set[0]
+        <span style="font-weight: bold;">else</span>:
+            <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.role_set[1]
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-6-1" name="sec-1-2-6-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-6-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_get_role">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_get_role</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_get_role"</span>
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.obj_delegate.get_role(val=<span style="font-style: italic;">"admin"</span>).get(<span style="font-style: italic;">"val"</span>),
+                              <span style="font-style: italic;">"admin"</span>)
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.obj_delegate.get_role(val=<span style="font-style: italic;">"user"</span>).get(<span style="font-style: italic;">"val"</span>),
+                              <span style="font-style: italic;">"user"</span>)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-7" class="outline-4">
+<h4 id="sec-1-2-7"><span class="section-number-4">1.2.7</span> Get user with admin role</h4>
+<div class="outline-text-4" id="text-1-2-7">
+<p>
+This function returns the user the admin role from the user set
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_admin_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_admin_user</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">self</span>.user_set[0]
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-7-1" name="sec-1-2-7-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-7-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_get_admin_user">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_get_admin_user</span>(<span style="font-weight: bold;">self</span>):
+         <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_get_admin_user"</span>
+         <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">self</span>.obj_delegate.get_admin_user(),
+                              <span style="font-weight: bold;">self</span>.obj_delegate.user_set[0])
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-8" class="outline-4">
+<h4 id="sec-1-2-8"><span class="section-number-4">1.2.8</span> Get user by Email</h4>
+<div class="outline-text-4" id="text-1-2-8">
+<p>
+This function returns the user by email from the user set
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_user_by_email">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">get_user_by_email</span>(<span style="font-weight: bold;">self</span>, email):
+        <span style="font-weight: bold; font-style: italic;">user_list</span> = <span style="font-weight: bold;">filter</span>(<span style="font-weight: bold;">lambda</span> user: user.get(<span style="font-style: italic;">"email"</span>) == email,
+                             <span style="font-weight: bold;">self</span>.user_set)
+        <span style="font-weight: bold;">if</span> user_list:
+            <span style="font-weight: bold;">return</span> user_list[0]
+        <span style="font-weight: bold;">else</span>:
+            <span style="font-weight: bold; text-decoration: underline;">None</span>
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-8-1" name="sec-1-2-8-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-8-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_get_user_by_email">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_get_user_by_email</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_get_user_by_email"</span>
+        <span style="font-weight: bold; font-style: italic;">email</span> = Email(val=Config.admin_email)
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.obj_delegate.get_user_by_email(email)
+        <span style="font-weight: bold;">self</span>.assertEqual(user.get(<span style="font-style: italic;">"email"</span>), email)
+
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.obj_delegate.get_user_by_email(Email(val=<span style="font-style: italic;">"tt@kk.com"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(user, <span style="font-weight: bold; text-decoration: underline;">None</span>)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-9" class="outline-4">
+<h4 id="sec-1-2-9"><span class="section-number-4">1.2.9</span> Set Email of a User</h4>
+<div class="outline-text-4" id="text-1-2-9">
+<p>
+This function sets Email of a user in the user set. No exception is thrown
+here, the upper layer which is calling this function should ensure <code>user</code>
+exists whose email is changed. 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="set_email">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">set_email</span>(<span style="font-weight: bold;">self</span>, user, email):
+        <span style="font-weight: bold; font-style: italic;">usr</span> = <span style="font-weight: bold;">self</span>.get_user_by_email(user.get(<span style="font-style: italic;">"email"</span>))
+        usr.<span style="font-weight: bold;">set</span>(email=email)
+        <span style="font-weight: bold;">return</span> user
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-9-1" name="sec-1-2-9-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-9-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_set_email">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_set_email</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_set_email"</span>
+        <span style="font-weight: bold; font-style: italic;">email</span> = Email(val=Config.admin_email)
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.obj_delegate.get_user_by_email(email)
+        <span style="font-weight: bold; font-style: italic;">email</span> = Email(val=<span style="font-style: italic;">"abc@gnu.org"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.obj_delegate.set_email(user, email)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(user.get(<span style="font-style: italic;">"email"</span>), email)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-10" class="outline-4">
+<h4 id="sec-1-2-10"><span class="section-number-4">1.2.10</span> Set Name of a User</h4>
+<div class="outline-text-4" id="text-1-2-10">
+<p>
+This function sets Name of a user in the user set. No exception is thrown
+here, the upper layer which is calling this function should ensure <code>user</code>
+exists whose name is changed. 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="set_name">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">set_name</span>(<span style="font-weight: bold;">self</span>, user, name):
+        <span style="font-weight: bold; font-style: italic;">usr</span> = <span style="font-weight: bold;">self</span>.get_user_by_email(user.get(<span style="font-style: italic;">"email"</span>))
+        usr.<span style="font-weight: bold;">set</span>(name=name)
+        <span style="font-weight: bold;">return</span> user
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-2-10-1" name="sec-1-2-10-1"></a>Tests<br  /><div class="outline-text-5" id="text-1-2-10-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_set_name">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_set_name</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_set_name"</span>
+        <span style="font-weight: bold; font-style: italic;">email</span> = Email(val=Config.admin_email)
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.obj_delegate.get_user_by_email(email)
+        <span style="font-weight: bold; font-style: italic;">name</span> = Name(val=<span style="font-style: italic;">"Jimi Hendrix"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = <span style="font-weight: bold;">self</span>.obj_delegate.set_name(user, name)
+        <span style="font-weight: bold;">self</span>.assertEqual(user.get(<span style="font-style: italic;">"name"</span>), name)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2016-07-07 Thu]</span></span></p>
+<p class="author">Author: VLEAD</p>
+<p class="date">Created: 2017-04-26 Wed 22:27</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

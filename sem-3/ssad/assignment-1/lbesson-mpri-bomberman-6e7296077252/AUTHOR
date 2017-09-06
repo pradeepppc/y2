@@ -1,0 +1,38 @@
+.. 2012/2013 MPRI 1-21 Net Programming Project : Multiplayer Bomberman.
+
+List of contributors:
+---------------------
+
+ Main author : Lilian BESSON (mailto:lilian.besson@normale.fr).
+
+Thanks to:
+^^^^^^^^^^
+
+ * Vincent Le Gallic (mailto:vincent.legallic AT crans DOT org),
+    for our work with Sphinx documentation generator.
+ 
+ * [http://www.softicons.com/icon-tools/icon-converter]
+    for the icon-converter tool, allowing many different player pictures in 48x48 pixels.
+ 
+ * Yann Duplouy (mailto:yann.duplouy AT crans DOT org),
+    for a tutorial about ''argparse'' command line parsers auto-generator.
+ 
+ * Vincent Cohen-Addad and Lucas Hosseini ({vincent.cohenaddad|lucas.hosseini} AT ens-lyon DOT fr),
+    for the semantic, the network protocole, and the syntax of network messages.
+ 
+ * And my little brother, Fabian,
+    for his help when choosing the game soundtrack and the picture for the caracters.
+
+.. 
+	License:
+	^^^^^^^^
+	 This project is released under the GPLv3 license, for more details, take a look at the LICENSE file.
+
+	Installation:
+	^^^^^^^^^^^^^
+	 For more details, see the `INSTALL <../../INSTALL>`_ file.
+
+	About:
+	^^^^^^
+	 For more informations about the project, the doc can be usefull.
+ You can also contact me by email : `here <mailto:lilian.bessonATATATnormale.fr>`_.

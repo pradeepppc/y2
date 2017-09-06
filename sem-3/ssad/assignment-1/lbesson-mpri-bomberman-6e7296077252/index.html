@@ -1,0 +1,96 @@
+<h1>MPRI 1-21 net programming project</h1>
+<p>A multi-player Bomberman game, with formal semantics and an open protocol.</p>
+<p><img alt="Screenshot of the game, for the server" src="http://perso.crans.org/~besson/publis/Bomberman/images/exempletextual_server.png" title="Screenshot of the game, for the server" /></p>
+<hr />
+<h3>Author:</h3>
+<p>Lilian Besson (<em>for more details, see the AUTHOR file in the source</em>).</p>
+<h3>Language:</h3>
+<p>Python v2.7.3</p>
+<h2>Documentation</h2>
+<p>The doc can be consulted on one of this page :</p>
+<ul>
+<li>on <strong>ENS de Cachan</strong> website : <a href="http://www.dptinfo.ens-cachan.fr/~lbesson/publis/Bomberman/_build/html/" title="Hosted by the dpt info of 'ENS de Cachan'">publis/Bomberman/_build/html/</a>.</li>
+<li>on <strong>Cr@ns</strong> website <a href="http://perso.crans.org/besson/publis/Bomberman/_build/html/" title="Hosted by the 'Cr@ns' association">publis/Bomberman/_build/html/</a>.</li>
+</ul>
+<p><strong>All the details (installation, options, etc) are in the doc</strong>.
+Anyway, here are somes infos.</p>
+<hr />
+<h1>Installation</h1>
+<h2>Dependencies</h2>
+<p>The project is <em>entirely written in Python</em>, version <em>2.7.3</em>.</p>
+<p>For more details about the <strong>Python</strong> language, see <a href="http://www.python.org&gt;" title="Python power !">the official site</a>.
+Python 2.7.1 or higher is <strong>required</strong>.</p>
+<p>The project also <strong>require</strong> the following <em>unusual module(s)</em> :</p>
+<ol>
+<li>pygame (for GUI): can be found <a href="http://www.pygame.org/download.shtml" title="Python power !">here on their official site</a>.  </li>
+<li>scanf (for parsing) : <strong>it is</strong> distributed <em>with the project</em>. You can also download it <a href="https://hkn.eecs.berkeley.edu/~dyoo/python/scanf/" title="Thank for the developper of this software !">here on Berkeley's website</a>.</li>
+</ol>
+<h2>Plateform(s)</h2>
+<p>The project have been <em>developped</em> on <em>GNU/Linux</em> (Ubuntu 11.10).</p>
+<h4>Warning (Windows)</h4>
+<p>It also have been quickly tested on <em>Windows 7</em> <strong>with the Cygwin environment</strong> and Python 2.7.</p>
+<h4>Warning (Mac OS X)</h4>
+<p>It shall also work on <em>Mac OS X</em>, but <strong>not been tested</strong>.
+Any suggestion or returns is welcome !
+Where things can be different between <em>Mac</em> and the others plateform is with the <em>sockets</em> (Linux use <em>BSD sockets</em>, and <em>Mac</em> don't).
+In particular, some network error handling can work on <em>Linux</em> but no on <em>Mac</em>.</p>
+<h2>What is the important part ?</h2>
+<p>The project is in two parts : <strong>a server, and a client</strong>, represented as the two following Python scripts :</p>
+<ol>
+<li>the server <strong>BombermanServer.py</strong>;</li>
+<li>the client <strong>BombermanClient.py</strong>.</li>
+</ol>
+<p>Those two can be called with the option <code>--help</code> to show how to used them.
+All options are explained in this <em>help</em> message.</p>
+<h2>How to quickly use it</h2>
+<p>If you simply want to use it, follow those points :</p>
+<ol>
+<li>In a first terminal, launch a server (for example from the computer <strong>opened</strong> on the web, and known as <em>bomberman.crans.org</em>):</li>
+</ol>
+<p><code>$ ./BombermanServer.py --server bomberman.crans.org --port 13882</code></p>
+<p>This launch the server, listening on port 13882. The game will be launched with a board 11x11, waiting for 3 players.</p>
+<ol>
+<li>In <em>a second terminal</em>, launch a client and connect it to this server:</li>
+</ol>
+<p><code>$ ./BombermanClient.py --server bomberman.crans.org --port 13882 --pseudo "Luke" --color "blue"</code></p>
+<p>This launch the game, playing with the server previously launched, and with a player called "Luke", and colored with blue.
+   This game uses an interactive window (GUI) if possible, otherwise it will try to launch in text mode (TUI) but <em>the TUI is still experimental</em>.</p>
+<ol>
+<li>
+<p>Find <strong>2 other friends to play with you</strong>, tell them the <code>--server</code> and <code>--port</code> argument for their client, and that's it !</p>
+</li>
+<li>
+<p>More options :</p>
+<ul>
+<li><code>--music</code>, <code>--nomusic</code> : <strong>enable</strong>, or <strong>disable</strong> the <em>soundtrack</em> during the game (for the client),</li>
+<li><code>--soundeffect</code>, <code>--nosoundeffect</code> : <strong>enable</strong>, or <strong>disable</strong> the <em>soundeffect</em> during the game (for the client),</li>
+<li><code>--ANSI</code>, <code>--noANSI</code> : idem for the <em>ANSI</em> escape color codes,</li>
+<li><code>--noUTF</code> : might also be able to force pure ASCII text mode <em>(it works, but it is uglier than with UTF8 !)</em>,</li>
+</ul>
+</li>
+<li>
+<p>Moreover, the two files <strong>ConfigClient.py</strong> and <strong>ConfigServer.py</strong> can be edited to keep your favorite parameters from one session to an other.</p>
+</li>
+</ol>
+<h4>Note</h4>
+<p>If you are interesting, an <em>experimental</em> bot is in progress. That mean, a program that play <em>by itself</em>.
+ By now, it is <strong>quite limited</strong>, but <strong>it works</strong> :)
+ Of course, a <em>human</em> player will beat an <em>automatic</em> one very easily,
+ but at least this allow to test everything without switching between 3 windows to play successively one of each players.
+ And as far as I tried, one human player <em>vs</em> 7 bots can't win ;)</p>
+<hr />
+<p><img alt="A client" src="http://perso.crans.org/~besson/publis/Bomberman/images/example_IA.png" title="Screenshot of the game, for IA clients." /></p>
+<h1>About the project</h1>
+<p>This project was realised for the MPRI 1-21 <strong>net programming lesson</strong>. I received the mark <em>16.9/20</em> for my work.</p>
+<p>The MPRI is the <strong>Parisian Master for Research in Computer Science</strong> (<em>Master Parisien de Recherche en Informatique</em> in French).</p>
+<p>I worked with <em>Lucas Hosseini</em> and <em>Vincent Cohen-Addad</em>, and if you are curious, there work is <a href="https://bitbucket.org/vcohen/projet_reseau" title="check this out !">here on bitbucket</a>.</p>
+<h1>About the doc</h1>
+<p>The documentation is produced mainly with <strong>Sphinx</strong>, the Python's documentation generator.</p>
+<p>I wrote a few scripts to help <em>Sphinx</em> to do what I wanted, and to generate a <em>PyDoc</em> version of the doc too.</p>
+<p>Those scripts constitute now an independant and a powerful project.
+It is hosted <a href="https://sites.google.com/site/naereencorp/liste-des-projets/makepydoc" title="check this out too ;) !">here on my Google Site</a></p>
+<h2>Contact me</h2>
+<p>Feel free to contact me, either with a bitbucket message (my profile is <a href="https://bitbucket.org/lbesson/" title="here">lbesson</a>), or via an email at <strong>lilian DOT besson AT ens-cachan DOT fr</strong>.</p>
+<h2>License</h2>
+<p>This project is released under the <strong>GPLv3 license</strong>, for more details, take a look at the LICENSE file in the source.
+<em>Basically, that allow you to use all or part of the project for you own business.</em></p>

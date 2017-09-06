@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Class Persistence</title>
+<!-- 2017-04-26 Wed 22:27 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="VLEAD" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../../style/css/worg-style.css" />
+<link rel="stylesheet" type="text/css" href="../../style/css/override.css" />
+<link rel="icon" type="image/png" href="../../style/img/favicon/popl.png" />
+<script type="text/javascript" src="../../style/js/org-info.js">
+/**
+ *
+ * @source: ../../style/js/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in ../../style/js/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in ../../style/js/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "1");
+org_html_manager.set("LINK_HOME", "../../index.html");
+org_html_manager.set("LINK_UP", "../index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../../index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Class Persistence</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Introduction</a></li>
+<li><a href="#sec-2">2. Persistence</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Implementation</a>
+<ul>
+<li><a href="#sec-2-1-1">2.1.1. mk_persistent</a></li>
+<li><a href="#sec-2-1-2">2.1.2. Operations supporting persistence</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-2">2.2. Tests</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Test Infra</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-3-0-1">3.0.1. Imports for tests</a></li>
+<li><a href="#sec-3-0-2">3.0.2. Running tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This document builds on the <a href="./class-templates.html"><code>class_templates</code></a> meta programming techniques to
+make objects persistent.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Persistence</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+The entities of the system defined in the <a href="../../data-model/index.html">data model</a> are implemented as
+<a href="../objects/entities.html">objects</a>.  Any practical system entails persistence of these entities
+implemented as objects so that the information is not lost when the system is
+shut down.
+</p>
+
+<p>
+This document captures a way that takes <a href="../objects/entities.html">objects</a> of which cannot persist and
+provides an API for persisting them.  The technology used for persistence is
+<a href="https://www.mysql.com/">mysql</a> and since this application is built using <a href="https://www.python.org/download/releases/2.7/">python</a>, <a href="http://www.sqlalchemy.org/">sqlalchemy</a> - a python
+based <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">ORM</a> is used for database access.
+</p>
+
+<p>
+A entity with no persistence is provided persistence the following way.
+</p>
+<pre class="example">
+table_args = {"__tablename__": "names",
+"id": db.Column(db.Integer, primary_key=True),
+"name": db.Column(db.String(128), nullable=False)
+}
+Name = ClassPersistenceTemplate.mk_persistent(Name, **table_args)
+</pre>
+
+<p>
+Now, an API to perform CRUD (create, read, update and delete) operations is
+available for an object of type Name.
+</p>
+</div>
+
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Implementation</h3>
+<div class="outline-text-3" id="text-2-1">
+</div><div id="outline-container-sec-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span> mk_persistent</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+ClassPersistentTemplate provides a method <code>mk_persistent</code> that takes a
+class created by <code>ClassTemplates</code> and provides persistence to it.
+</p>
+
+<p>
+The non persistent class is made persistent by copying all its properties
+to the new class while inheriting from <code>db.Model</code>.
+</p>
+
+<p>
+<code>db.Model</code> provided by <code>sqlalchemy</code> is the glue that provides methods
+(save, delete) to persistent an object. 
+</p>
+
+<p>
+<code>mk_persistent</code> takes:
+</p>
+<ul class="org-ul">
+<li>a class and 
+</li>
+<li>a dictionary that contains name-value pairs defining a table in mysql as
+arguments and returns a class.
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="mk_persistent">    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">mk_persistent</span>(cls, uk_list, **table_args):
+        check_list(uk_list)
+        <span style="font-weight: bold;">setattr</span>(cls, <span style="font-style: italic;">'unique_key_list'</span>, uk_list)
+    
+        check_dict(table_args)
+        <span style="font-weight: bold;">for</span> key, value <span style="font-weight: bold;">in</span> table_args.iteritems():
+            <span style="font-weight: bold;">setattr</span>(cls, key, value)
+        <span style="font-style: italic;">'''http://stackoverflow.com/questions/9539052/how-to-dynamically-change-base-class-of-instances-at-runtime</span>
+<span style="font-style: italic;">'''</span>
+        <span style="font-weight: bold; font-style: italic;">cls.is_persistent</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+        <span style="font-weight: bold; font-style: italic;">cls</span> = <span style="font-weight: bold;">type</span>(cls.<span style="font-weight: bold;">__name__</span>, (db.Model,), <span style="font-weight: bold;">dict</span>(cls.__dict__))
+
+        <span style="font-weight: bold; font-style: italic;">cls.save</span> = ClassPersistenceTemplate.mk_save(cls)
+        <span style="font-weight: bold; font-style: italic;">cls.delete</span> = ClassPersistenceTemplate.mk_delete(cls)
+        <span style="font-weight: bold; font-style: italic;">cls.get_by_id</span> = ClassPersistenceTemplate.mk_get_by_id(cls)
+        <span style="font-weight: bold; font-style: italic;">cls.get_all</span> = ClassPersistenceTemplate.mk_get_all(cls)
+        <span style="font-weight: bold; font-style: italic;">cls.apply_filters</span> = ClassPersistenceTemplate.mk_apply_filters(cls)
+        <span style="font-weight: bold; font-style: italic;">cls.set_hidden_id</span> = ClassPersistenceTemplate.mk_set_hidden_id(cls)
+        ClassPersistenceTemplate.mk_save_handler(cls)
+        <span style="font-weight: bold;">return</span> cls
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-1-2" class="outline-4">
+<h4 id="sec-2-1-2"><span class="section-number-4">2.1.2</span> Operations supporting persistence</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<p>
+Saving an object to a persistent store and retrieving object(s) from
+persistent store are provided to the new persistent class by using the
+functions provided by <code>db.Model</code>
+</p>
+</div>
+
+<ol class="org-ol"><li><a id="sec-2-1-2-1" name="sec-2-1-2-1"></a>Save Object<br  /><div class="outline-text-5" id="text-2-1-2-1">
+<p>
+This function provides the class with the functionality to save the object
+to the database.  The save to persistence store happens:
+</p>
+<ol class="org-ol">
+<li>Upon initial addition to the store and
+</li>
+<li>Upon any further update on the stored object.
+</li>
+</ol>
+
+<p>
+Both the cases are handled. Also, if any of the attributes is a db object,
+but it not a proper sql alchemy object, such attributes are retrieved from
+the db and set to the object that is saved.  This ensures inconsistencies
+between sql alchemy object and <code>utils</code> object representation are removed. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="save_method">    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">mk_save</span>(cls) :
+        <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">fn</span>(obj, update=<span style="font-weight: bold; text-decoration: underline;">False</span>, **args):
+
+            <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">db_object_and_not_retrieved_from_db</span>(val):
+                <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">hasattr</span>(val, <span style="font-style: italic;">'id'</span>) <span style="font-weight: bold;">and</span> <span style="font-weight: bold;">getattr</span>(val, <span style="font-style: italic;">'id'</span>) <span style="font-weight: bold;">is</span> <span style="font-weight: bold; text-decoration: underline;">None</span>
+
+            <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">retrieve_from_db</span>(value):
+                <span style="font-weight: bold;">for</span> unique_key <span style="font-weight: bold;">in</span> value.__class__.unique_key_list:
+                    <span style="font-weight: bold; font-style: italic;">args_dict</span> = {}
+                    <span style="font-weight: bold; font-style: italic;">args_dict</span>[unique_key] = value.get(unique_key)
+                
+                <span style="font-weight: bold; font-style: italic;">new_val</span> = value.__class__.apply_filters(**args_dict)[0]
+                <span style="font-weight: bold;">return</span> new_val
+            
+            <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setup_the_object</span>(attributes_to_set):
+                <span style="font-weight: bold;">for</span> key, value <span style="font-weight: bold;">in</span> attributes_to_set.iteritems():
+                    <span style="font-weight: bold; font-style: italic;">new_val</span> = <span style="font-weight: bold; text-decoration: underline;">None</span>
+                    <span style="font-weight: bold;">if</span> is_list(value):
+                        <span style="font-weight: bold; font-style: italic;">new_val_list</span> = []
+                        <span style="font-weight: bold;">for</span> item <span style="font-weight: bold;">in</span> value:
+                            <span style="font-weight: bold;">if</span> db_object_and_not_retrieved_from_db(item):
+                                new_val_list.append(retrieve_from_db(item))
+                            <span style="font-weight: bold;">else</span>:
+                                new_val_list.append(item)
+                            
+                        <span style="font-weight: bold; font-style: italic;">new_val</span> = new_val_list
+                    <span style="font-weight: bold;">else</span>:
+                        <span style="font-weight: bold;">if</span> db_object_and_not_retrieved_from_db(value):
+                            <span style="font-weight: bold; font-style: italic;">new_val</span> = retrieve_from_db(value)
+                        <span style="font-weight: bold;">else</span>:
+                            <span style="font-weight: bold; font-style: italic;">new_val</span> = value
+                                
+                    <span style="font-weight: bold;">setattr</span>(obj, key, new_val)
+
+            <span style="font-weight: bold;">if</span> (update):
+                <span style="font-weight: bold; font-style: italic;">attributes_to_set</span> = args
+            <span style="font-weight: bold;">else</span>:
+                <span style="font-weight: bold; font-style: italic;">attributes_to_set</span> = obj.state
+            
+            setup_the_object(attributes_to_set)
+            
+            <span style="font-weight: bold; font-style: italic;">db.session.autoflush</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+            db.session.add(obj)
+            db.session.commit()
+
+        <span style="font-weight: bold;">return</span> fn
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="sec-2-1-2-2" name="sec-2-1-2-2"></a>Save Handler<br  /><div class="outline-text-5" id="text-2-1-2-2">
+<p>
+An object with the ability to persist behaves differently than an object
+without persistence when any of the attributes of the object are modified.
+To achieve this, on any modification of an attribute of a persistence
+object, save_handler is invoked, which writes to the database.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="save_handler">    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">mk_save_handler</span>(cls):
+        <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">fn</span>(obj, **args):
+            obj.save(update=<span style="font-weight: bold; text-decoration: underline;">True</span>, **args)
+
+        <span style="font-weight: bold; font-style: italic;">cls.custom_handlers</span>[<span style="font-style: italic;">'save_handler'</span>] = fn
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="sec-2-1-2-3" name="sec-2-1-2-3"></a>Delete Object<br  /><div class="outline-text-5" id="text-2-1-2-3">
+<p>
+The function provides the class with the functionality to delete an object
+from the database.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="delete_method">    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">mk_delete</span>(cls):
+        <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">fn</span>(obj):
+            <span style="font-weight: bold; font-style: italic;">db.session.autoflush</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+            db.session.delete(obj)
+            db.session.commit()
+
+        <span style="font-weight: bold;">return</span> fn
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="sec-2-1-2-4" name="sec-2-1-2-4"></a>Set State<br  /><div class="outline-text-5" id="text-2-1-2-4">
+<p>
+When an object is retrieved from the database, sqlalchemy constructs the
+object in a different way which does not allow the use of the retrieved
+object in a consistent way - using the same API exposed by the object
+without persistence.  All the attributes of an object are part of a
+<code>state</code> variable.  This function <code>set_state</code> populates the <code>state</code>
+variable.  This method is invoked after every retrieval from the database.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="set_state_method">    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">mk_set_state</span>(cls):
+        <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">fn</span>(obj):
+            <span style="font-weight: bold; font-style: italic;">obj.state</span> = {}
+
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">staticmethod</span>(fn)
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="sec-2-1-2-5" name="sec-2-1-2-5"></a>Get By ID<br  /><div class="outline-text-5" id="text-2-1-2-5">
+<p>
+The function provides the class with the functionality to retrieve an
+object from the database based on the primary key.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_by_id_method">    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">mk_get_by_id</span>(cls):
+        <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">fn</span>(<span style="font-weight: bold;">id</span>):
+            <span style="font-weight: bold; font-style: italic;">db.session.autoflush</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+            <span style="font-weight: bold; font-style: italic;">obj</span> = cls.query.get(<span style="font-weight: bold;">id</span>)
+            <span style="font-weight: bold;">return</span> obj
+
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">staticmethod</span>(fn)
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="sec-2-1-2-6" name="sec-2-1-2-6"></a>Get All<br  /><div class="outline-text-5" id="text-2-1-2-6">
+<p>
+The function provides the class with the functionality to retrieve all the
+objects of a particular type from the database.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="get_all_method">    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">mk_get_all</span>(cls):
+        <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">fn</span>():
+            <span style="font-weight: bold; font-style: italic;">db.session.autoflush</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+            <span style="font-weight: bold; font-style: italic;">lst</span> = cls.query.<span style="font-weight: bold;">all</span>()
+            <span style="font-weight: bold;">return</span> lst
+
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">staticmethod</span>(fn)
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="sec-2-1-2-7" name="sec-2-1-2-7"></a>Apply Filters<br  /><div class="outline-text-5" id="text-2-1-2-7">
+<p>
+The function provides the class with an ability to fetch an object from
+the database with a selection criteria.  In sqlalchmey, when an object of
+type one is part of the search criteria to search an object of type two,
+it is necessary that object of type one has id which is not null. This
+means the object of type one has to be retrieved from the database before
+it can be passed as a parameter to the search criteria.
+</p>
+
+<p>
+Every object has a unique key which is either an object type or a
+primitive type.  This function recursively retrieves the objects from
+persistence store to build the arguments before finally applying the
+filters. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="apply_filters">    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">mk_apply_filters</span>(cls):
+        <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">fn</span>(**kwargs):
+            <span style="font-weight: bold; font-style: italic;">db.session.autoflush</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+            <span style="font-weight: bold;">for</span> key, value <span style="font-weight: bold;">in</span> kwargs.iteritems():
+                <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> (is_str(value) <span style="font-weight: bold;">or</span> is_unicode(value) <span style="font-weight: bold;">or</span>
+                            is_none(value) <span style="font-weight: bold;">or</span> is_int(value) <span style="font-weight: bold;">or</span>
+                            is_date(value)):
+                   <span style="font-weight: bold;">for</span> unique_key <span style="font-weight: bold;">in</span> value.__class__.unique_key_list:
+                       <span style="font-weight: bold; font-style: italic;">args_dict</span> = {}
+                       <span style="font-weight: bold; font-style: italic;">args_dict</span>[unique_key] = value.get(unique_key)
+
+                   <span style="font-weight: bold; font-style: italic;">kwargs</span>[key] = value.__class__.apply_filters(**args_dict)[0]
+
+            <span style="font-weight: bold; font-style: italic;">lst</span> = cls.query.filter_by(**kwargs).<span style="font-weight: bold;">all</span>()
+
+            <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> lst:
+                <span style="font-weight: bold;">raise</span> NotFoundError(<span style="font-style: italic;">"The object is not found"</span>)
+            <span style="font-weight: bold;">else</span>:
+                <span style="font-weight: bold;">return</span> lst
+
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">staticmethod</span>(fn)
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="sec-2-1-2-8" name="sec-2-1-2-8"></a>Set hidden ID<br  /><div class="outline-text-5" id="text-2-1-2-8">
+<p>
+The function provides the class with the functionality to set an hidden
+ID. 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="set_hidden_id">    <span style="font-weight: bold; text-decoration: underline;">@staticmethod</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">mk_set_hidden_id</span>(cls):
+        <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">fn</span>(obj, <span style="font-weight: bold;">id</span>):
+            <span style="font-weight: bold; font-style: italic;">obj.hide_id</span>[<span style="font-style: italic;">"id"</span>] = <span style="font-weight: bold;">id</span>
+
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">staticmethod</span>(fn)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Tests</h3>
+<div class="outline-text-3" id="text-2-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="persistence_tests"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistence</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">testCreationOfAPersistentClass</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"testCreationOfAPersistentClass"</span>
+        
+        <span style="font-weight: bold; font-style: italic;">Name</span> = ClassTemplate.mk_class(<span style="font-style: italic;">"Name"</span>)
+        Name.add_attributes(name=is_alphabetic_str)
+
+        <span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"names"</span>,
+                <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+                <span style="font-style: italic;">"name"</span>: db.Column(db.String(128), nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>)
+                }
+        <span style="font-weight: bold; font-style: italic;">PName</span> = ClassPersistenceTemplate.mk_persistent(Name, [<span style="font-style: italic;">'name'</span>], **args)
+        <span style="font-weight: bold;">self</span>.setUp()
+        <span style="font-weight: bold; font-style: italic;">p_name</span> = PName(name=<span style="font-style: italic;">"Jimi Hendrix"</span>)
+        p_name.save()
+        <span style="font-weight: bold; font-style: italic;">name</span> = PName.get_by_id(1)
+        <span style="font-weight: bold;">self</span>.assertEqual(name.get(<span style="font-style: italic;">"name"</span>), <span style="font-style: italic;">"Jimi Hendrix"</span>)
+        p_name.<span style="font-weight: bold;">set</span>(name=<span style="font-style: italic;">"Bo Didley"</span>)
+        <span style="font-weight: bold; font-style: italic;">names</span> = PName.get_all()
+        <span style="font-weight: bold;">self</span>.assertEqual(names[0].get(<span style="font-style: italic;">"name"</span>), <span style="font-style: italic;">"Bo Didley"</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(PName.apply_filters(name=<span style="font-style: italic;">"Bo Didley"</span>)[0].get(<span style="font-style: italic;">"name"</span>),
+                             <span style="font-style: italic;">"Bo Didley"</span>)
+        names[0].delete()
+        <span style="font-weight: bold; font-style: italic;">names</span> = PName.get_all()
+        <span style="font-weight: bold;">self</span>.assertEqual(names, [])
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Test Infra</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-0-1" class="outline-4">
+<h4 id="sec-3-0-1"><span class="section-number-4">3.0.1</span> Imports for tests</h4>
+<div class="outline-text-4" id="text-3-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="imports_for_tests"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">-*- coding: utf-8 -*-</span>
+<span style="font-weight: bold;">import</span> unittest
+<span style="font-weight: bold;">from</span> flask_testing <span style="font-weight: bold;">import</span> TestCase
+<span style="font-weight: bold;">from</span> datetime <span style="font-weight: bold;">import</span> datetime
+<span style="font-weight: bold;">from</span> runtime.utils.type_utils <span style="font-weight: bold;">import</span> *
+<span style="font-weight: bold;">from</span> runtime.utils.class_templates <span style="font-weight: bold;">import</span> *
+<span style="font-weight: bold;">from</span> class_persistence_template <span style="font-weight: bold;">import</span> *
+<span style="font-weight: bold;">from</span> runtime.rest.app <span style="font-weight: bold;">import</span> create_app
+
+<span style="font-weight: bold; font-style: italic;">config</span> = {
+    <span style="font-style: italic;">'SQLALCHEMY_DATABASE_URI'</span>: <span style="font-style: italic;">''</span>
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3-0-2" class="outline-4">
+<h4 id="sec-3-0-2"><span class="section-number-4">3.0.2</span> Running tests</h4>
+<div class="outline-text-4" id="text-3-0-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="run_test_cases"><span style="font-weight: bold;">if</span> <span style="font-weight: bold;">__name__</span> == <span style="font-style: italic;">'__main__'</span>:
+    unittest.main()
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2016-06-09 Thu]</span></span></p>
+<p class="author">Author: VLEAD</p>
+<p class="date">Created: 2017-04-26 Wed 22:27</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

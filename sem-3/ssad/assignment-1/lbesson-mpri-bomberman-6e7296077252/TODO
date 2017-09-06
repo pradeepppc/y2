@@ -1,0 +1,29 @@
+8. Voir pour le rapport (faire un Rapport.rst).
+	Les rapports individuels devrons nous être envoyés avant le 20 février minuit,
+	avec le code source de vos projets.  Les sources devront inclure un fichier
+	README décrivant les pas de compilation et une description d'utilisation de
+	votre programme.  Ces rapports, de 5 pages maximum, devront comporter:
+
+	- Une description de l'organisation du programme en différent modules et la
+	répartition des fonctionnalités entre ces modules; une description plus
+	détaillé du module en charge du réseau, celui qui implémente le protocole.
+	- Une section dans laquelle vous justifiez vos choix de conception (e.g
+	gestion de la concurrence par threads ou à l'aide de select(2)).
+	- Si vous avez effectué des modifications sur le protocole, décrivez pourquoi
+	elles étaient nécessaires.
+	- Limitations de votre solution et difficultés rencontrées.
+
+10. Voir pour l'affichage (pourquoi ça bloque au début ?).
+    Semble ok maintenant.
+
+11. Pourquoi téléportation ?
+    Semble être une inversion entre deux joueurs. Ou entre deux coins de la map.
+
+12. Un joueur qui se déconnecte meurt ?
+     Depuis un client, pas d'info sur les communications avec les joueurs.
+     Donc, pas possible de savoir si un joueur a quitté,
+     à moins que le serveur ne le signale.
+     Ce qui n'est pas le cas.
+
+13. ParseMessageIn ligne 149-151 : problème protocole (si deux joueurs ont le même pseudo, impossible d'être sur qu'on a récupéré le bon *id*).
+    FIXME !

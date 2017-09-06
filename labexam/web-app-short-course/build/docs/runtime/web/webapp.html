@@ -1,0 +1,1669 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Front End for User Directory Application</title>
+<!-- 2017-04-26 Wed 22:27 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="VLEAD" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../../style/css/worg-style.css" />
+<link rel="stylesheet" type="text/css" href="../../style/css/override.css" />
+<link rel="icon" type="image/png" href="../../style/img/favicon/popl.png" />
+<script type="text/javascript" src="../../style/js/org-info.js">
+/**
+ *
+ * @source: ../../style/js/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in ../../style/js/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in ../../style/js/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "1");
+org_html_manager.set("LINK_HOME", "../../index.html");
+org_html_manager.set("LINK_UP", "../index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../../index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Front End for User Directory Application</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Introduction</a></li>
+<li><a href="#sec-2">2. System JS - $.Post equivalent to send AJAX</a></li>
+<li><a href="#sec-3">3. System JS - Mock API</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Add User</a></li>
+<li><a href="#sec-3-2">3.2. Get all users</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. System JS - Rest API</a>
+<ul>
+<li><a href="#sec-4-1">4.1. Get user Details</a></li>
+<li><a href="#sec-4-2">4.2. Delete User</a></li>
+<li><a href="#sec-4-3">4.3. Add User</a></li>
+<li><a href="#sec-4-4">4.4. Get all users</a></li>
+<li><a href="#sec-4-5">4.5. Login</a></li>
+<li><a href="#sec-4-6">4.6. Logout</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5. System JS - Window, # handling</a></li>
+<li><a href="#sec-6">6. User JS - Introduction</a></li>
+<li><a href="#sec-7">7. User JS - Model State</a></li>
+<li><a href="#sec-8">8. User JS - Pick API choice (REST V/S Mock)</a></li>
+<li><a href="#sec-9">9. User JS - Window onload: setup # handlers, start from register</a></li>
+<li><a href="#sec-10">10. User JS - Hide all containers</a></li>
+<li><a href="#sec-11">11. User Component - Get all Users</a></li>
+<li><a href="#sec-12">12. User Component - Add User</a></li>
+<li><a href="#sec-13">13. User Component - Delete User</a></li>
+<li><a href="#sec-14">14. User Component - User Details</a></li>
+<li><a href="#sec-15">15. User Component - Home</a></li>
+<li><a href="#sec-16">16. User Component - Index page</a></li>
+<li><a href="#sec-17">17. HTML: Consolidated</a></li>
+<li><a href="#sec-18">18. CSS : Consolidated</a></li>
+<li><a href="#sec-19">19. JS: Consolidated</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+The front end for the user directory application is implemeted here.  It is
+implemented using client side hash(#) routing.  The window location's
+hyperlink reference (href) is manipulated through the hash(#) to simulate the
+state machine.  <code>http://part-url#login</code>, <code>http://part-url#logout</code>,
+<code>http://part-url#get_all_users</code> are some of the routes this application
+processes.  As a convention, in the above examples, the path after the
+hash(#) - <code>login</code>, <code>logout</code> and <code>get_all_users</code> are referred to as hash
+paths. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> System JS - $.Post equivalent to send AJAX</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+
+<pre class="src src-js" id="post_json"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">post_json</span>(<span style="font-weight: bold; font-style: italic;">url</span>, <span style="font-weight: bold; font-style: italic;">data</span>, <span style="font-weight: bold; font-style: italic;">callback</span>, <span style="font-weight: bold; font-style: italic;">error_callback</span>) {
+  $.ajax({
+    url: url,
+    type: <span style="font-style: italic;">"POST"</span>,
+    data: JSON.stringify(data),
+    contentType: <span style="font-style: italic;">"application/json; charset=utf-8"</span>,
+    success: callback,
+    <span style="font-weight: bold;">error</span>: <span style="font-weight: bold;">function</span> (<span style="font-weight: bold; font-style: italic;">request</span>, <span style="font-weight: bold; font-style: italic;">status</span>, <span style="font-weight: bold; font-style: italic;">error</span>) {
+      console.log(<span style="font-style: italic;">"error on: "</span> + url + 
+                  <span style="font-style: italic;">"\n|data: "</span> + data  + 
+                  <span style="font-style: italic;">"\n|RESPONSE: "</span> + request.responseText + 
+                  <span style="font-style: italic;">"\n| status: "</span> + status + 
+                  <span style="font-style: italic;">"\n| error: "</span> + error);
+      <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TODO: figure out which one of this is "semantically correct"</span>
+      <span style="font-weight: bold;">if</span> (error_callback != <span style="font-weight: bold; text-decoration: underline;">null</span> &amp;&amp; error_callback != <span style="font-weight: bold; text-decoration: underline;">undefined</span> &amp;&amp; error_callback) {
+        error_callback(request, status, error);
+      }
+    }
+  });
+};
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> System JS - Mock API</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+
+<pre class="src src-js" id="mock_api"><span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">MockAPI</span> = {
+  users: [],
+&lt;&lt;mock_add_user&gt;&gt;
+&lt;&lt;mock_get_all_users&gt;&gt;
+};
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Add User</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+<pre class="src src-js" id="mock_add_user">    <span style="font-weight: bold;">add_user</span>: <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">name</span>, <span style="font-weight: bold; font-style: italic;">email</span>, <span style="font-weight: bold; font-style: italic;">cb</span>) {
+        <span style="font-weight: bold; text-decoration: underline;">this</span>.users.push({name: name, email: email});
+    },
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Get all users</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+
+<pre class="src src-js" id="mock_get_all_users"><span style="font-weight: bold;">get_all_users</span>: <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">cb</span>) {
+    cb(<span style="font-weight: bold; text-decoration: underline;">this</span>.users);
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> System JS - Rest API</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+
+<pre class="src src-js" id="rest_api"><span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">RestAPI</span> = {
+&lt;&lt;rest_get_user_details&gt;&gt;
+&lt;&lt;rest_delete_user&gt;&gt;
+&lt;&lt;rest_add_user&gt;&gt;
+&lt;&lt;rest_get_all_users&gt;&gt;
+&lt;&lt;rest_login&gt;&gt;
+&lt;&lt;rest_logout&gt;&gt;
+};
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Get user Details</h3>
+<div class="outline-text-3" id="text-4-1">
+<div class="org-src-container">
+
+<pre class="src src-js" id="rest_get_user_details">  <span style="font-weight: bold;">get_user_details</span>: <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">email</span>, <span style="font-weight: bold; font-style: italic;">success_cb</span>, <span style="font-weight: bold; font-style: italic;">error_cb</span>) {
+    $.ajax({
+      url: <span style="font-style: italic;">'/show_user_details'</span>,
+      type: <span style="font-style: italic;">'GET'</span>,
+      data: {
+        email: email
+      },
+      success: success_cb,
+      error: error_cb
+    });
+  },
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Delete User</h3>
+<div class="outline-text-3" id="text-4-2">
+<div class="org-src-container">
+
+<pre class="src src-js" id="rest_delete_user">  <span style="font-weight: bold;">delete_user</span>: <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">email</span>, <span style="font-weight: bold; font-style: italic;">success_cb</span>, <span style="font-weight: bold; font-style: italic;">error_cb</span>) {
+    $.ajax({
+      url: <span style="font-style: italic;">'/del_user/'</span> + email,
+      type: <span style="font-style: italic;">'DELETE'</span>,
+      success: success_cb,
+      error: error_cb
+    });
+  },
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Add User</h3>
+<div class="outline-text-3" id="text-4-3">
+<div class="org-src-container">
+
+<pre class="src src-js" id="rest_add_user">  <span style="font-weight: bold;">add_user</span>: <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">name</span>, <span style="font-weight: bold; font-style: italic;">email</span>, <span style="font-weight: bold; font-style: italic;">role</span>, <span style="font-weight: bold; font-style: italic;">success_cb</span>, <span style="font-weight: bold; font-style: italic;">error_cb</span>) {
+    post_json(<span style="font-style: italic;">"/add_user"</span>,
+              {name: name, email: email, role: role},
+              success_cb,
+              error_cb);
+  },
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Get all users</h3>
+<div class="outline-text-3" id="text-4-4">
+<div class="org-src-container">
+
+<pre class="src src-js" id="rest_get_all_users">  <span style="font-weight: bold;">get_all_users</span>: <span style="font-weight: bold;">function</span> (<span style="font-weight: bold; font-style: italic;">cb</span>) {
+    $.get(<span style="font-style: italic;">"/show_users"</span>,
+          <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">data</span>) { console.log(data); cb(data) });
+  },
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Login</h3>
+<div class="outline-text-3" id="text-4-5">
+<div class="org-src-container">
+
+<pre class="src src-js" id="rest_login">  <span style="font-weight: bold;">login</span>: <span style="font-weight: bold;">function</span>() {
+    window.location.href = <span style="font-style: italic;">"/login"</span>
+  },
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-6" class="outline-3">
+<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Logout</h3>
+<div class="outline-text-3" id="text-4-6">
+<div class="org-src-container">
+
+<pre class="src src-js" id="rest_logout">  <span style="font-weight: bold;">logout</span>: <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">role</span>, <span style="font-weight: bold; font-style: italic;">success_cb</span>, <span style="font-weight: bold; font-style: italic;">failure_cb</span>) {
+    window.location.href = <span style="font-style: italic;">"/logout"</span>;
+  }
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> System JS - Window, # handling</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Call <code>register_onhashchange_handlers</code> to attach a handler.
+</p>
+
+<p>
+Parameters:
+handler_functions :: { hash_path :: function() {} }
+whose keys are the hash strings and the values
+are the handler.
+</p>
+
+
+<p>
+Call <code>navigate</code> to navigate to a path
+Parameters:
+path :: String
+</p>
+
+<p>
+navigates to given path
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-js" id="hash_handler"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">navigate</span>(<span style="font-weight: bold; font-style: italic;">path</span>) {
+  <span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">current</span> = window.location.href;
+  window.location.href = current.replace(<span style="font-style: italic;">/#(.*)$/</span>, <span style="font-style: italic;">''</span>) + <span style="font-style: italic;">'#'</span> + path;
+};
+
+<span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">strip # from window.location.hash</span>
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">get_window_hash_path</span>() {
+  <span style="font-weight: bold;">return</span> location.hash.substring(1);
+};
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">register_onhashchange_handlers</span>(<span style="font-weight: bold; font-style: italic;">handler_functions</span>) {
+  $(window).on(<span style="font-style: italic;">"hashchange"</span>, <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">e</span>) {
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">strip hash out</span>
+    hash_path = get_window_hash_path();
+    console.log(<span style="font-style: italic;">"new hash: "</span>, hash_path);
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">we use hasOwnProperty since we need to check if a handler is </span>
+    <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">defined for the hash_path</span>
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">object has it, not its parents (in the prototype chain)</span>
+    <span style="font-weight: bold;">if</span> (handler_functions.hasOwnProperty(hash_path)) {
+      <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">invoke said handler function</span>
+      handler_functions[hash_path]();
+    } <span style="font-weight: bold;">else</span> {
+      console.warn(<span style="font-style: italic;">`no handler for ${hash_path}`</span>);
+    }
+  });
+};
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> User JS - Introduction</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+User code that uses our library to build an API.  User code: Pick between
+REST and Mock API, setup # handlers for views.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> User JS - Model State</h2>
+<div class="outline-text-2" id="text-7">
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">make_state_object</span>() {
+  private_state = {
+    current_user: <span style="font-weight: bold; text-decoration: underline;">null</span>
+  };
+  
+  state_obj = {
+    <span style="font-weight: bold;">set_current_user</span>: <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">user</span>) { private_state.current_user = user; },
+    <span style="font-weight: bold;">get_current_user</span>: <span style="font-weight: bold;">function</span>() { console.assert(private_state.current_user != <span style="font-weight: bold; text-decoration: underline;">null</span>); <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">this</span>.current_user; }
+  };
+  
+  <span style="font-weight: bold;">return</span> state_obj;
+};
+
+<span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">have a global STATE object that has all of the model state</span>
+STATE = make_state_object();
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> User JS - Pick API choice (REST V/S Mock)</h2>
+<div class="outline-text-2" id="text-8">
+<div class="org-src-container">
+
+<pre class="src src-js" id="api_choice"><span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">API</span> = RestAPI;
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> User JS - Window onload: setup # handlers, start from register</h2>
+<div class="outline-text-2" id="text-9">
+<div class="org-src-container">
+
+<pre class="src src-js" id="window_onload"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">is_logged_in</span>() {
+  <span style="font-weight: bold;">return</span> document.cookie.indexOf(<span style="font-style: italic;">"session"</span>) != -1;
+}
+
+window.onload = <span style="font-weight: bold;">function</span>() {
+  register_onhashchange_handlers({
+    index: index_handler,
+    get_all_users: get_all_users_handler,
+    add_user: add_user_handler,
+    home: home_handler,
+    delete_user: delete_user_handler});
+  
+  <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">Hashes available when not logged in (authorized)</span>
+  <span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">unauth_available_hashes</span> = [<span style="font-style: italic;">"index"</span>];
+
+  <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TODO: figure out why this does not trigger onhashchange</span>
+  <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TRIAL: check if preventing race condition helps</span>
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">current_hash</span> = get_window_hash_path();
+  <span style="font-weight: bold;">if</span> (current_hash === <span style="font-style: italic;">""</span>) {
+    console.log(<span style="font-style: italic;">"defaulting #url to get_all_users"</span>);
+    
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">send logged in users to home, others to index</span>
+    <span style="font-weight: bold;">if</span> (is_logged_in()) {
+      current_hash = <span style="font-style: italic;">"home"</span>;
+    }
+    <span style="font-weight: bold;">else</span> {
+      current_hash = <span style="font-style: italic;">"index"</span>;
+    }
+  }
+
+  console.log(<span style="font-style: italic;">"navigating to: #"</span> + current_hash);
+  
+  <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">If the hash is available to everyone, or if the user</span>
+  <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">is logged in, give them access</span>
+  <span style="font-weight: bold;">if</span> (unauth_available_hashes.indexOf(current_hash) &gt; -1  ||
+      is_logged_in()) {
+    navigate(current_hash);
+  }
+  <span style="font-weight: bold;">else</span> {
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">by default, if unauthorized, send to index page</span>
+    naviagte(<span style="font-style: italic;">"index"</span>);
+  }
+
+  <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">HACK: I don't know why this is needed for the first hash change.</span>
+  <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">Figure it out</span>
+  $(window).trigger(<span style="font-style: italic;">"hashchange"</span>);
+};
+</pre>
+</div>
+
+<p>
+All components that are part of our single page application go here
+</p>
+</div>
+</div>
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> User JS - Hide all containers</h2>
+<div class="outline-text-2" id="text-10">
+<div class="org-src-container">
+
+<pre class="src src-js" id="component_auxiliary"><span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">use to hide all containers before displaying another container</span>
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">hide_all_containers</span>() {
+  <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">TODO: consider refactoring to addClass in a loop</span>
+  $(<span style="font-style: italic;">'#get-all-users-container'</span>).addClass(<span style="font-style: italic;">"hidden"</span>);
+  $(<span style="font-style: italic;">'#add-user-container'</span>).addClass(<span style="font-style: italic;">"hidden"</span>);
+  $(<span style="font-style: italic;">'#delete-user-container'</span>).addClass(<span style="font-style: italic;">"hidden"</span>);
+  $(<span style="font-style: italic;">'#home-container'</span>).addClass(<span style="font-style: italic;">"hidden"</span>);
+  $(<span style="font-style: italic;">'#index-container'</span>).addClass(<span style="font-style: italic;">"hidden"</span>);
+  $(<span style="font-style: italic;">'#user-details-result-container'</span>).addClass(<span style="font-style: italic;">"hidden"</span>);
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> User Component - Get all Users</h2>
+<div class="outline-text-2" id="text-11">
+<div class="org-src-container">
+
+<pre class="src src-html" id="get_all_users_html">  &lt;<span style="font-weight: bold;">div</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"get-all-users-container"</span> <span style="font-weight: bold; font-style: italic;">class</span>=<span style="font-style: italic;">"hidden"</span>&gt;
+    &lt;<span style="font-weight: bold;">ul</span>&gt;
+      &lt;<span style="font-weight: bold;">li</span>&gt;
+        &lt;<span style="font-weight: bold;">label</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"get-all-users-error-box"</span> <span style="font-weight: bold; font-style: italic;">style</span>=<span style="font-style: italic;">"color: #FF5722"</span>&gt;&lt;/<span style="font-weight: bold;">label</span>&gt;
+        &lt;<span style="font-weight: bold;">label</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"get-all-users-info-box"</span> <span style="font-weight: bold; font-style: italic;">style</span>=<span style="font-style: italic;">"color: #26C6DA"</span>&gt;&lt;/<span style="font-weight: bold;">label</span>&gt;
+      &lt;/<span style="font-weight: bold;">li</span>&gt;
+    &lt;/<span style="font-weight: bold;">ul</span>&gt;
+    &lt;<span style="font-weight: bold;">ul</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"users-list"</span>&gt;
+    &lt;/<span style="font-weight: bold;">ul</span>&gt;
+    &lt;<span style="font-weight: bold;">button</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"window.location.hash='home'"</span>&gt; Home &lt;/<span style="font-weight: bold;">button</span>&gt;
+  &lt;/<span style="font-weight: bold;">div</span>&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-js" id="get_all_users_handler"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">make_li_for_user</span>(<span style="font-weight: bold; font-style: italic;">user</span>) {
+  console.dir(user);
+  
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">delete_button</span> =
+    <span style="font-style: italic;">"&lt;a style='margin-left: 1em' onclick=user_list_delete("</span> +
+    <span style="font-style: italic;">"'"</span> + user.email.val + <span style="font-style: italic;">"'"</span> +
+    <span style="font-style: italic;">")&gt; Delete User &lt;/a&gt;"</span>;
+
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">user_details_button</span> =
+    <span style="font-style: italic;">"&lt;a style='margin-left: 1em' onclick=get_user_details_handler("</span> +
+    <span style="font-style: italic;">"'"</span> + user.email.val + <span style="font-style: italic;">"'"</span> +
+    <span style="font-style: italic;">")&gt; User Details &lt;/a&gt;"</span>;
+
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">roles</span> = <span style="font-style: italic;">""</span>;
+
+  <span style="font-weight: bold;">for</span>(<span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0; i &lt; user.roles.length; i++) {
+    roles += user.roles[i].val;
+    roles += <span style="font-style: italic;">" "</span>;
+  }
+
+  <span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">match</span> = <span style="font-style: italic;">/\w+/</span>.exec(user.email.val);
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">id</span> = <span style="font-style: italic;">'user-details-'</span> + match[0];
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">details_ul</span> = <span style="font-style: italic;">"&lt;ul id="</span> + id + <span style="font-style: italic;">"&gt;&lt;/ul&gt;"</span>;
+
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">li</span> = $(<span style="font-style: italic;">"&lt;li style='margin-bottom: 50px' &gt;"</span> + <span style="font-style: italic;">"Name: "</span> +
+             user.name.val +
+             <span style="font-style: italic;">" | Email: "</span> +
+             user.email.val +
+             user_details_button + 
+             delete_button + 
+             details_ul + 
+             <span style="font-style: italic;">"&lt;/li&gt;"</span>
+            );
+  <span style="font-weight: bold;">return</span> li;
+}
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">user_list_delete</span>(<span style="font-weight: bold; font-style: italic;">email</span>) {
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">error_box</span> = $(<span style="font-style: italic;">"#get-all-users-error-box"</span>);
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">info_box</span> = $(<span style="font-style: italic;">"#get-all-users-info-box"</span>);
+
+  error_box.text(<span style="font-style: italic;">""</span>);
+  info_box.text(<span style="font-style: italic;">""</span>);
+  
+  API.delete_user(email, 
+                  <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">request</span>) {
+                    console.group(<span style="font-style: italic;">"user_list_delete"</span>);
+                    console.log(request);
+
+                    <span style="font-weight: bold;">if</span> (request.status === <span style="font-style: italic;">"failure"</span>) {
+                      error_box.text(request.msg);
+                    }
+
+                    <span style="font-weight: bold;">else</span> {
+                      info_box.text(<span style="font-style: italic;">"User "</span> + email + <span style="font-style: italic;">" successfully deleted"</span>);
+                      <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TODO: use client-side flash for this message</span>
+                      console.log(<span style="font-style: italic;">"User successfully deleted"</span>);
+                      <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">trigger page reload</span>
+                      <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">FIXME: currently forcing' page reload</span>
+                    }
+
+                    $(window).trigger(<span style="font-style: italic;">"hashchange"</span>);
+                    navigate(<span style="font-style: italic;">"get_all_users"</span>);
+                    console.groupEnd();
+                  }, 
+
+                  <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">request</span>) {
+                    $(<span style="font-style: italic;">"get-all-users-error-box"</span>).val(request.responseText);
+                  });
+};
+
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">get_all_users_handler</span>() {
+  hide_all_containers();
+
+  <span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">container</span> = $(<span style="font-style: italic;">'#get-all-users-container'</span>);
+  container.removeClass(<span style="font-style: italic;">"hidden"</span>);
+
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">error_box</span> = $(<span style="font-style: italic;">"#get-all-users-error-box"</span>);
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">info_box</span> = $(<span style="font-style: italic;">"#get-all-users-info-box"</span>);
+
+  error_box.text(<span style="font-style: italic;">""</span>);
+  info_box.text(<span style="font-style: italic;">""</span>);
+  
+  API.get_all_users(<span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">users</span>) {
+    console.group(<span style="font-style: italic;">"get_all_users callback"</span>);
+    console.dir(users);
+    <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">ul</span> = $(<span style="font-style: italic;">'#get-all-users-container #users-list'</span>);
+    ul.empty(); <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TODO: slower than removing nodes</span>
+    <span style="font-weight: bold;">for</span>(<span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0; i &lt; users.length; ++i) {
+      <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">user</span> = users[i];
+      <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">li</span> = make_li_for_user(user);
+      ul.append(li);
+    }
+    console.groupEnd();
+  });
+};
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> User Component - Add User</h2>
+<div class="outline-text-2" id="text-12">
+<div class="org-src-container">
+
+<pre class="src src-html" id="add_user_html">&lt;<span style="font-weight: bold;">div</span> <span style="font-weight: bold; font-style: italic;">id</span>='add-user-container'&gt;
+  &lt;<span style="font-weight: bold;">ul</span> <span style="font-weight: bold; font-style: italic;">class</span>=<span style="font-style: italic;">"no-bullets"</span>&gt;
+
+    &lt;<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">label</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"add-user-error-box"</span> <span style="font-weight: bold; font-style: italic;">style</span>=<span style="font-style: italic;">"color: #FF5722"</span>&gt;&lt;/<span style="font-weight: bold;">label</span>&gt;
+      &lt;<span style="font-weight: bold;">label</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"add-user-info-box"</span> <span style="font-weight: bold; font-style: italic;">style</span>=<span style="font-style: italic;">"color: #26C6DA"</span>&gt;&lt;/<span style="font-weight: bold;">label</span>&gt;
+    &lt;/<span style="font-weight: bold;">li</span>&gt;  
+    &lt;<span style="font-weight: bold;">li</span>&gt; 
+      &lt;<span style="font-weight: bold;">label</span>&gt; Name: &lt;/<span style="font-weight: bold;">label</span>&gt;
+      &lt;<span style="font-weight: bold;">input</span> <span style="font-weight: bold; font-style: italic;">type</span>=<span style="font-style: italic;">"text"</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"add-user-name"</span>&gt;&lt;/<span style="font-weight: bold;">input</span>&gt;
+    &lt;/<span style="font-weight: bold;">li</span>&gt;
+    &lt;<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">label</span>&gt; Email: &lt;/<span style="font-weight: bold;">label</span>&gt;
+      &lt;<span style="font-weight: bold;">input</span> <span style="font-weight: bold; font-style: italic;">type</span>=<span style="font-style: italic;">"text"</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"add-user-email"</span>&gt;&lt;/<span style="font-weight: bold;">input</span>&gt;
+    &lt;/<span style="font-weight: bold;">li</span>&gt;
+    &lt;<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">button</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"add-user-button"</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"add_user_callback()"</span>&gt; Add User &lt;/<span style="font-weight: bold;">button</span>&gt;
+    &lt;/<span style="font-weight: bold;">li</span>&gt;
+    
+    &lt;<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">button</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"window.location.hash='home'"</span>&gt; Go to Home &lt;/<span style="font-weight: bold;">button</span>&gt;
+    &lt;/<span style="font-weight: bold;">li</span>&gt;
+  &lt;/<span style="font-weight: bold;">ul</span>&gt;
+&lt;/<span style="font-weight: bold;">div</span>&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-js" id="add_user_handler"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">add_user_handler</span>() {
+      hide_all_containers();
+      
+      $(<span style="font-style: italic;">"#add-user-info-box"</span>).text(<span style="font-style: italic;">""</span>);
+      $(<span style="font-style: italic;">"#add-user-error-box"</span>).text(<span style="font-style: italic;">""</span>);
+      $(<span style="font-style: italic;">"#add-user-container"</span>).removeClass(<span style="font-style: italic;">"hidden"</span>);
+}
+  
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">add_user_callback</span>() {
+  console.log(<span style="font-style: italic;">"add user callback called"</span>);
+  
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">name</span> = $(<span style="font-style: italic;">'#add-user-name'</span>).val();
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">email</span> = $(<span style="font-style: italic;">'#add-user-email'</span>).val();
+  <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TODO: once the API is fixed, we don't need to send this over</span>
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">role_id</span> = <span style="font-style: italic;">"user"</span>;
+  
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">error_box</span> = $(<span style="font-style: italic;">"#add-user-error-box"</span>);
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">info_box</span> = $(<span style="font-style: italic;">"#add-user-info-box"</span>);
+  
+  error_box.text(<span style="font-style: italic;">""</span>);
+  info_box.text(<span style="font-style: italic;">""</span>);
+  
+  <span style="font-weight: bold;">if</span> (name === <span style="font-style: italic;">""</span>) {
+    error_box.text(<span style="font-style: italic;">"Please fill in name"</span>);
+    <span style="font-weight: bold;">return</span>;
+  }
+  <span style="font-weight: bold;">else</span> <span style="font-weight: bold;">if</span> (email === <span style="font-style: italic;">""</span>) {
+    error_box.text(<span style="font-style: italic;">"Please fill in email"</span>);
+    <span style="font-weight: bold;">return</span>;
+  }
+  
+  <span style="font-weight: bold;">function</span> <span style="font-weight: bold;">success_callback</span>(<span style="font-weight: bold; font-style: italic;">req</span>) {
+    console.log(req);
+    <span style="font-weight: bold;">if</span> (req.status === <span style="font-style: italic;">"failure"</span>) {
+      error_box.text(req.msg);
+    }
+    <span style="font-weight: bold;">else</span> {
+      info_box.text(<span style="font-style: italic;">"Success, user: "</span> + name + <span style="font-style: italic;">" added."</span>);
+    }
+  };
+  
+  <span style="font-weight: bold;">function</span> <span style="font-weight: bold;">error_callback</span>(<span style="font-weight: bold; font-style: italic;">request</span>) {
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TODO: once API returns JSON, pretty print the json</span>
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">let error_json = JSON.parse(request.responseText);</span>
+    error_box.text(request.responseText || <span style="font-style: italic;">'Unable to find error'</span>);
+  };
+
+  API.add_user(name,
+               email,
+               role_id,
+               success_callback,
+               error_callback);
+};
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13"><span class="section-number-2">13</span> User Component - Delete User</h2>
+<div class="outline-text-2" id="text-13">
+<div class="org-src-container">
+
+<pre class="src src-html" id="delete_user_html">&lt;<span style="font-weight: bold;">div</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"delete-user-container"</span> <span style="font-weight: bold; font-style: italic;">class</span>=<span style="font-style: italic;">"hidden"</span>&gt;
+  &lt;<span style="font-weight: bold;">h3</span>&gt;<span style="font-style: italic; text-decoration: underline;"> Delete User </span>&lt;/<span style="font-weight: bold;">h3</span>&gt;
+  &lt;<span style="font-weight: bold;">ul</span>&gt;    
+    &lt;<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">label</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"delete-user-error-box"</span> <span style="font-weight: bold; font-style: italic;">style</span>=<span style="font-style: italic;">"color: #FF5722"</span>&gt;&lt;/<span style="font-weight: bold;">label</span>&gt;
+      &lt;<span style="font-weight: bold;">label</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"delete-user-info-box"</span> <span style="font-weight: bold; font-style: italic;">style</span>=<span style="font-style: italic;">"color: #26C6DA"</span>&gt;&lt;/<span style="font-weight: bold;">label</span>&gt;
+    &lt;/<span style="font-weight: bold;">li</span>&gt;
+
+    &lt;<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">label</span>&gt; Email ID &lt;/<span style="font-weight: bold;">label</span>&gt;
+    &lt;/<span style="font-weight: bold;">li</span>&gt;
+    &lt;<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">input</span> <span style="font-weight: bold; font-style: italic;">type</span>=<span style="font-style: italic;">"text"</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"delete-user-email-id"</span>&gt; &lt;/<span style="font-weight: bold;">input</span>&gt;
+    &lt;/<span style="font-weight: bold;">li</span>&gt;
+    &lt;<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">button</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"delete_user_callback()"</span>&gt; Delete User &lt;/<span style="font-weight: bold;">button</span>&gt;
+    &lt;/<span style="font-weight: bold;">li</span>&gt;
+    &lt;<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">button</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"window.location.hash='home'"</span>&gt; Home &lt;/<span style="font-weight: bold;">button</span>&gt;
+    &lt;/<span style="font-weight: bold;">li</span>&gt;
+
+  &lt;/<span style="font-weight: bold;">ul</span>&gt;
+&lt;/<span style="font-weight: bold;">div</span>&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-js" id="delete_user_handler"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">delete_user_handler</span>() {
+  hide_all_containers();
+  
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">error_box</span> = $(<span style="font-style: italic;">"#delete-user-error-box"</span>);
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">info_box</span> = $(<span style="font-style: italic;">"#delete-user-info-box"</span>);
+  
+  error_box.text(<span style="font-style: italic;">""</span>);
+  info_box.text(<span style="font-style: italic;">""</span>);
+  
+  $(<span style="font-style: italic;">"#delete-user-container"</span>).removeClass(<span style="font-style: italic;">"hidden"</span>);
+}
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">delete_user_callback</span>() {
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">delete_email</span> = $(<span style="font-style: italic;">'#delete-user-email-id'</span>).val();
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">error_box</span> = $(<span style="font-style: italic;">"#delete-user-error-box"</span>);
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">info_box</span> =  $(<span style="font-style: italic;">"#delete-user-info-box"</span>);
+
+  error_box.text(<span style="font-style: italic;">""</span>);
+  info_box.text(<span style="font-style: italic;">""</span>);
+  
+  <span style="font-weight: bold;">if</span> (delete_email == <span style="font-style: italic;">""</span>) {
+    console.error(<span style="font-style: italic;">"delete email ID expected!"</span>);
+    error_box.text(<span style="font-style: italic;">"delete email ID expected"</span>);
+    <span style="font-weight: bold;">return</span>;
+  };
+
+  <span style="font-weight: bold;">function</span> <span style="font-weight: bold;">success_callback</span>(<span style="font-weight: bold; font-style: italic;">req</span>) {
+    console.log(req);
+    <span style="font-weight: bold;">if</span> (req.status === <span style="font-style: italic;">"failure"</span>) {
+      error_box.text(req.msg);
+    }
+    <span style="font-weight: bold;">else</span> {
+      info_box.text(delete_email + <span style="font-style: italic;">" deleted successfully"</span>);
+
+    }
+  };
+  
+  <span style="font-weight: bold;">function</span> <span style="font-weight: bold;">error_cb</span>(<span style="font-weight: bold; font-style: italic;">request</span>) {
+    console.group(<span style="font-style: italic;">"delete_user error callback"</span>);
+    console.dir(request);
+    <span style="font-weight: bold; font-style: italic;">/*</span>
+<span style="font-weight: bold; font-style: italic;">      let error_json = JSON.parse(request.responseText);</span>
+<span style="font-weight: bold; font-style: italic;">      console.dir(error_json);</span>
+<span style="font-weight: bold; font-style: italic;">    */</span>
+    
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TODO: once you recieve JSON, extract the error</span>
+    error_box.text(request.responseText);
+    console.groupEnd();
+  };
+
+  API.delete_user(delete_email, success_callback, error_cb);
+};
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-14" class="outline-2">
+<h2 id="sec-14"><span class="section-number-2">14</span> User Component - User Details</h2>
+<div class="outline-text-2" id="text-14">
+<div class="org-src-container">
+
+<pre class="src src-js" id="user_details_handler"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">make_li_for_user_details</span>(<span style="font-weight: bold; font-style: italic;">str</span>, <span style="font-weight: bold; font-style: italic;">value</span>) {
+  console.group(<span style="font-style: italic;">"make_li_for_user_details"</span>);
+  console.dir(str);
+  console.dir(value);
+
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">li</span> = $(<span style="font-style: italic;">"&lt;li style='margin-bottom: 50px' &gt;"</span> + str + <span style="font-style: italic;">": "</span> +
+             value + 
+             <span style="font-style: italic;">"&lt;/li&gt;"</span>
+            );
+  console.dir(li);
+  console.groupEnd();
+  <span style="font-weight: bold;">return</span> li;
+};
+
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">get_user_details_handler</span>(<span style="font-weight: bold; font-style: italic;">email</span>) {
+
+  <span style="font-weight: bold;">function</span> <span style="font-weight: bold;">details_success_cb</span>(<span style="font-weight: bold; font-style: italic;">user</span>) {
+    console.group(<span style="font-style: italic;">"get_all_users callback"</span>);
+    console.dir(user);
+
+    name = user.name.val;
+    email = user.email.val;
+    roles = user.roles;
+
+    <span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">match</span> = <span style="font-style: italic;">/\w+/</span>.exec(email);
+    id = <span style="font-style: italic;">'user-details-'</span> + match[0];
+    console.dir(<span style="font-style: italic;">'#get-all-users-container '</span> + <span style="font-style: italic;">'#'</span> + id);
+
+    <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">ul</span> = $(<span style="font-style: italic;">'#get-all-users-container '</span> + <span style="font-style: italic;">'#'</span> + id);
+
+    ul.empty();
+    ul.append(make_li_for_user_details(<span style="font-style: italic;">"Name"</span>, name));
+    ul.append(make_li_for_user_details(<span style="font-style: italic;">"Email"</span>, email));
+    <span style="font-weight: bold;">for</span>(<span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0; i &lt; roles.length; ++i) {
+      <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">role</span> = roles[i];
+      <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">li</span> = make_li_for_user_details(<span style="font-style: italic;">"Role"</span>, role.val);
+      ul.append(li);
+    };
+    console.groupEnd();
+  };
+
+  <span style="font-weight: bold;">function</span> <span style="font-weight: bold;">details_error_cb</span>(<span style="font-weight: bold; font-style: italic;">xhr</span>) {
+    console.log(<span style="font-style: italic;">"error"</span>);
+  };
+
+  API.get_user_details(email, details_success_cb, details_error_cb);
+
+};
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-15" class="outline-2">
+<h2 id="sec-15"><span class="section-number-2">15</span> User Component - Home</h2>
+<div class="outline-text-2" id="text-15">
+<div class="org-src-container">
+
+<pre class="src src-html" id="home_html">&lt;<span style="font-weight: bold;">div</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"home-container"</span>&gt;
+  &lt;<span style="font-weight: bold;">ul</span>&gt;
+    &lt;<span style="font-weight: bold;">li</span>&gt;&lt;<span style="font-weight: bold;">a</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"window.location.hash='add_user'"</span>&gt; Add User &lt;/<span style="font-weight: bold;">a</span>&gt;&lt;/<span style="font-weight: bold;">li</span>&gt;
+    &lt;<span style="font-weight: bold;">li</span>&gt;&lt;<span style="font-weight: bold;">a</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"window.location.hash='get_all_users'"</span>&gt; Get all users &lt;/<span style="font-weight: bold;">a</span>&gt;&lt;/<span style="font-weight: bold;">li</span>&gt;
+    &lt;<span style="font-weight: bold;">li</span>&gt;&lt;<span style="font-weight: bold;">a</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"window.location.hash='delete_user'"</span>&gt; Delete User &lt;/<span style="font-weight: bold;">a</span>&gt;&lt;/<span style="font-weight: bold;">li</span>&gt;
+    &lt;<span style="font-weight: bold;">li</span>&gt;&lt;<span style="font-weight: bold;">a</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"API.logout()"</span>&gt; Logout &lt;/<span style="font-weight: bold;">a</span>&gt;&lt;/<span style="font-weight: bold;">li</span>&gt;
+  &lt;/<span style="font-weight: bold;">ul</span>&gt;
+&lt;/<span style="font-weight: bold;">div</span>&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-js" id="home_handler"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">home_handler</span>() {
+  hide_all_containers();
+  $(<span style="font-style: italic;">'#home-container'</span>).removeClass(<span style="font-style: italic;">"hidden"</span>);
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-16" class="outline-2">
+<h2 id="sec-16"><span class="section-number-2">16</span> User Component - Index page</h2>
+<div class="outline-text-2" id="text-16">
+<div class="org-src-container">
+
+<pre class="src src-html" id="index_html">  &lt;<span style="font-weight: bold;">div</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"index-container"</span>&gt;
+    &lt;<span style="font-weight: bold;">ul</span>&gt;
+      &lt;<span style="font-weight: bold;">li</span>&gt;&lt;<span style="font-weight: bold;">a</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"login_onclick()""&gt; Login &lt;/a&gt;&lt;/li&gt;</span>
+<span style="font-style: italic;">    &lt;/ul&gt;</span>
+<span style="font-style: italic;">  &lt;/div&gt;</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-js" id="index_handler"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">index_handler</span>() {
+  hide_all_containers();
+  $(<span style="font-style: italic;">'#index-container'</span>).removeClass(<span style="font-style: italic;">"hidden"</span>);
+};
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">login_onclick</span>() {
+
+  <span style="font-weight: bold;">if</span> (is_logged_in()) {
+    current_hash = <span style="font-style: italic;">"home"</span>;
+  } <span style="font-weight: bold;">else</span> {
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TODO: make role customizable</span>
+    API.login();
+  }
+};
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-17" class="outline-2">
+<h2 id="sec-17"><span class="section-number-2">17</span> HTML: Consolidated</h2>
+<div class="outline-text-2" id="text-17">
+<p>
+We need to put the HTML files in a <code>templates</code> folder since we are returning the HTML file
+using <code>render_template</code> in flask. We will change this eventually to be served by our web server.
+</p>
+
+<p>
+Notice the <code>static/</code> in our URLs that is used to refer to our static files. We follow this convention
+so that when we are actually deploying this app, the static files can be served by apache/ngix/whatever
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-html">  &lt;<span style="font-weight: bold;">html</span>&gt;
+  &lt;<span style="font-weight: bold;">head</span>&gt;
+  
+  &lt;<span style="font-weight: bold;">script</span> <span style="font-weight: bold; font-style: italic;">src</span>=<span style="font-style: italic;">"static/js/jquery-3.1.1.min.js"</span>&gt;&lt;/<span style="font-weight: bold;">script</span>&gt;
+  &lt;<span style="font-weight: bold;">script</span> <span style="font-weight: bold; font-style: italic;">src</span>=<span style="font-style: italic;">"static/js/main.js"</span>&gt;&lt;/<span style="font-weight: bold;">script</span>&gt;
+  &lt;<span style="font-weight: bold;">link</span> <span style="font-weight: bold; font-style: italic;">rel</span>=<span style="font-style: italic;">"stylesheet"</span> <span style="font-weight: bold; font-style: italic;">href</span>=<span style="font-style: italic;">"static/css/main.css"</span> /&gt;
+  &lt;/<span style="font-weight: bold;">head</span>&gt;
+  &lt;<span style="font-weight: bold;">body</span>&gt;
+  &lt;<span style="font-weight: bold;">h1</span>&gt;<span style="font-weight: bold; text-decoration: underline;"> Hello World </span>&lt;/<span style="font-weight: bold;">h1</span>&gt;
+  
+    &lt;<span style="font-weight: bold;">div</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"get-all-users-container"</span> <span style="font-weight: bold; font-style: italic;">class</span>=<span style="font-style: italic;">"hidden"</span>&gt;
+      &lt;<span style="font-weight: bold;">ul</span>&gt;
+        &lt;<span style="font-weight: bold;">li</span>&gt;
+          &lt;<span style="font-weight: bold;">label</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"get-all-users-error-box"</span> <span style="font-weight: bold; font-style: italic;">style</span>=<span style="font-style: italic;">"color: #FF5722"</span>&gt;&lt;/<span style="font-weight: bold;">label</span>&gt;
+          &lt;<span style="font-weight: bold;">label</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"get-all-users-info-box"</span> <span style="font-weight: bold; font-style: italic;">style</span>=<span style="font-style: italic;">"color: #26C6DA"</span>&gt;&lt;/<span style="font-weight: bold;">label</span>&gt;
+        &lt;/<span style="font-weight: bold;">li</span>&gt;
+      &lt;/<span style="font-weight: bold;">ul</span>&gt;
+      &lt;<span style="font-weight: bold;">ul</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"users-list"</span>&gt;
+      &lt;/<span style="font-weight: bold;">ul</span>&gt;
+      &lt;<span style="font-weight: bold;">button</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"window.location.hash='home'"</span>&gt; Home &lt;/<span style="font-weight: bold;">button</span>&gt;
+    &lt;/<span style="font-weight: bold;">div</span>&gt;
+  
+  &lt;<span style="font-weight: bold;">div</span> <span style="font-weight: bold; font-style: italic;">id</span>='add-user-container'&gt;
+    &lt;<span style="font-weight: bold;">ul</span> <span style="font-weight: bold; font-style: italic;">class</span>=<span style="font-style: italic;">"no-bullets"</span>&gt;
+  
+      &lt;<span style="font-weight: bold;">li</span>&gt;
+        &lt;<span style="font-weight: bold;">label</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"add-user-error-box"</span> <span style="font-weight: bold; font-style: italic;">style</span>=<span style="font-style: italic;">"color: #FF5722"</span>&gt;&lt;/<span style="font-weight: bold;">label</span>&gt;
+        &lt;<span style="font-weight: bold;">label</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"add-user-info-box"</span> <span style="font-weight: bold; font-style: italic;">style</span>=<span style="font-style: italic;">"color: #26C6DA"</span>&gt;&lt;/<span style="font-weight: bold;">label</span>&gt;
+      &lt;/<span style="font-weight: bold;">li</span>&gt;  
+      &lt;<span style="font-weight: bold;">li</span>&gt; 
+        &lt;<span style="font-weight: bold;">label</span>&gt; Name: &lt;/<span style="font-weight: bold;">label</span>&gt;
+        &lt;<span style="font-weight: bold;">input</span> <span style="font-weight: bold; font-style: italic;">type</span>=<span style="font-style: italic;">"text"</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"add-user-name"</span>&gt;&lt;/<span style="font-weight: bold;">input</span>&gt;
+      &lt;/<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">li</span>&gt;
+        &lt;<span style="font-weight: bold;">label</span>&gt; Email: &lt;/<span style="font-weight: bold;">label</span>&gt;
+        &lt;<span style="font-weight: bold;">input</span> <span style="font-weight: bold; font-style: italic;">type</span>=<span style="font-style: italic;">"text"</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"add-user-email"</span>&gt;&lt;/<span style="font-weight: bold;">input</span>&gt;
+      &lt;/<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">li</span>&gt;
+        &lt;<span style="font-weight: bold;">button</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"add-user-button"</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"add_user_callback()"</span>&gt; Add User &lt;/<span style="font-weight: bold;">button</span>&gt;
+      &lt;/<span style="font-weight: bold;">li</span>&gt;
+      
+      &lt;<span style="font-weight: bold;">li</span>&gt;
+        &lt;<span style="font-weight: bold;">button</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"window.location.hash='home'"</span>&gt; Go to Home &lt;/<span style="font-weight: bold;">button</span>&gt;
+      &lt;/<span style="font-weight: bold;">li</span>&gt;
+    &lt;/<span style="font-weight: bold;">ul</span>&gt;
+  &lt;/<span style="font-weight: bold;">div</span>&gt;
+  
+  &lt;<span style="font-weight: bold;">div</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"delete-user-container"</span> <span style="font-weight: bold; font-style: italic;">class</span>=<span style="font-style: italic;">"hidden"</span>&gt;
+    &lt;<span style="font-weight: bold;">h3</span>&gt;<span style="font-style: italic; text-decoration: underline;"> Delete User </span>&lt;/<span style="font-weight: bold;">h3</span>&gt;
+    &lt;<span style="font-weight: bold;">ul</span>&gt;    
+      &lt;<span style="font-weight: bold;">li</span>&gt;
+        &lt;<span style="font-weight: bold;">label</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"delete-user-error-box"</span> <span style="font-weight: bold; font-style: italic;">style</span>=<span style="font-style: italic;">"color: #FF5722"</span>&gt;&lt;/<span style="font-weight: bold;">label</span>&gt;
+        &lt;<span style="font-weight: bold;">label</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"delete-user-info-box"</span> <span style="font-weight: bold; font-style: italic;">style</span>=<span style="font-style: italic;">"color: #26C6DA"</span>&gt;&lt;/<span style="font-weight: bold;">label</span>&gt;
+      &lt;/<span style="font-weight: bold;">li</span>&gt;
+  
+      &lt;<span style="font-weight: bold;">li</span>&gt;
+        &lt;<span style="font-weight: bold;">label</span>&gt; Email ID &lt;/<span style="font-weight: bold;">label</span>&gt;
+      &lt;/<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">li</span>&gt;
+        &lt;<span style="font-weight: bold;">input</span> <span style="font-weight: bold; font-style: italic;">type</span>=<span style="font-style: italic;">"text"</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"delete-user-email-id"</span>&gt; &lt;/<span style="font-weight: bold;">input</span>&gt;
+      &lt;/<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">li</span>&gt;
+        &lt;<span style="font-weight: bold;">button</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"delete_user_callback()"</span>&gt; Delete User &lt;/<span style="font-weight: bold;">button</span>&gt;
+      &lt;/<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">li</span>&gt;
+        &lt;<span style="font-weight: bold;">button</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"window.location.hash='home'"</span>&gt; Home &lt;/<span style="font-weight: bold;">button</span>&gt;
+      &lt;/<span style="font-weight: bold;">li</span>&gt;
+  
+    &lt;/<span style="font-weight: bold;">ul</span>&gt;
+  &lt;/<span style="font-weight: bold;">div</span>&gt;
+  
+  &lt;<span style="font-weight: bold;">div</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"home-container"</span>&gt;
+    &lt;<span style="font-weight: bold;">ul</span>&gt;
+      &lt;<span style="font-weight: bold;">li</span>&gt;&lt;<span style="font-weight: bold;">a</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"window.location.hash='add_user'"</span>&gt; Add User &lt;/<span style="font-weight: bold;">a</span>&gt;&lt;/<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">li</span>&gt;&lt;<span style="font-weight: bold;">a</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"window.location.hash='get_all_users'"</span>&gt; Get all users &lt;/<span style="font-weight: bold;">a</span>&gt;&lt;/<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">li</span>&gt;&lt;<span style="font-weight: bold;">a</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"window.location.hash='delete_user'"</span>&gt; Delete User &lt;/<span style="font-weight: bold;">a</span>&gt;&lt;/<span style="font-weight: bold;">li</span>&gt;
+      &lt;<span style="font-weight: bold;">li</span>&gt;&lt;<span style="font-weight: bold;">a</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"API.logout()"</span>&gt; Logout &lt;/<span style="font-weight: bold;">a</span>&gt;&lt;/<span style="font-weight: bold;">li</span>&gt;
+    &lt;/<span style="font-weight: bold;">ul</span>&gt;
+  &lt;/<span style="font-weight: bold;">div</span>&gt;
+    &lt;<span style="font-weight: bold;">div</span> <span style="font-weight: bold; font-style: italic;">id</span>=<span style="font-style: italic;">"index-container"</span>&gt;
+      &lt;<span style="font-weight: bold;">ul</span>&gt;
+        &lt;<span style="font-weight: bold;">li</span>&gt;&lt;<span style="font-weight: bold;">a</span> <span style="font-weight: bold; font-style: italic;">onclick</span>=<span style="font-style: italic;">"login_onclick()""&gt; Login &lt;/a&gt;&lt;/li&gt;</span>
+<span style="font-style: italic;">      &lt;/ul&gt;</span>
+<span style="font-style: italic;">    &lt;/div&gt;</span>
+<span style="font-style: italic;">  </span>
+<span style="font-style: italic;">  &lt;/body&gt;</span>
+<span style="font-style: italic;">  &lt;/html&gt;</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-18" class="outline-2">
+<h2 id="sec-18"><span class="section-number-2">18</span> CSS : Consolidated</h2>
+<div class="outline-text-2" id="text-18">
+<div class="org-src-container">
+
+<pre class="src src-css">  <span style="font-weight: bold;">body </span>{
+      <span style="font-weight: bold; font-style: italic;">background-color</span>: #EFEFEF;
+      <span style="font-weight: bold; font-style: italic;">padding-left</span>: 80px;
+      <span style="font-weight: bold; font-style: italic;">padding-right</span>: 80px;
+      <span style="font-weight: bold; font-style: italic;">padding-top</span>: 20px;
+      <span style="font-weight: bold; font-style: italic;">font-family</span>: monospace;
+  }
+  
+  <span style="font-weight: bold;">input, ul, button, label </span>{
+      <span style="font-weight: bold; font-style: italic;">font-size</span>: 1.2em;
+      <span style="font-weight: bold; font-style: italic;">font-family</span>: <span style="font-style: italic;">"Droid Sans"</span>, Sans-Serif;
+  }
+  
+  <span style="font-weight: bold;">ul </span>{
+      <span style="font-weight: bold; font-style: italic;">list-style-type</span>: none;
+  }
+  
+  <span style="font-weight: bold;">ul li </span>{
+      <span style="font-weight: bold; font-style: italic;">margin-bottom</span>: 1em;
+  }
+  
+  <span style="font-weight: bold;">#add-user-container </span>{
+      <span style="font-weight: bold; font-style: italic;">max-width</span>: 500px;
+  }
+  <span style="font-weight: bold;">.hidden </span>{
+      <span style="font-weight: bold; font-style: italic;">display</span>: none;
+  }
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-19" class="outline-2">
+<h2 id="sec-19"><span class="section-number-2">19</span> JS: Consolidated</h2>
+<div class="outline-text-2" id="text-19">
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">***System code***</span>
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">post_json</span>(<span style="font-weight: bold; font-style: italic;">url</span>, <span style="font-weight: bold; font-style: italic;">data</span>, <span style="font-weight: bold; font-style: italic;">callback</span>, <span style="font-weight: bold; font-style: italic;">error_callback</span>) {
+  $.ajax({
+    url: url,
+    type: <span style="font-style: italic;">"POST"</span>,
+    data: JSON.stringify(data),
+    contentType: <span style="font-style: italic;">"application/json; charset=utf-8"</span>,
+    success: callback,
+    <span style="font-weight: bold;">error</span>: <span style="font-weight: bold;">function</span> (<span style="font-weight: bold; font-style: italic;">request</span>, <span style="font-weight: bold; font-style: italic;">status</span>, <span style="font-weight: bold; font-style: italic;">error</span>) {
+      console.log(<span style="font-style: italic;">"error on: "</span> + url + 
+                  <span style="font-style: italic;">"\n|data: "</span> + data  + 
+                  <span style="font-style: italic;">"\n|RESPONSE: "</span> + request.responseText + 
+                  <span style="font-style: italic;">"\n| status: "</span> + status + 
+                  <span style="font-style: italic;">"\n| error: "</span> + error);
+      <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TODO: figure out which one of this is "semantically correct"</span>
+      <span style="font-weight: bold;">if</span> (error_callback != <span style="font-weight: bold; text-decoration: underline;">null</span> &amp;&amp; error_callback != <span style="font-weight: bold; text-decoration: underline;">undefined</span> &amp;&amp; error_callback) {
+        error_callback(request, status, error);
+      }
+    }
+  });
+};
+
+<span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">MockAPI</span> = {
+  users: [],
+    <span style="font-weight: bold;">add_user</span>: <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">name</span>, <span style="font-weight: bold; font-style: italic;">email</span>, <span style="font-weight: bold; font-style: italic;">cb</span>) {
+        <span style="font-weight: bold; text-decoration: underline;">this</span>.users.push({name: name, email: email});
+    },
+<span style="font-weight: bold;">get_all_users</span>: <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">cb</span>) {
+    cb(<span style="font-weight: bold; text-decoration: underline;">this</span>.users);
+}
+};
+<span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">RestAPI</span> = {
+  <span style="font-weight: bold;">get_user_details</span>: <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">email</span>, <span style="font-weight: bold; font-style: italic;">success_cb</span>, <span style="font-weight: bold; font-style: italic;">error_cb</span>) {
+    $.ajax({
+      url: <span style="font-style: italic;">'/show_user_details'</span>,
+      type: <span style="font-style: italic;">'GET'</span>,
+      data: {
+        email: email
+      },
+      success: success_cb,
+      error: error_cb
+    });
+  },
+
+  <span style="font-weight: bold;">delete_user</span>: <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">email</span>, <span style="font-weight: bold; font-style: italic;">success_cb</span>, <span style="font-weight: bold; font-style: italic;">error_cb</span>) {
+    $.ajax({
+      url: <span style="font-style: italic;">'/del_user/'</span> + email,
+      type: <span style="font-style: italic;">'DELETE'</span>,
+      success: success_cb,
+      error: error_cb
+    });
+  },
+
+  <span style="font-weight: bold;">add_user</span>: <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">name</span>, <span style="font-weight: bold; font-style: italic;">email</span>, <span style="font-weight: bold; font-style: italic;">role</span>, <span style="font-weight: bold; font-style: italic;">success_cb</span>, <span style="font-weight: bold; font-style: italic;">error_cb</span>) {
+    post_json(<span style="font-style: italic;">"/add_user"</span>,
+              {name: name, email: email, role: role},
+              success_cb,
+              error_cb);
+  },
+
+  <span style="font-weight: bold;">get_all_users</span>: <span style="font-weight: bold;">function</span> (<span style="font-weight: bold; font-style: italic;">cb</span>) {
+    $.get(<span style="font-style: italic;">"/show_users"</span>,
+          <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">data</span>) { console.log(data); cb(data) });
+  },
+
+  <span style="font-weight: bold;">login</span>: <span style="font-weight: bold;">function</span>() {
+    window.location.href = <span style="font-style: italic;">"/login"</span>
+  },
+
+  <span style="font-weight: bold;">logout</span>: <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">role</span>, <span style="font-weight: bold; font-style: italic;">success_cb</span>, <span style="font-weight: bold; font-style: italic;">failure_cb</span>) {
+    window.location.href = <span style="font-style: italic;">"/logout"</span>;
+  }
+
+};
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">navigate</span>(<span style="font-weight: bold; font-style: italic;">path</span>) {
+  <span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">current</span> = window.location.href;
+  window.location.href = current.replace(<span style="font-style: italic;">/#(.*)$/</span>, <span style="font-style: italic;">''</span>) + <span style="font-style: italic;">'#'</span> + path;
+};
+
+<span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">strip # from window.location.hash</span>
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">get_window_hash_path</span>() {
+  <span style="font-weight: bold;">return</span> location.hash.substring(1);
+};
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">register_onhashchange_handlers</span>(<span style="font-weight: bold; font-style: italic;">handler_functions</span>) {
+  $(window).on(<span style="font-style: italic;">"hashchange"</span>, <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">e</span>) {
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">strip hash out</span>
+    hash_path = get_window_hash_path();
+    console.log(<span style="font-style: italic;">"new hash: "</span>, hash_path);
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">we use hasOwnProperty since we need to check if a handler is </span>
+    <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">defined for the hash_path</span>
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">object has it, not its parents (in the prototype chain)</span>
+    <span style="font-weight: bold;">if</span> (handler_functions.hasOwnProperty(hash_path)) {
+      <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">invoke said handler function</span>
+      handler_functions[hash_path]();
+    } <span style="font-weight: bold;">else</span> {
+      console.warn(<span style="font-style: italic;">`no handler for ${hash_path}`</span>);
+    }
+  });
+};
+
+
+<span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">***User code***</span>
+
+<span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">API</span> = RestAPI;
+
+
+<span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">use to hide all containers before displaying another container</span>
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">hide_all_containers</span>() {
+  <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">TODO: consider refactoring to addClass in a loop</span>
+  $(<span style="font-style: italic;">'#get-all-users-container'</span>).addClass(<span style="font-style: italic;">"hidden"</span>);
+  $(<span style="font-style: italic;">'#add-user-container'</span>).addClass(<span style="font-style: italic;">"hidden"</span>);
+  $(<span style="font-style: italic;">'#delete-user-container'</span>).addClass(<span style="font-style: italic;">"hidden"</span>);
+  $(<span style="font-style: italic;">'#home-container'</span>).addClass(<span style="font-style: italic;">"hidden"</span>);
+  $(<span style="font-style: italic;">'#index-container'</span>).addClass(<span style="font-style: italic;">"hidden"</span>);
+  $(<span style="font-style: italic;">'#user-details-result-container'</span>).addClass(<span style="font-style: italic;">"hidden"</span>);
+}
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">make_li_for_user</span>(<span style="font-weight: bold; font-style: italic;">user</span>) {
+  console.dir(user);
+  
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">delete_button</span> =
+    <span style="font-style: italic;">"&lt;a style='margin-left: 1em' onclick=user_list_delete("</span> +
+    <span style="font-style: italic;">"'"</span> + user.email.val + <span style="font-style: italic;">"'"</span> +
+    <span style="font-style: italic;">")&gt; Delete User &lt;/a&gt;"</span>;
+
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">user_details_button</span> =
+    <span style="font-style: italic;">"&lt;a style='margin-left: 1em' onclick=get_user_details_handler("</span> +
+    <span style="font-style: italic;">"'"</span> + user.email.val + <span style="font-style: italic;">"'"</span> +
+    <span style="font-style: italic;">")&gt; User Details &lt;/a&gt;"</span>;
+
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">roles</span> = <span style="font-style: italic;">""</span>;
+
+  <span style="font-weight: bold;">for</span>(<span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0; i &lt; user.roles.length; i++) {
+    roles += user.roles[i].val;
+    roles += <span style="font-style: italic;">" "</span>;
+  }
+
+  <span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">match</span> = <span style="font-style: italic;">/\w+/</span>.exec(user.email.val);
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">id</span> = <span style="font-style: italic;">'user-details-'</span> + match[0];
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">details_ul</span> = <span style="font-style: italic;">"&lt;ul id="</span> + id + <span style="font-style: italic;">"&gt;&lt;/ul&gt;"</span>;
+
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">li</span> = $(<span style="font-style: italic;">"&lt;li style='margin-bottom: 50px' &gt;"</span> + <span style="font-style: italic;">"Name: "</span> +
+             user.name.val +
+             <span style="font-style: italic;">" | Email: "</span> +
+             user.email.val +
+             user_details_button + 
+             delete_button + 
+             details_ul + 
+             <span style="font-style: italic;">"&lt;/li&gt;"</span>
+            );
+  <span style="font-weight: bold;">return</span> li;
+}
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">user_list_delete</span>(<span style="font-weight: bold; font-style: italic;">email</span>) {
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">error_box</span> = $(<span style="font-style: italic;">"#get-all-users-error-box"</span>);
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">info_box</span> = $(<span style="font-style: italic;">"#get-all-users-info-box"</span>);
+
+  error_box.text(<span style="font-style: italic;">""</span>);
+  info_box.text(<span style="font-style: italic;">""</span>);
+  
+  API.delete_user(email, 
+                  <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">request</span>) {
+                    console.group(<span style="font-style: italic;">"user_list_delete"</span>);
+                    console.log(request);
+
+                    <span style="font-weight: bold;">if</span> (request.status === <span style="font-style: italic;">"failure"</span>) {
+                      error_box.text(request.msg);
+                    }
+
+                    <span style="font-weight: bold;">else</span> {
+                      info_box.text(<span style="font-style: italic;">"User "</span> + email + <span style="font-style: italic;">" successfully deleted"</span>);
+                      <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TODO: use client-side flash for this message</span>
+                      console.log(<span style="font-style: italic;">"User successfully deleted"</span>);
+                      <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">trigger page reload</span>
+                      <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">FIXME: currently forcing' page reload</span>
+                    }
+
+                    $(window).trigger(<span style="font-style: italic;">"hashchange"</span>);
+                    navigate(<span style="font-style: italic;">"get_all_users"</span>);
+                    console.groupEnd();
+                  }, 
+
+                  <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">request</span>) {
+                    $(<span style="font-style: italic;">"get-all-users-error-box"</span>).val(request.responseText);
+                  });
+};
+
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">get_all_users_handler</span>() {
+  hide_all_containers();
+
+  <span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">container</span> = $(<span style="font-style: italic;">'#get-all-users-container'</span>);
+  container.removeClass(<span style="font-style: italic;">"hidden"</span>);
+
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">error_box</span> = $(<span style="font-style: italic;">"#get-all-users-error-box"</span>);
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">info_box</span> = $(<span style="font-style: italic;">"#get-all-users-info-box"</span>);
+
+  error_box.text(<span style="font-style: italic;">""</span>);
+  info_box.text(<span style="font-style: italic;">""</span>);
+  
+  API.get_all_users(<span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">users</span>) {
+    console.group(<span style="font-style: italic;">"get_all_users callback"</span>);
+    console.dir(users);
+    <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">ul</span> = $(<span style="font-style: italic;">'#get-all-users-container #users-list'</span>);
+    ul.empty(); <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TODO: slower than removing nodes</span>
+    <span style="font-weight: bold;">for</span>(<span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0; i &lt; users.length; ++i) {
+      <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">user</span> = users[i];
+      <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">li</span> = make_li_for_user(user);
+      ul.append(li);
+    }
+    console.groupEnd();
+  });
+};
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">add_user_handler</span>() {
+      hide_all_containers();
+      
+      $(<span style="font-style: italic;">"#add-user-info-box"</span>).text(<span style="font-style: italic;">""</span>);
+      $(<span style="font-style: italic;">"#add-user-error-box"</span>).text(<span style="font-style: italic;">""</span>);
+      $(<span style="font-style: italic;">"#add-user-container"</span>).removeClass(<span style="font-style: italic;">"hidden"</span>);
+}
+  
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">add_user_callback</span>() {
+  console.log(<span style="font-style: italic;">"add user callback called"</span>);
+  
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">name</span> = $(<span style="font-style: italic;">'#add-user-name'</span>).val();
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">email</span> = $(<span style="font-style: italic;">'#add-user-email'</span>).val();
+  <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TODO: once the API is fixed, we don't need to send this over</span>
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">role_id</span> = <span style="font-style: italic;">"user"</span>;
+  
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">error_box</span> = $(<span style="font-style: italic;">"#add-user-error-box"</span>);
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">info_box</span> = $(<span style="font-style: italic;">"#add-user-info-box"</span>);
+  
+  error_box.text(<span style="font-style: italic;">""</span>);
+  info_box.text(<span style="font-style: italic;">""</span>);
+  
+  <span style="font-weight: bold;">if</span> (name === <span style="font-style: italic;">""</span>) {
+    error_box.text(<span style="font-style: italic;">"Please fill in name"</span>);
+    <span style="font-weight: bold;">return</span>;
+  }
+  <span style="font-weight: bold;">else</span> <span style="font-weight: bold;">if</span> (email === <span style="font-style: italic;">""</span>) {
+    error_box.text(<span style="font-style: italic;">"Please fill in email"</span>);
+    <span style="font-weight: bold;">return</span>;
+  }
+  
+  <span style="font-weight: bold;">function</span> <span style="font-weight: bold;">success_callback</span>(<span style="font-weight: bold; font-style: italic;">req</span>) {
+    console.log(req);
+    <span style="font-weight: bold;">if</span> (req.status === <span style="font-style: italic;">"failure"</span>) {
+      error_box.text(req.msg);
+    }
+    <span style="font-weight: bold;">else</span> {
+      info_box.text(<span style="font-style: italic;">"Success, user: "</span> + name + <span style="font-style: italic;">" added."</span>);
+    }
+  };
+  
+  <span style="font-weight: bold;">function</span> <span style="font-weight: bold;">error_callback</span>(<span style="font-weight: bold; font-style: italic;">request</span>) {
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TODO: once API returns JSON, pretty print the json</span>
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">let error_json = JSON.parse(request.responseText);</span>
+    error_box.text(request.responseText || <span style="font-style: italic;">'Unable to find error'</span>);
+  };
+
+  API.add_user(name,
+               email,
+               role_id,
+               success_callback,
+               error_callback);
+};
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">home_handler</span>() {
+  hide_all_containers();
+  $(<span style="font-style: italic;">'#home-container'</span>).removeClass(<span style="font-style: italic;">"hidden"</span>);
+}
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">index_handler</span>() {
+  hide_all_containers();
+  $(<span style="font-style: italic;">'#index-container'</span>).removeClass(<span style="font-style: italic;">"hidden"</span>);
+};
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">login_onclick</span>() {
+
+  <span style="font-weight: bold;">if</span> (is_logged_in()) {
+    current_hash = <span style="font-style: italic;">"home"</span>;
+  } <span style="font-weight: bold;">else</span> {
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TODO: make role customizable</span>
+    API.login();
+  }
+};
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">delete_user_handler</span>() {
+  hide_all_containers();
+  
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">error_box</span> = $(<span style="font-style: italic;">"#delete-user-error-box"</span>);
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">info_box</span> = $(<span style="font-style: italic;">"#delete-user-info-box"</span>);
+  
+  error_box.text(<span style="font-style: italic;">""</span>);
+  info_box.text(<span style="font-style: italic;">""</span>);
+  
+  $(<span style="font-style: italic;">"#delete-user-container"</span>).removeClass(<span style="font-style: italic;">"hidden"</span>);
+}
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">delete_user_callback</span>() {
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">delete_email</span> = $(<span style="font-style: italic;">'#delete-user-email-id'</span>).val();
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">error_box</span> = $(<span style="font-style: italic;">"#delete-user-error-box"</span>);
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">info_box</span> =  $(<span style="font-style: italic;">"#delete-user-info-box"</span>);
+
+  error_box.text(<span style="font-style: italic;">""</span>);
+  info_box.text(<span style="font-style: italic;">""</span>);
+  
+  <span style="font-weight: bold;">if</span> (delete_email == <span style="font-style: italic;">""</span>) {
+    console.error(<span style="font-style: italic;">"delete email ID expected!"</span>);
+    error_box.text(<span style="font-style: italic;">"delete email ID expected"</span>);
+    <span style="font-weight: bold;">return</span>;
+  };
+
+  <span style="font-weight: bold;">function</span> <span style="font-weight: bold;">success_callback</span>(<span style="font-weight: bold; font-style: italic;">req</span>) {
+    console.log(req);
+    <span style="font-weight: bold;">if</span> (req.status === <span style="font-style: italic;">"failure"</span>) {
+      error_box.text(req.msg);
+    }
+    <span style="font-weight: bold;">else</span> {
+      info_box.text(delete_email + <span style="font-style: italic;">" deleted successfully"</span>);
+
+    }
+  };
+  
+  <span style="font-weight: bold;">function</span> <span style="font-weight: bold;">error_cb</span>(<span style="font-weight: bold; font-style: italic;">request</span>) {
+    console.group(<span style="font-style: italic;">"delete_user error callback"</span>);
+    console.dir(request);
+    <span style="font-weight: bold; font-style: italic;">/*</span>
+<span style="font-weight: bold; font-style: italic;">      let error_json = JSON.parse(request.responseText);</span>
+<span style="font-weight: bold; font-style: italic;">      console.dir(error_json);</span>
+<span style="font-weight: bold; font-style: italic;">    */</span>
+    
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TODO: once you recieve JSON, extract the error</span>
+    error_box.text(request.responseText);
+    console.groupEnd();
+  };
+
+  API.delete_user(delete_email, success_callback, error_cb);
+};
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">make_li_for_user_details</span>(<span style="font-weight: bold; font-style: italic;">str</span>, <span style="font-weight: bold; font-style: italic;">value</span>) {
+  console.group(<span style="font-style: italic;">"make_li_for_user_details"</span>);
+  console.dir(str);
+  console.dir(value);
+
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">li</span> = $(<span style="font-style: italic;">"&lt;li style='margin-bottom: 50px' &gt;"</span> + str + <span style="font-style: italic;">": "</span> +
+             value + 
+             <span style="font-style: italic;">"&lt;/li&gt;"</span>
+            );
+  console.dir(li);
+  console.groupEnd();
+  <span style="font-weight: bold;">return</span> li;
+};
+
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">get_user_details_handler</span>(<span style="font-weight: bold; font-style: italic;">email</span>) {
+
+  <span style="font-weight: bold;">function</span> <span style="font-weight: bold;">details_success_cb</span>(<span style="font-weight: bold; font-style: italic;">user</span>) {
+    console.group(<span style="font-style: italic;">"get_all_users callback"</span>);
+    console.dir(user);
+
+    name = user.name.val;
+    email = user.email.val;
+    roles = user.roles;
+
+    <span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">match</span> = <span style="font-style: italic;">/\w+/</span>.exec(email);
+    id = <span style="font-style: italic;">'user-details-'</span> + match[0];
+    console.dir(<span style="font-style: italic;">'#get-all-users-container '</span> + <span style="font-style: italic;">'#'</span> + id);
+
+    <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">ul</span> = $(<span style="font-style: italic;">'#get-all-users-container '</span> + <span style="font-style: italic;">'#'</span> + id);
+
+    ul.empty();
+    ul.append(make_li_for_user_details(<span style="font-style: italic;">"Name"</span>, name));
+    ul.append(make_li_for_user_details(<span style="font-style: italic;">"Email"</span>, email));
+    <span style="font-weight: bold;">for</span>(<span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0; i &lt; roles.length; ++i) {
+      <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">role</span> = roles[i];
+      <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">li</span> = make_li_for_user_details(<span style="font-style: italic;">"Role"</span>, role.val);
+      ul.append(li);
+    };
+    console.groupEnd();
+  };
+
+  <span style="font-weight: bold;">function</span> <span style="font-weight: bold;">details_error_cb</span>(<span style="font-weight: bold; font-style: italic;">xhr</span>) {
+    console.log(<span style="font-style: italic;">"error"</span>);
+  };
+
+  API.get_user_details(email, details_success_cb, details_error_cb);
+
+};
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">is_logged_in</span>() {
+  <span style="font-weight: bold;">return</span> document.cookie.indexOf(<span style="font-style: italic;">"session"</span>) != -1;
+}
+
+window.onload = <span style="font-weight: bold;">function</span>() {
+  register_onhashchange_handlers({
+    index: index_handler,
+    get_all_users: get_all_users_handler,
+    add_user: add_user_handler,
+    home: home_handler,
+    delete_user: delete_user_handler});
+  
+  <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">Hashes available when not logged in (authorized)</span>
+  <span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">unauth_available_hashes</span> = [<span style="font-style: italic;">"index"</span>];
+
+  <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TODO: figure out why this does not trigger onhashchange</span>
+  <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">TRIAL: check if preventing race condition helps</span>
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">current_hash</span> = get_window_hash_path();
+  <span style="font-weight: bold;">if</span> (current_hash === <span style="font-style: italic;">""</span>) {
+    console.log(<span style="font-style: italic;">"defaulting #url to get_all_users"</span>);
+    
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">send logged in users to home, others to index</span>
+    <span style="font-weight: bold;">if</span> (is_logged_in()) {
+      current_hash = <span style="font-style: italic;">"home"</span>;
+    }
+    <span style="font-weight: bold;">else</span> {
+      current_hash = <span style="font-style: italic;">"index"</span>;
+    }
+  }
+
+  console.log(<span style="font-style: italic;">"navigating to: #"</span> + current_hash);
+  
+  <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">If the hash is available to everyone, or if the user</span>
+  <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">is logged in, give them access</span>
+  <span style="font-weight: bold;">if</span> (unauth_available_hashes.indexOf(current_hash) &gt; -1  ||
+      is_logged_in()) {
+    navigate(current_hash);
+  }
+  <span style="font-weight: bold;">else</span> {
+    <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">by default, if unauthorized, send to index page</span>
+    naviagte(<span style="font-style: italic;">"index"</span>);
+  }
+
+  <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">HACK: I don't know why this is needed for the first hash change.</span>
+  <span style="font-weight: bold; font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">Figure it out</span>
+  $(window).trigger(<span style="font-style: italic;">"hashchange"</span>);
+};
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2017-02-06 Mon]</span></span></p>
+<p class="author">Author: VLEAD</p>
+<p class="date">Created: 2017-04-26 Wed 22:27</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Type Predicates and Checks</title>
+<!-- 2017-04-26 Wed 22:27 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="VLEAD" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../../style/css/worg-style.css" />
+<link rel="stylesheet" type="text/css" href="../../style/css/override.css" />
+<link rel="icon" type="image/png" href="../../style/img/favicon/popl.png" />
+<script type="text/javascript" src="../../style/js/org-info.js">
+/**
+ *
+ * @source: ../../style/js/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in ../../style/js/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in ../../style/js/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "1");
+org_html_manager.set("LINK_HOME", "../../index.html");
+org_html_manager.set("LINK_UP", "../index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../../index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Type Predicates and Checks</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Introduction</a></li>
+<li><a href="#sec-2">2. Type predicates</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Instance predicate</a>
+<ul>
+<li><a href="#sec-2-1-1">2.1.1. Test Instance predicate</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-2">2.2. Alphabetic string predicate</a></li>
+<li><a href="#sec-2-3">2.3. Email string predicate</a></li>
+<li><a href="#sec-2-4">2.4. Date predicate</a></li>
+<li><a href="#sec-2-5">2.5. None predicate</a></li>
+<li><a href="#sec-2-6">2.6. Helper Function</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Checks</a>
+<ul>
+<li><a href="#sec-3-1">3.1. <code>check_pred</code></a>
+<ul>
+<li><a href="#sec-3-1-1">3.1.1. Tests for <code>check_pred</code></a></li>
+<li><a href="#sec-3-1-2">3.1.2. Tests for check_alphabetic_str</a></li>
+<li><a href="#sec-3-1-3">3.1.3. Few more tests on check_alphabetic_str</a></li>
+<li><a href="#sec-3-1-4">3.1.4. Tests for check_email_str</a></li>
+<li><a href="#sec-3-1-5">3.1.5. Tests for check_string</a></li>
+<li><a href="#sec-3-1-6">3.1.6. Tests for check_date</a></li>
+<li><a href="#sec-3-1-7">3.1.7. Tests for check_int</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-2">3.2. <code>check_inst</code></a>
+<ul>
+<li><a href="#sec-3-2-1">3.2.1. Tests</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-3">3.3. <code>check_inv</code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This module defines basic type predicates and type checks. 
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Type predicates</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+A type predicate is a function that takes one argument and
+returns a boolean.
+</p>
+</div>
+
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Instance predicate</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+An instance predicate checks if the argument is in an
+instance of a class.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="def_is_inst"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">is_inst</span>(cls):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">fn</span>(a):
+        <span style="font-weight: bold;">return</span> a.__class__.<span style="font-weight: bold;">__name__</span> == cls.<span style="font-weight: bold;">__name__</span>
+    <span style="font-weight: bold;">return</span> fn
+
+<span style="font-weight: bold; font-style: italic;">is_int</span> = is_inst(<span style="font-weight: bold;">int</span>)
+<span style="font-weight: bold; font-style: italic;">is_bool</span> = is_inst(<span style="font-weight: bold;">bool</span>)
+<span style="font-weight: bold; font-style: italic;">is_str</span> = is_inst(<span style="font-weight: bold;">str</span>)
+<span style="font-weight: bold; font-style: italic;">is_dict</span> = is_inst(<span style="font-weight: bold;">dict</span>)
+<span style="font-weight: bold; font-style: italic;">is_normal_list</span> = is_inst(<span style="font-weight: bold;">list</span>)
+<span style="font-weight: bold; font-style: italic;">is_instrumented_list</span> = is_inst(InstrumentedList)
+<span style="font-weight: bold; font-style: italic;">is_list</span> = <span style="font-weight: bold;">lambda</span> ls: is_normal_list(ls) <span style="font-weight: bold;">or</span> is_instrumented_list(ls)
+<span style="font-weight: bold; font-style: italic;">is_string</span> = is_inst(<span style="font-weight: bold;">str</span>)
+<span style="font-weight: bold; font-style: italic;">is_unicode</span> = is_inst(<span style="font-weight: bold;">unicode</span>)
+<span style="font-weight: bold; font-style: italic;">is_str_or_none</span> = <span style="font-weight: bold;">lambda</span> <span style="font-weight: bold;">str</span>: is_str(<span style="font-weight: bold;">str</span>) <span style="font-weight: bold;">or</span> <span style="font-weight: bold;">str</span> == <span style="font-weight: bold; text-decoration: underline;">None</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span> Test Instance predicate</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestIsInstance"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestIsInstance</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_is_int</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_instances"</span>
+        <span style="font-weight: bold;">self</span>.assertEqual(is_int(10), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(is_int(10.0), <span style="font-weight: bold; text-decoration: underline;">False</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(is_bool(<span style="font-weight: bold; text-decoration: underline;">False</span>), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(is_bool(10), <span style="font-weight: bold; text-decoration: underline;">False</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(is_str(<span style="font-style: italic;">'hello world'</span>), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(is_str(<span style="font-weight: bold; text-decoration: underline;">False</span>), <span style="font-weight: bold; text-decoration: underline;">False</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(is_str_or_none(<span style="font-weight: bold; text-decoration: underline;">None</span>), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(is_dict({<span style="font-style: italic;">'email'</span>: <span style="font-style: italic;">'xyz@g.com'</span>}), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(is_dict(<span style="font-style: italic;">"{'email': 'xyz@g.com'}"</span>), <span style="font-weight: bold; text-decoration: underline;">False</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Alphabetic string predicate</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+This function take an argument and checks whether the
+argument is an alphabetic string.  An alphabetic string
+consists of one or more alphabetic characters, period or
+space.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="def_is_alphabetic_str"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">is_alphabetic_str</span>(value):
+    <span style="font-weight: bold;">if</span> (<span style="font-weight: bold;">isinstance</span>(value, <span style="font-weight: bold;">str</span>) <span style="font-weight: bold;">and</span> <span style="font-weight: bold;">not</span> re.search(<span style="font-style: italic;">'[^a-zA-Z. ]+'</span>, value)):
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">False</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Email string predicate</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Email is a type as defined in RFC <a href="https://tools.ietf.org/html/rfc5321">5321</a>, <a href="https://tools.ietf.org/html/rfc5322">5322</a> and <a href="https://tools.ietf.org/html/rfc6531">6531</a>.
+Following is the constructor for this class.
+</p>
+
+<p>
+(We may want to instead use the <code>validate_email</code> package of Python.  See
+<a href="http://stackoverflow.com/questions/8022530/python-check-for-valid-email-address">this</a> Stack Overflow discussion.)
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="def_is_email_str"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">is_email_str</span>(value):
+    <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">isinstance</span>(value, <span style="font-weight: bold;">str</span>) <span style="font-weight: bold;">and</span> re.search(<span style="font-style: italic;">'[^@]+@[^@]+\.[^@]+'</span>, value):
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">False</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Date predicate</h3>
+<div class="outline-text-3" id="text-2-4">
+<div class="org-src-container">
+
+<pre class="src src-python" id="def_is_date"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">is_date</span>(value):
+    <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">isinstance</span>(value, datetime.date)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> None predicate</h3>
+<div class="outline-text-3" id="text-2-5">
+<div class="org-src-container">
+
+<pre class="src src-python" id="def_is_none"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">is_none</span>(value):
+    <span style="font-weight: bold;">return</span> value == <span style="font-weight: bold; text-decoration: underline;">None</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Helper Function</h3>
+<div class="outline-text-3" id="text-2-6">
+<div class="org-src-container">
+
+<pre class="src src-python" id="def_jsonify_list"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">return a list of dicts as json with correct mime types</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">flask does not provide a jsonify for lists; hence this method</span>
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">jsonify_list</span>(data):
+    <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">type</span>(data) <span style="font-weight: bold;">is</span> <span style="font-weight: bold;">not</span> <span style="font-weight: bold;">list</span>:
+        <span style="font-weight: bold;">raise</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span>(<span style="font-style: italic;">'jsonify_list function accepts only a list'</span>)
+
+    <span style="font-weight: bold;">return</span> make_response(json.dumps(data), 200,
+                         {<span style="font-style: italic;">'content-type'</span>: <span style="font-style: italic;">'application/json'</span>})
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Checks</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+All checks check on a predicate for a type.  
+</p>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> <code>check_pred</code></h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+A <i>check</i> is a partial function that takes an argument and
+acts as as filter.  If the check fails, the check function
+raises an exception.  If the check passes, then the function
+returns the argument.
+</p>
+
+<p>
+We start with implementing a generic function that checks
+predicates.  <code>check_pred</code> takes a predicate <code>p</code> and returns
+a function that takes an argument <code>a</code> and returns <code>a</code> if <code>a</code>
+satisfies <code>p</code>, and raises a <code>TypeError</code> otherwise.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="def_check_pred"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">check_pred</span>(p):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">fn</span>(a):
+        <span style="font-weight: bold;">if</span> p(a):
+            <span style="font-weight: bold;">return</span> a
+        <span style="font-weight: bold;">else</span>:
+            <span style="font-weight: bold;">raise</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span>(<span style="font-style: italic;">'arg %s does not satisfy type predicate %s'</span> % (a, p))
+    <span style="font-weight: bold;">return</span> fn
+
+<span style="font-weight: bold; font-style: italic;">check_alphabetic_str</span> = check_pred(is_alphabetic_str)
+<span style="font-weight: bold; font-style: italic;">check_email_str</span> = check_pred(is_email_str)
+<span style="font-weight: bold; font-style: italic;">check_string</span> = check_pred(is_string)
+<span style="font-weight: bold; font-style: italic;">check_date</span> = check_pred(is_date)
+<span style="font-weight: bold; font-style: italic;">check_int</span> = check_pred(is_int)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1-1" class="outline-4">
+<h4 id="sec-3-1-1"><span class="section-number-4">3.1.1</span> Tests for <code>check_pred</code></h4>
+<div class="outline-text-4" id="text-3-1-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestCheckPred"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">rem</span>(a, b):
+    <span style="font-weight: bold;">return</span> a % b
+
+<span style="font-weight: bold; font-style: italic;">check_even</span> = check_pred(<span style="font-weight: bold;">lambda</span> a: <span style="font-weight: bold;">isinstance</span>(a,<span style="font-weight: bold;">int</span>) &amp; rem(a,2) == 0)
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestCheckPred</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-style: italic;">'''test_check_pred'''</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_check_even</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_check_pred"</span>
+        <span style="font-weight: bold;">self</span>.assertEqual(check_even(4), 4)
+        <span style="font-weight: bold;">self</span>.assertRaises(<span style="font-weight: bold; text-decoration: underline;">TypeError</span>, check_even, 5)
+        <span style="font-weight: bold;">self</span>.assertEqual(check_even(<span style="font-weight: bold; text-decoration: underline;">False</span>), <span style="font-weight: bold; text-decoration: underline;">False</span>)  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">False == 0 in Python</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1-2" class="outline-4">
+<h4 id="sec-3-1-2"><span class="section-number-4">3.1.2</span> Tests for check_alphabetic_str</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestCheckAlphabeticStr"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestCheckAlphabeticStr</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-style: italic;">"""Tests for  alphabetic strings"""</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_check_alphabetic_str</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_check_alphabetic_str"</span>
+        <span style="font-weight: bold;">self</span>.assertEqual(check_alphabetic_str(<span style="font-style: italic;">"Hello"</span>), <span style="font-style: italic;">"Hello"</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(check_alphabetic_str(<span style="font-style: italic;">"M. N. Ray"</span>), <span style="font-style: italic;">"M. N. Ray"</span>)
+        <span style="font-weight: bold;">self</span>.assertRaises(<span style="font-weight: bold; text-decoration: underline;">TypeError</span>, check_alphabetic_str, <span style="font-style: italic;">"123hello"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1-3" class="outline-4">
+<h4 id="sec-3-1-3"><span class="section-number-4">3.1.3</span> Few more tests on check_alphabetic_str</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<p>
+There are some false positives that slip in with <code>alphabetic_str</code>.  A more
+accurate definition of <code>is_alphabetic_str</code> should fix this.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="more-alphabetic_str-checks">    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_more_alphabetic_strings</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_more_alphabetic_strings"</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">this looks wierd!  Should it be a name?</span>
+        <span style="font-weight: bold;">self</span>.assertEqual(check_alphabetic_str(<span style="font-style: italic;">".  ."</span>), <span style="font-style: italic;">".  ."</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1-4" class="outline-4">
+<h4 id="sec-3-1-4"><span class="section-number-4">3.1.4</span> Tests for check_email_str</h4>
+<div class="outline-text-4" id="text-3-1-4">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestCheckEmailStr"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestCheckEmailStr</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-style: italic;">"""Tests for Email strings"""</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_check_email_str</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_check_email_str"</span>
+        <span style="font-weight: bold;">self</span>.assertEqual(check_email_str(<span style="font-style: italic;">"web@gnu.org"</span>), <span style="font-style: italic;">"web@gnu.org"</span>)
+        <span style="font-weight: bold;">self</span>.assertRaises(<span style="font-weight: bold; text-decoration: underline;">TypeError</span>, check_email_str, <span style="font-style: italic;">"@gnu.org"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1-5" class="outline-4">
+<h4 id="sec-3-1-5"><span class="section-number-4">3.1.5</span> Tests for check_string</h4>
+<div class="outline-text-4" id="text-3-1-5">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestCheckString"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestCheckString</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-style: italic;">"""Tests for strings"""</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_check_string</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_check_string"</span>
+        <span style="font-weight: bold;">self</span>.assertEqual(check_string(<span style="font-style: italic;">"Hello"</span>), <span style="font-style: italic;">"Hello"</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(check_string(<span style="font-style: italic;">"M. N. Ray"</span>), <span style="font-style: italic;">"M. N. Ray"</span>)
+        <span style="font-weight: bold;">self</span>.assertRaises(<span style="font-weight: bold; text-decoration: underline;">TypeError</span>, check_alphabetic_str, 123)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1-6" class="outline-4">
+<h4 id="sec-3-1-6"><span class="section-number-4">3.1.6</span> Tests for check_date</h4>
+<div class="outline-text-4" id="text-3-1-6">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestCheckDate"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestCheckDate</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-style: italic;">"""Tests for date"""</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_check_date</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_check_date"</span>
+        <span style="font-weight: bold;">self</span>.assertEqual(check_date(datetime.datetime.strptime(<span style="font-style: italic;">"30-06-2016"</span>, <span style="font-style: italic;">"%d-%m-%Y"</span>).date()), datetime.datetime.strptime(<span style="font-style: italic;">"30-06-2016"</span>, <span style="font-style: italic;">"%d-%m-%Y"</span>).date())
+        <span style="font-weight: bold;">self</span>.assertEqual(check_date(datetime.datetime.strptime(<span style="font-style: italic;">"29-06-2016"</span>, <span style="font-style: italic;">"%d-%m-%Y"</span>).date()), datetime.datetime.strptime(<span style="font-style: italic;">"29-06-2016"</span>, <span style="font-style: italic;">"%d-%m-%Y"</span>).date())
+        <span style="font-weight: bold;">self</span>.assertRaises(<span style="font-weight: bold; text-decoration: underline;">TypeError</span>, check_date, 123)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1-7" class="outline-4">
+<h4 id="sec-3-1-7"><span class="section-number-4">3.1.7</span> Tests for check_int</h4>
+<div class="outline-text-4" id="text-3-1-7">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestCheckInt"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestCheckInt</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-style: italic;">"""Tests for integer"""</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_check_integer</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_check_integer"</span>
+        <span style="font-weight: bold;">self</span>.assertEqual(check_int(123), 123)
+        <span style="font-weight: bold;">self</span>.assertRaises(<span style="font-weight: bold; text-decoration: underline;">TypeError</span>, check_int, <span style="font-style: italic;">"abc"</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> <code>check_inst</code></h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+<code>check_inst</code> takes a class and returns a function that checks if its
+argument is an instance that class.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="def_check_inst"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">check_inst</span>(cls):
+    <span style="font-weight: bold;">return</span> check_pred(is_inst(cls))
+
+<span style="font-weight: bold; font-style: italic;">check_function</span> =  check_inst(types.FunctionType)
+<span style="font-weight: bold; font-style: italic;">check_dict</span> = check_inst(<span style="font-weight: bold;">dict</span>)
+<span style="font-weight: bold; font-style: italic;">check_list</span> = check_inst(<span style="font-weight: bold;">list</span>)
+<span style="font-weight: bold; font-style: italic;">check_str</span> = check_inst(<span style="font-weight: bold;">str</span>)
+<span style="font-weight: bold; font-style: italic;">check_int</span> = check_inst(<span style="font-weight: bold;">int</span>)
+<span style="font-weight: bold; font-style: italic;">check_pos_int</span> = check_pred(<span style="font-weight: bold;">lambda</span> arg: check_int(arg) <span style="font-weight: bold;">and</span> arg &gt; 0)
+<span style="font-weight: bold; font-style: italic;">check_non_neg_int</span> = check_pred(<span style="font-weight: bold;">lambda</span> arg: check_int(arg) <span style="font-weight: bold;">and</span> arg &gt;= 0)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> Tests</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestCheckInstance"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestCheckInstance</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-style: italic;">"""Tests for Check instances"""</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_check_inst</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_check_instance"</span>
+        <span style="font-weight: bold;">self</span>.assertEqual(check_int(3), 3)
+        <span style="font-weight: bold;">self</span>.assertEqual(check_str(<span style="font-style: italic;">"abc"</span>), <span style="font-style: italic;">"abc"</span>)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">isinstance</span>(
+                         check_dict({<span style="font-style: italic;">'x'</span>: 3, <span style="font-style: italic;">'y'</span>: 5}),
+                         <span style="font-weight: bold;">dict</span>),
+                         <span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">isinstance</span>(
+                         check_function(check_function),
+                         types.FunctionType),
+                         <span style="font-weight: bold; text-decoration: underline;">True</span>)
+
+        <span style="font-weight: bold;">self</span>.assertRaises(<span style="font-weight: bold; text-decoration: underline;">TypeError</span>, check_pos_int, 0)
+        <span style="font-weight: bold;">self</span>.assertRaises(<span style="font-weight: bold; text-decoration: underline;">TypeError</span>, check_non_neg_int, -1)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> <code>check_inv</code></h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+An invariant is a predicate on a dictionary.  <code>check-inv</code> takes an invariant
+and an optional class name and returns an invariant check.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="def_check_inv"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">check_inv</span>(inv, *name):
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">args is a dictionary</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">fn</span>(args):
+        <span style="font-weight: bold;">if</span> inv(args):
+            args
+        <span style="font-weight: bold;">else</span>:
+            <span style="font-weight: bold;">if</span> name == []:
+                <span style="font-weight: bold;">raise</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span>(<span style="font-style: italic;">"invariant fails on args %s"</span> % args)
+            <span style="font-weight: bold;">else</span>:
+                <span style="font-weight: bold;">raise</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span>(<span style="font-style: italic;">"invariant for class %s fails on args %s"</span> % (name[0], args))
+    <span style="font-weight: bold;">return</span> fn
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: VLEAD</p>
+<p class="date">Created: 2017-04-26 Wed 22:27</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+edit : main.o cd.o ls.o pwd.o \
+       pinfo.o echo.o parse.o command.o printbash.o
+        cc -o edit main.o cd.o ls.o pwd.o \
+                   pinfo.o echo.o parse.o command.o printbash.o
+
+main.o : main.c cd.h ls.h pwd.h pinfo.h echo.h parse.h command.h printbash.h
+        cc -c main.c
+cd.o : cd.c cd.h ls.h pwd.h pinfo.h echo.h parse.h command.h printbash.h 
+        cc -c cd.c
+command.o : command.c cd.h ls.h pwd.h pinfo.h echo.h parse.h command.h printbash.h
+        cc -c command.c
+pwd.o : pwd.c cd.h ls.h pwd.h pinfo.h echo.h parse.h command.h printbash.h
+        cc -c pwd.c
+pinfo.o : pinfo.c cd.h ls.h pwd.h pinfo.h echo.h parse.h command.h printbash.h
+        cc -c pinfo.c
+echo.o : echo.c cd.h ls.h pwd.h pinfo.h echo.h parse.h command.h printbash.h
+        cc -c echo.c
+parse.o : parse.c cd.h ls.h pwd.h pinfo.h echo.h parse.h command.h printbash.h
+        cc -c parse.c
+printbash.o : printbash.c cd.h ls.h pwd.h pinfo.h echo.h parse.h command.h printbash.h
+        cc -c printbash.c
+ls.o : ls.c cd.h ls.h pwd.h pinfo.h echo.h parse.h command.h printbash.h
+	cc -c ls.c
+clean :
+        rm edit main.o cd.o command.o printbash.o \
+           pwd.o pinfo.o echo.o parse.o ls.o

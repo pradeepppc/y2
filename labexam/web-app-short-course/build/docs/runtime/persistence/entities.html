@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Persistent Entities</title>
+<!-- 2017-04-26 Wed 22:27 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="VLEAD" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../../style/css/worg-style.css" />
+<link rel="stylesheet" type="text/css" href="../../style/css/override.css" />
+<link rel="icon" type="image/png" href="../../style/img/favicon/popl.png" />
+<script type="text/javascript" src="../../style/js/org-info.js">
+/**
+ *
+ * @source: ../../style/js/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in ../../style/js/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in ../../style/js/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "1");
+org_html_manager.set("LINK_HOME", "../../index.html");
+org_html_manager.set("LINK_UP", "../index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../../index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Persistent Entities</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Introduction</a></li>
+<li><a href="#sec-2">2. Name</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-2-0-1">2.0.1. Test Name</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Email</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Test Email</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Role</a>
+<ul>
+<li><a href="#sec-4-1">4.1. Test Role</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5. User</a>
+<ul>
+<li><a href="#sec-5-1">5.1. Test User</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+n#+DATE: <span class="timestamp-wrapper"><span class="timestamp">[2016-06-07 Tue]</span></span>
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Persistence is added to all the enttites defined in <a href="../objects/entities.html"><code>objects</code></a>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Name</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<code>Name</code> is a class with an attribute name of type <code>is_alphabetic_str</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Name"><span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"name_tbl"</span>,
+        <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"val"</span>: db.Column(db.String(128), unique=<span style="font-weight: bold; text-decoration: underline;">True</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"users"</span>: db.relationship(<span style="font-style: italic;">'User'</span>, backref=<span style="font-style: italic;">'name'</span>)
+        }
+
+<span style="font-weight: bold; font-style: italic;">Name</span> = ClassPersistenceTemplate.mk_persistent(Name, [<span style="font-style: italic;">'val'</span>], **args)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-2-0-1" class="outline-4">
+<h4 id="sec-2-0-1"><span class="section-number-4">2.0.1</span> Test Name</h4>
+<div class="outline-text-4" id="text-2-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestName"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistentName</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_name</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_create_name"</span>
+        <span style="font-weight: bold; font-style: italic;">name</span>=<span style="font-style: italic;">"Jimi Hendrix"</span>
+        <span style="font-weight: bold; font-style: italic;">na</span> = Name(val=name)
+        na.save()
+        <span style="font-weight: bold; font-style: italic;">na_from_db</span> = Name.apply_filters(val=name)[0]
+        
+        <span style="font-weight: bold;">self</span>.assertEqual(is_name(na), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(is_name(na_from_db), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold; font-style: italic;">new_name</span> = Name.get_by_id(1)
+        <span style="font-weight: bold;">self</span>.assertEqual(new_name.get(<span style="font-style: italic;">"val"</span>), <span style="font-style: italic;">"Jimi Hendrix"</span>)
+        <span style="font-weight: bold;">self</span>.assertRaises(<span style="font-weight: bold; text-decoration: underline;">TypeError</span>, Name, val=<span style="font-style: italic;">"Jimi 123 Hendrix"</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_update_name</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test update name"</span>
+        <span style="font-weight: bold; font-style: italic;">name</span>=<span style="font-style: italic;">"Jimi Hendrix"</span>
+        <span style="font-weight: bold; font-style: italic;">na</span> = Name(val=name)
+        na.save()
+
+        <span style="font-weight: bold;">self</span>.assertEqual(Name.get_by_id(1).get(<span style="font-style: italic;">"val"</span>), <span style="font-style: italic;">"Jimi Hendrix"</span>)
+
+        na.<span style="font-weight: bold;">set</span>(val=<span style="font-style: italic;">"Bo Didley"</span>)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(Name.get_by_id(1).get(<span style="font-style: italic;">"val"</span>), <span style="font-style: italic;">"Bo Didley"</span>)
+
+        <span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.assertRaises(NotFoundError):
+            <span style="font-weight: bold; font-style: italic;">na_from_db</span> = Name.apply_filters(val=name)[0]
+
+    
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_delete_name</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test delete name"</span>
+        <span style="font-weight: bold; font-style: italic;">na</span> = Name(val=<span style="font-style: italic;">"Jimi Hendrix"</span>)
+        na.save()
+        <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">len</span>(Name.get_all()), 1)
+        na.delete()
+        <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">len</span>(Name.get_all()), 0)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_equality_on_name</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test equality on name"</span>
+        <span style="font-weight: bold; font-style: italic;">na</span> = Name(val=<span style="font-style: italic;">"Jimi Hendrix"</span>)
+        na.save()
+        <span style="font-weight: bold; font-style: italic;">na</span> = Name(val=<span style="font-style: italic;">"Bo Didley"</span>)
+        na.save()
+        <span style="font-weight: bold; font-style: italic;">na_from_db</span> = Name.apply_filters(val=<span style="font-style: italic;">"Bo Didley"</span>)[0]
+        <span style="font-weight: bold;">self</span>.assertEqual(na_from_db.get(<span style="font-style: italic;">"val"</span>), <span style="font-style: italic;">"Bo Didley"</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Email</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<code>Email</code> is a class an attribute email of type <code>is_email_str</code>.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Email"><span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"email_tbl"</span>,
+        <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"val"</span>: db.Column(db.String(128), unique=<span style="font-weight: bold; text-decoration: underline;">True</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        }
+
+<span style="font-weight: bold; font-style: italic;">Email</span> = ClassPersistenceTemplate.mk_persistent(Email, [<span style="font-style: italic;">'val'</span>], **args)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Test Email</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestEmail"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistenceEmail</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_email</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_create_email"</span>
+        <span style="font-weight: bold; font-style: italic;">email</span>=<span style="font-style: italic;">"jimi@gnu.org"</span>
+        <span style="font-weight: bold; font-style: italic;">em</span> = Email(val=email)
+        em.save()
+        <span style="font-weight: bold; font-style: italic;">em_from_db</span> = Email.apply_filters(val=email)[0]
+        <span style="font-weight: bold;">self</span>.assertEqual(is_email(em_from_db), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold; font-style: italic;">em</span> = Email.get_by_id(1)
+        <span style="font-weight: bold;">self</span>.assertEqual(em_from_db.get(<span style="font-style: italic;">"val"</span>), email)
+        <span style="font-weight: bold;">self</span>.assertEqual(em.get(<span style="font-style: italic;">"val"</span>), email)
+        <span style="font-weight: bold;">self</span>.assertRaises(<span style="font-weight: bold; text-decoration: underline;">TypeError</span>, Email, val=<span style="font-style: italic;">"jimi@@gnu.org"</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_update_email</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test update email"</span>
+
+        <span style="font-weight: bold; font-style: italic;">email</span>=<span style="font-style: italic;">"jimi@gnu.org"</span>
+        <span style="font-weight: bold; font-style: italic;">em</span> = Email(val=email)
+        em.save()
+
+        em.<span style="font-weight: bold;">set</span>(val=<span style="font-style: italic;">"didley@gnu.org"</span>)
+
+        <span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.assertRaises(NotFoundError):
+            <span style="font-weight: bold; font-style: italic;">em_from_db</span> = Email.apply_filters(val=email)[0]
+
+        <span style="font-weight: bold; font-style: italic;">em</span> = Email.get_by_id(1)
+        <span style="font-weight: bold; font-style: italic;">em_from_db</span> = Email.apply_filters(val=<span style="font-style: italic;">"didley@gnu.org"</span>)[0]
+
+        <span style="font-weight: bold;">self</span>.assertEqual(em_from_db.get(<span style="font-style: italic;">"val"</span>), <span style="font-style: italic;">"didley@gnu.org"</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(em.get(<span style="font-style: italic;">"val"</span>), <span style="font-style: italic;">"didley@gnu.org"</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_delete_email</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test delete email"</span>
+        <span style="font-weight: bold; font-style: italic;">em</span> = Email(val=<span style="font-style: italic;">"jimi@gnu.org"</span>)
+        em.save()
+        <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">len</span>(Email.get_all()), 1)
+        em.delete()
+        <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">len</span>(Email.get_all()), 0)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_duplicate_email</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_duplicate_email"</span>
+        <span style="font-weight: bold; font-style: italic;">em1</span> = Email(val=<span style="font-style: italic;">"jimi@gnu.org"</span>)
+        em1.save()
+        <span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.assertRaises(IntegrityError):
+            <span style="font-weight: bold; font-style: italic;">em2</span> = Email(val=<span style="font-style: italic;">"jimi@gnu.org"</span>)
+            em2.save()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_equality_on_email</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_equality_on_email"</span>
+        <span style="font-weight: bold; font-style: italic;">em1</span> = Email(val=<span style="font-style: italic;">"jimi@gnu.org"</span>)
+        em1.save()
+
+        <span style="font-weight: bold; font-style: italic;">em2</span> = Email(val=<span style="font-style: italic;">"didley@gnu.org"</span>)
+        em2.save()
+
+        <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">len</span>(Email.apply_filters(val=<span style="font-style: italic;">"jimi@gnu.org"</span>)), 1)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Role</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+<code>Role</code> is an entity that has an attribute <code>val</code> which is an alphabetic string
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Role"><span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"role_tbl"</span>,
+        <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"val"</span>: db.Column(db.String(128), nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>, unique=<span style="font-weight: bold; text-decoration: underline;">True</span>)
+      }
+
+<span style="font-weight: bold; font-style: italic;">Role</span> = ClassPersistenceTemplate.mk_persistent(Role, [<span style="font-style: italic;">'val'</span>], **args)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Test Role</h3>
+<div class="outline-text-3" id="text-4-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestRole"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistenceRole</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_admin_role</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_create_role"</span>
+        <span style="font-weight: bold; font-style: italic;">ro</span> = Role(val=<span style="font-style: italic;">"admin"</span>)
+        ro.save()
+        <span style="font-weight: bold; font-style: italic;">ro_from_db</span> = Role.apply_filters(val=<span style="font-style: italic;">"admin"</span>)[0]
+        <span style="font-weight: bold;">self</span>.assertEqual(is_role(ro_from_db), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold; font-style: italic;">ro</span> = Role.get_by_id(1)
+        <span style="font-weight: bold;">self</span>.assertEqual(ro.get(<span style="font-style: italic;">"val"</span>), <span style="font-style: italic;">"admin"</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(ro_from_db.get(<span style="font-style: italic;">"val"</span>), <span style="font-style: italic;">"admin"</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> User</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+A <code>User</code> entity has fields <code>name</code> of type <code>Name</code>, <code>email</code> of type <code>Email</code> and
+role of type <code>Role</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_association_Table"><span style="font-weight: bold; font-style: italic;">users_roles</span> = db.Table(<span style="font-style: italic;">'users_roles_tbl'</span>,
+                      db.Column(<span style="font-style: italic;">'user_id'</span>,db.Integer, db.ForeignKey(<span style="font-style: italic;">'user_tbl.id'</span>)),
+                      db.Column(<span style="font-style: italic;">'role_id'</span>,db.Integer,db.ForeignKey(<span style="font-style: italic;">'role_tbl.id'</span>)))
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_User"><span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"user_tbl"</span>,
+        <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"name_id"</span>: db.Column(db.Integer, db.ForeignKey(<span style="font-style: italic;">'name_tbl.id'</span>), 
+                                 nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>, unique=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"email_id"</span>: db.Column(db.Integer, db.ForeignKey(<span style="font-style: italic;">'email_tbl.id'</span>),
+                                 nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>, unique=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"roles"</span>: db.relationship(<span style="font-style: italic;">'Role'</span>,
+                                     secondary=users_roles, backref=<span style="font-style: italic;">'users'</span>),
+        <span style="font-style: italic;">"email"</span>: db.relationship(<span style="font-style: italic;">'Email'</span>,
+                                    backref=db.backref(<span style="font-style: italic;">'user'</span>, uselist=<span style="font-weight: bold; text-decoration: underline;">False</span>))
+        }
+
+<span style="font-weight: bold; font-style: italic;">User</span> = ClassPersistenceTemplate.mk_persistent(User, [<span style="font-style: italic;">'email'</span>], **args)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Test User</h3>
+<div class="outline-text-3" id="text-5-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestUser"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistenceUser</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_user</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_create_user"</span>
+
+        <span style="font-weight: bold; font-style: italic;">na</span> = Name(val=<span style="font-style: italic;">"Jimi Hendrix"</span>)
+        na.save()
+
+        <span style="font-weight: bold; font-style: italic;">em</span> = Email(val=<span style="font-style: italic;">"jimi@gnu.org"</span>)
+        em.save()
+
+        <span style="font-weight: bold; font-style: italic;">ro1</span> = Role(val=<span style="font-style: italic;">"user"</span>)
+        ro1.save()
+
+        <span style="font-weight: bold; font-style: italic;">ro2</span> = Role(val=<span style="font-style: italic;">"admin"</span>)
+        ro2.save()
+
+        <span style="font-weight: bold; font-style: italic;">roles</span> = [ro1, ro2] 
+        <span style="font-weight: bold; font-style: italic;">usr</span> = User(name=na, email=em, roles=roles)
+        usr.save()
+
+        <span style="font-weight: bold; font-style: italic;">user</span> = User.get_by_id(1)
+        <span style="font-weight: bold; font-style: italic;">user_from_db</span> = User.apply_filters(email=em)[0]
+        <span style="font-weight: bold;">self</span>.assertEqual(is_user(user), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(is_user(user_from_db), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(user.get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"val"</span>), <span style="font-style: italic;">"jimi@gnu.org"</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(user_from_db.get(<span style="font-style: italic;">"name"</span>).get(<span style="font-style: italic;">"val"</span>), 
+                             <span style="font-style: italic;">"Jimi Hendrix"</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_update_user</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_update_user"</span>
+
+        <span style="font-weight: bold; font-style: italic;">na</span> = Name(val=<span style="font-style: italic;">"Jimi Hendrix"</span>)
+        na.save()
+
+        <span style="font-weight: bold; font-style: italic;">em</span> = Email(val=<span style="font-style: italic;">"jimi@gnu.org"</span>)
+        em.save()
+
+        <span style="font-weight: bold; font-style: italic;">ro1</span> = Role(val=<span style="font-style: italic;">"user"</span>)
+        ro1.save()
+
+        <span style="font-weight: bold; font-style: italic;">ro2</span> = Role(val=<span style="font-style: italic;">"admin"</span>)
+        ro2.save()
+
+        <span style="font-weight: bold; font-style: italic;">roles</span> = [ro1, ro2]
+        <span style="font-weight: bold; font-style: italic;">usr</span> = User(name=na, email=em, roles=roles)
+        usr.save()
+
+        <span style="font-weight: bold; font-style: italic;">user</span> = User.get_by_id(1)
+        <span style="font-weight: bold; font-style: italic;">user_from_db</span> = User.apply_filters(email=em)[0]
+        <span style="font-weight: bold;">self</span>.assertEqual(is_user(user), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(is_user(user_from_db), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+
+        <span style="font-weight: bold; font-style: italic;">roles</span> = [ro1]
+        user_from_db.<span style="font-weight: bold;">set</span>(roles=roles)
+        <span style="font-weight: bold; font-style: italic;">user_from_db</span> = User.apply_filters(email=em)[0]
+
+        <span style="font-weight: bold;">self</span>.assertEqual(user.get(<span style="font-style: italic;">"roles"</span>)[0].get(<span style="font-style: italic;">'val'</span>), <span style="font-style: italic;">"user"</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_delete_user</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_delete_user"</span>
+
+        <span style="font-weight: bold; font-style: italic;">na</span> = Name(val=<span style="font-style: italic;">"Jimi Hendrix"</span>)
+        na.save()
+
+        <span style="font-weight: bold; font-style: italic;">em</span> = Email(val=<span style="font-style: italic;">"jimi@gnu.org"</span>)
+        em.save()
+
+        <span style="font-weight: bold; font-style: italic;">ro1</span> = Role(val=<span style="font-style: italic;">"user"</span>)
+        ro1.save()
+
+        <span style="font-weight: bold; font-style: italic;">ro2</span> = Role(val=<span style="font-style: italic;">"admin"</span>)
+        ro2.save()
+
+        <span style="font-weight: bold; font-style: italic;">roles</span> = [ro1, ro2] 
+        <span style="font-weight: bold; font-style: italic;">usr</span> = User(name=na, email=em, roles=roles)
+        usr.save()
+
+        <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">len</span>(User.get_all()), 1)
+        usr.delete()
+        <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">len</span>(User.get_all()), 0)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: VLEAD</p>
+<p class="date">Created: 2017-04-26 Wed 22:27</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

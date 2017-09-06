@@ -1,0 +1,13 @@
+# Files ignored by git
+# MPRI-Bomberman on Windows
+# https://bitbucket.org/lbesson/mpri-bomberman-windows/
+*~
+.*~
+*.py[co]
+.*.py[co]
+pyhtmlizer.css
+build/
+_build/
+_build_old/
+datas/32_32/
+datas/sound/

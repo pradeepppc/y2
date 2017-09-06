@@ -1,0 +1,31 @@
+import java.io.*;
+import java.net.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+public class Client extends JFrame{
+	private JTextField usertext;
+	private JTextArea chatwindow;
+	private ObjectOutputStream output;
+	private ObjectInputStream input;
+	private String message = "";
+	private String serverip;
+	private Socket connection;
+	
+	public Client(String host){
+			super("ms g");
+			serverip = host;
+			usertext = new JTextField();
+			usertext.setEditable(false);
+			usertext.addActionListener(
+				new ActionListener(){
+					public void actionPerformed(ActionEvent event){
+							senddata(event.getActionCommand());
+							usertext.setText("");
+					}
+						
+				}
+					
+			
+	}
+}

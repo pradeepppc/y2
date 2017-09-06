@@ -1,0 +1,124 @@
+.. 2012/2013 MPRI 1-21 Net Programming Project : Multiplayer Bomberman.
+
+Installation
+============
+
+Dependencies
+------------
+ 
+  The project is *entirely written in Python*, version *2.7.3*.
+   For more details about the **Python** language, see `the official site <http://www.python.org>`_.
+  Python 2.7.1 or higher is **required**.
+
+  The project also **require** the following *unusual module(s)* :
+   * pygame (for GUI): can be found `here <http://www.pygame.org/download.shtml>`_.  
+   * scanf (for parsing) : **it is** distributed *with the project*.
+     You can also download it `from here <https://hkn.eecs.berkeley.edu/~dyoo/python/scanf/>`_.
+
+.. * PyZenity (not any more, but for TP1's IRC client and server) : can be downloaded `here <http://brianramos.com/?page_id=38>`_ or `here <[http://pypi.python.org/pypi/PyZenity>`_.
+.. * urwid (for TUI): can be found `here <http://excess.org/urwid/>`_. (The TUI is still on development).
+
+Plateform(s)
+------------
+
+  The project have been *developped* on *GNU/Linux* (Ubuntu 11.10).
+  It also have been quickly tested on *Windows 7* **with the Cygwin environment** and Python 2.7.
+  
+  .. warning::
+     It shall also work on *Mac OS X*, but **not been tested**.
+      Any suggestion or returns is welcome !
+      Where things can be different between *Mac* and the others plateform is with the *sockets* (Linux use *BSD sockets*, and *Mac* don't).
+      In particular, some network error handling can work on *Linux* but no on *Mac*.
+   
+.. 
+	How to install it:
+	------------------
+	  
+	  Notice that installation *is not mandatory* :
+	   the project can be used and tested without installing *anything elsewhere* the directory which contains this file (and the others, extracted from the same archive).
+	  
+	  Anyway, the project can be installed with Python distutils setup tool::
+	   $ python setup.py install
+	  Or maybe with sudo rights, if the first try doesn't work::
+	   $ sudo python setup.py install
+
+What is the important part ?
+----------------------------
+  
+  The project is in two parts : **a server, and a client**, represented as the two following Python scripts :
+   * `the server BombermanServer.py <BombermanServer.html>`_;
+   * `the client BombermanClient.py <BombermanClient.html>`_.
+  
+  Those two can be called with the option *--help* to show how to used them.
+   All options are explained in this *help* message.
+..   And, for a more complete reference, the Sphinx documentation is also available (take a look at `it <index.html>`_). In fact, you might be reading at the doc *right now*, so this remark is kind of useless *:)*.
+  
+  .. danger::
+     About threads and unhandled exceptions.
+      When you executes one of those three programs, multi threading is used to parallelize operations,
+      and I'm not yet an expert with those.
+      So, it might happen some problems, **I cannot** ensure everything is always ok...
+      Per exemple, send *Ctrl+C* might *not stop* the first phasis.
+  
+How to quickly use it
+---------------------
+   
+   If you simply want to use it, follow those points :
+
+   1) In a first terminal, launch a server (for example from the computer **opened** on the web, and known as *bomberman.crans.org*)::
+     **$ ./BombermanServer.py --server bomberman.crans.org --port 13882**
+    This launch the server, listening on port 13882. The game will be launched with a board 11x11, waiting for 3 players.
+
+   2) In *a second terminal*, launch a client and connect it to this server::
+     **$ ./BombermanClient.py --server bomberman.crans.org --port 13882 --pseudo "Luke" --color "blue"**
+    This launch the game, playing with the server previously launched, and with a player called "Luke", and colored with blue.
+    This game used an interactive window (GUI) if possible, otherwise it will try to launch in text mode (TUI) but *the TUI is still experimental*.
+   
+   3) Find **2 other friends to play with you**, tell them the --server and --port argument for their client, and that's it !
+
+   4) More options :
+    * --music, --nomusic : **enable**, or **disable** the *soundtrack* during the game (for the client),
+    * --soundeffect, --nosoundeffect : **enable**, or **disable** the *soundeffect* during the game (for the client),
+    * --ANSI, --noANSI : idem for the *ANSI* escape color codes,
+    * --noUTF : might also be able to force pure ASCII text mode *(it works, but it is uglier than with UTF8 !)*,
+
+   5) Moreover, the two files `ConfigClient <ConfigClient.html>`_ and `ConfigServer <ConfigServer.html>`_ can be edited to keep your favorite parameters from one session to an other.
+   
+.. note::
+   If you are interesting, an *experimental* bot is in progress. That mean, a program that play *by itself*.
+    By now, it is **quite limited**, but **it works** :)
+    Of course, a *human* player will beat an *automatic* one very easily,
+    but at least this allow to test everything without switching between 3 windows to play successively one of each players.
+    And as far as I tried, one human player *vs* 7 bots can't win ;)
+
+..
+    The client script can also take other arguments, like for parametrizing the key binding :
+   * --up K_z : to use the key 'z' to go up,
+   * --bomb K_SPACE : to use the space key to drop bomb.
+   
+    The server script can also activate the bonus system (all or some of them) :
+   * --bonus all : activate all bonuses,
+   * --bonus apple dice fire : activate only three of the bonuses (see --help returned doc for more details).
+
+..
+	Documentation
+	-------------
+
+	 If you are *curious*, or if you want to use some part of the code, there is a complete documentation for this project.
+	 
+	 The documentation is made with Sphinx, and use some GNU Bash scripts, made by Lilian BESSON (and now those scripts are an independant projects, see `my website <https://sites.google.com/site/naereencorp/liste-des-projets/makepydoc/>`_).
+	 
+	 A part of the doc is also available as simple PyDoc generated HTML pages.
+
+.. 
+	List of contributors
+	--------------------
+	 Main author : Lilian BESSON (mailto:lilian.bessonAAAAATTTTTnormale.fr).
+	  For more details, see the `AUTHOR <../../AUTHOR>`_ file.
+
+License
+-------
+
+ This project is released under the **GPLv3 license**, for more details, take a look at the `LICENSE <../../LICENSE>`_ file.
+ *Basically, that allow you to use all or part of the project for you own business.*
+

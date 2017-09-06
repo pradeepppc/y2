@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Building a Web Application: Ground up to the Cloud</title>
+<!-- 2017-04-26 Wed 22:27 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="VLEAD" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="./style/css/worg-style.css" />
+<link rel="stylesheet" type="text/css" href="./style/css/override.css" />
+<link rel="icon" type="image/png" href="./style/img/favicon/popl.png" />
+<script type="text/javascript" src="./style/js/org-info.js">
+/**
+ *
+ * @source: ./style/js/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in ./style/js/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in ./style/js/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "1");
+org_html_manager.set("LINK_HOME", "./index.html");
+org_html_manager.set("LINK_UP", "./index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="./index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Building a Web Application: Ground up to the Cloud</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Introduction</a></li>
+<li><a href="#sec-2">2. Version/Branch History</a></li>
+<li><a href="#sec-3">3. Goal</a></li>
+<li><a href="#sec-4">4. Components of a web application</a></li>
+<li><a href="#sec-5">5. Software Development Life Cycle  (SDLC)</a></li>
+<li><a href="#design">6. Design of the application</a>
+<ul>
+<li><a href="#sec-6-1">6.1. A monolithic web application</a></li>
+<li><a href="#sec-6-2">6.2. A web application decoupled from the service</a></li>
+<li><a href="#sec-6-3">6.3. Dissecting a service providing data</a>
+<ul>
+<li><a href="#sec-6-3-1">6.3.1. Diagram Representation</a></li>
+<li><a href="#sec-6-3-2">6.3.2. Components and Interfaces</a></li>
+</ul>
+</li>
+<li><a href="#sec-6-4">6.4. Building the <code>System</code> component with <code>guard</code> and <code>filter</code></a>
+<ul>
+<li><a href="#sec-6-4-1">6.4.1. Diagram Representation</a></li>
+<li><a href="#sec-6-4-2">6.4.2. <code>guard</code> and <code>filter</code> components</a></li>
+</ul>
+</li>
+<li><a href="#sec-6-5">6.5. Security</a></li>
+</ul>
+</li>
+<li><a href="#application">7. Application</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+The challenge is to build a web application from the ground up using formal
+methods ensuring safety and flexibility in evolution.  The <a href="./index.html#design"><code>Design</code></a> provides
+the methodology on <b>how</b> to build the application while the <a href="./index.html#application"><code>Data Model</code></a>
+provides on <b>what</b> to build.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Version/Branch History</h2>
+<div class="outline-text-2" id="text-2">
+<dl class="org-dl">
+<dt> <code>mini</code> </dt><dd>Version with only Users and Sessions as the main
+Entities.  No  Roles. 
+</dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Goal</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+The Goal of this course is to walk you through an end-to-end requirements
+specification, design, development and deployment of a small web application.
+In the process, you will learn to use various technologies and will be
+introduced to well-established processes and good software development
+practices that we use here at VLEAD.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Components of a web application</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+A <i>web application</i> consists of a collection of continuously running programs
+possibly running on different machines, connected, and geographically distant
+from each other. (Such programs are called services.)  On the user's
+machine's end is a program running inside the <i>web browser</i> which displays
+the output of the application as well as functions as an interface for the
+user to send information to the application.
+</p>
+
+<p>
+The server side of the application runs as a thread inside a <i>web server</i>.
+The job of the web server is to listen for inputs, get the server side web
+application thread to compute an output and then serve that output back to
+the user's browser. 
+</p>
+
+<p>
+The web application usually has a third component, which is   a <i>database</i>.
+The database stores data needed by the application.  The database allows the
+data to survive even if the application stops.
+</p>
+
+<p>
+The data items in the database are related to one another.  The types of the
+data and the relations between them and the operations permitted on the data
+items are expressed using a <i>data model</i>.
+</p>
+
+<p>
+The web application allows access to its underlying data via <i>URL addresses</i>
+(sometime along with form fields).  The specification of the mapping of the
+urls to operations on the data is called a <i>REST API</i>. 
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Software Development Life Cycle  (SDLC)</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+A systematic development of the application requires that we break down the
+entire realization of the application into multiple, intertwined phases.  In
+this short course, our application life cycle will include the following
+phases:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="right" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="right">No.</th>
+<th scope="col" class="left">Phase</th>
+<th scope="col" class="left">Resultant artefact</th>
+<th scope="col" class="left">Format</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="right">1.</td>
+<td class="left">Requirements definition</td>
+<td class="left">Requirements document</td>
+<td class="left">English (text)</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">2.</td>
+<td class="left">Data model</td>
+<td class="left">Formal specification</td>
+<td class="left">Specification language</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">(Design)</td>
+<td class="left">&#xa0;</td>
+<td class="left">and diagrams</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">3.</td>
+<td class="left">Object implementation</td>
+<td class="left">Code</td>
+<td class="left">Python</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">4.</td>
+<td class="left">Object Relational Model</td>
+<td class="left">Code</td>
+<td class="left">Python, SQL-Alchemy</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">5.</td>
+<td class="left">Rest API</td>
+<td class="left">Spec + Code</td>
+<td class="left">Python Flask Library</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">6.</td>
+<td class="left">Front End</td>
+<td class="left">Spec + Code</td>
+<td class="left">JS, Angular.js</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">7.</td>
+<td class="left">Deployment</td>
+<td class="left">Code, Deployment spec</td>
+<td class="left">JSON, makefiles</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">8.</td>
+<td class="left">Unit Testing</td>
+<td class="left">Code</td>
+<td class="left">Flask/Python unit testing</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">9.</td>
+<td class="left">Documentation</td>
+<td class="left">Literate Program</td>
+<td class="left">Org-mode/HTML</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">10.</td>
+<td class="left">Planning and tracking</td>
+<td class="left">Issues on Githhub</td>
+<td class="left">Text</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">11.</td>
+<td class="left">Versioning</td>
+<td class="left">Git</td>
+<td class="left">GitHub Repositories</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">12.</td>
+<td class="left">Release Management</td>
+<td class="left">GitHub Tags and</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">branches</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">13.</td>
+<td class="left">Continuous Integration</td>
+<td class="left">GitHub hooks</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-design" class="outline-2">
+<h2 id="design"><a id="sec-6" name="sec-6"></a><span class="section-number-2">6</span> Design of the application</h2>
+<div class="outline-text-2" id="text-design">
+
+<p>
+The application is perceived as a composition of entities and the ability to
+perform CRUD operations on this entities. 
+</p>
+
+<p>
+The principle that is followed while building this application is modularity.
+It is thought that the biggest gain from modularity is safety and ease of
+evolution in incorporating newer requirements.
+</p>
+
+<p>
+Design Choices:
+</p>
+</div>
+
+<div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> A monolithic web application</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+In a monolithic web application, 
+</p>
+
+<ul class="org-ul">
+<li>the web application that is responsible for providing the html pages on
+the browser and
+</li>
+<li>the service that provides the data to fill these html pages
+</li>
+</ul>
+
+<p>
+are tied together as a single application running from a single web server.
+</p>
+
+<img src="https://docs.google.com/drawings/d/1p4Jzhgb70CyyXSLCv45zRuTpF9uOu8y4PZTnB1zPuUY/pub?w=960&amp;h=400">
+
+<p>
+<a href="https://docs.google.com/drawings/d/1p4Jzhgb70CyyXSLCv45zRuTpF9uOu8y4PZTnB1zPuUY/edit">Edit the image</a>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> A web application decoupled from the service</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+The web application that is responsible for providing a seamless interactive
+experience to a user is decoupled from the service that provides the data
+for the application.  
+</p>
+
+<p>
+The functionality and the recipients of the functionality of either the web
+application or the service providing data are different and therefore it is
+imperative to decouple them.  The decoupling should enable the evolution of
+the both these services in their own trajectories.
+</p>
+
+<p>
+In this approach, the web application could plug to multiple services that
+provide data.  Also, a deviant of a web application to cater to browsers on
+mobiles can evolve separately while still using the application programming
+interface (API) of the same service providing data.
+</p>
+
+<img src="https://docs.google.com/drawings/d/1SdOIH2uikVCoMZVweUI_wt7gxks6nkQNnxaK8VQb2EU/pub?w=960&amp;h=720">
+
+<p>
+<a href="https://docs.google.com/drawings/d/1SdOIH2uikVCoMZVweUI_wt7gxks6nkQNnxaK8VQb2EU/edit">Edit the image</a>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3"><span class="section-number-3">6.3</span> Dissecting a service providing data</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+Defining components and their up and down interfaces is essential in
+building a RESTful service.  
+</p>
+</div>
+
+<div id="outline-container-sec-6-3-1" class="outline-4">
+<h4 id="sec-6-3-1"><span class="section-number-4">6.3.1</span> Diagram Representation</h4>
+<div class="outline-text-4" id="text-6-3-1">
+<img src="https://docs.google.com/drawings/d/1JfzCe7uEEk25KLSv77QFbxkjqcAWQvBCEtNJ-BfKi20/pub?w=960&amp;h=720">
+
+<p>
+<a href="https://docs.google.com/drawings/d/1JfzCe7uEEk25KLSv77QFbxkjqcAWQvBCEtNJ-BfKi20/edit">Edit the image</a>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-6-3-2" class="outline-4">
+<h4 id="sec-6-3-2"><span class="section-number-4">6.3.2</span> Components and Interfaces</h4>
+<div class="outline-text-4" id="text-6-3-2">
+<p>
+Each component has two interfaces - an upper and a lower.  An upper
+interface of a component enables two way communication with the component
+above it and similarly the lower interface enables two way communication
+with the component below it.
+</p>
+
+<p>
+As we traverse from bottom to the top in the stack (in the diagram from
+left to right), we move from unsafe to safe method calls. 
+</p>
+
+<ul class="org-ul">
+<li>The API exposed by the <code>Entity</code> component allows for access and
+manipulation of <code>entities</code> ( getters and setters) in the application
+without any checks.  The programming interface accepts only objects and
+spits out objects.
+</li>
+
+<li><code>System</code> component lies on top of <code>Entity</code> component. <code>System</code> maintains
+the state of the application.  It exposes the operations to change the
+state of the application as a programming interface to the component
+(<code>REST</code>) above it.  It is the controller that accepts strings as
+parameters, converts them to objects and invokes the API of the <code>Entity</code>
+component while providing all the checks to determine if an operation can
+be performed.  This component provides safety for the unsafe component
+that lies beneath it. 
+</li>
+
+<li><code>Rest</code> component is the gateway of the application.  All requests to the
+service from other applications end up here.  The functionality of this
+component is to determine if the request has to be entertained, and if
+entertained, pick the corresponding interface call to the <code>System</code>
+component.  A table that maps RESTful API to the <code>System</code> API is
+maintained in this component.  Restful API is the API that is published
+to the external world.
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-6-4" class="outline-3">
+<h3 id="sec-6-4"><span class="section-number-3">6.4</span> Building the <code>System</code> component with <code>guard</code> and <code>filter</code></h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+The <code>System</code> component is further modularized where <code>guard</code> and <code>filter</code>
+components are plugged on top of it.  The component <code>guard</code> is the safety
+net while component <code>filter</code> is the data presenter. 
+</p>
+</div>
+
+<div id="outline-container-sec-6-4-1" class="outline-4">
+<h4 id="sec-6-4-1"><span class="section-number-4">6.4.1</span> Diagram Representation</h4>
+<div class="outline-text-4" id="text-6-4-1">
+<img src="https://docs.google.com/drawings/d/1MlZJu82jXhQ7LZNWCcCU8z2YBcRsXBBH_EVqRwaxxtg/pub?w=960&amp;h=720">
+
+<p>
+<a href="https://docs.google.com/drawings/d/1MlZJu82jXhQ7LZNWCcCU8z2YBcRsXBBH_EVqRwaxxtg/edit">Edit the image</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6-4-2" class="outline-4">
+<h4 id="sec-6-4-2"><span class="section-number-4">6.4.2</span> <code>guard</code> and <code>filter</code> components</h4>
+<div class="outline-text-4" id="text-6-4-2">
+<ul class="org-ul">
+<li>The <code>guard</code> abstracts out all the safety checks that are required for
+performing an operation that either changes or retrieves the state of the
+<code>System</code>.  The type of checks a <code>guard</code> could perform are arity, type,
+authorization and state checks.
+</li>
+
+<li>The <code>filter</code> acts on the data which is the result of the operation before
+the data is presented to the <code>REST</code> component.  This ensures a privilege
+based access to the elements of data. 
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-6-5" class="outline-3">
+<h3 id="sec-6-5"><span class="section-number-3">6.5</span> Security</h3>
+<div class="outline-text-3" id="text-6-5">
+<p>
+The application ensures two levels of security is maintained.  
+</p>
+
+<ol class="org-ol">
+<li>Who is authorized to access the RESTful API of the application?  This
+level of determining authorized access to the application is implemented
+at the <code>REST</code> component.
+</li>
+
+<li>What operations are allowed for each user of the application?  This is
+achieved by the <code>guard</code> component.  The operations are either
+modification or retrieval of the state of the system. 
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-application" class="outline-2">
+<h2 id="application"><a id="sec-7" name="sec-7"></a><span class="section-number-2">7</span> Application</h2>
+<div class="outline-text-2" id="text-application">
+<p>
+The user directory application is a simple application that maintains user
+data.  The development of the application is divided into the following
+phases:
+</p>
+
+<ol class="org-ol">
+<li><a href="./requirements/index.html">Requirements</a>
+</li>
+
+<li><a href="./data-model/index.html">Data Model</a>
+</li>
+
+<li><a href="./runtime/index.html">Runtime</a>
+</li>
+
+<li><a href="./deployment/index.html">Deployment</a>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2016-05-11 Wed]</span></span></p>
+<p class="author">Author: VLEAD</p>
+<p class="date">Created: 2017-04-26 Wed 22:27</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
